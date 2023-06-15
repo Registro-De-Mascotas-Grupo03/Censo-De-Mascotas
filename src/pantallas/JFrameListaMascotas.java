@@ -5,14 +5,23 @@
  */
 package pantallas;
 
+import entidades.Mascota;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author tokiro
  */
+
 public class JFrameListaMascotas extends javax.swing.JFrame {
 
     private JFrameGestorUsuario padre;
     
+    List<Mascota> mascotas = new ArrayList<>();
+    DefaultTableModel modeloTabla = new DefaultTableModel();
+    String[] info = new String[7];
     public JFrameListaMascotas() {
         initComponents();
     }
@@ -20,8 +29,42 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
     public JFrameListaMascotas(JFrameGestorUsuario padre) {
         initComponents();
         this.padre = padre;
+        TablaMascotas.setModel(modeloTabla);
+        //PARA LA TABLA
+        modeloTabla = new DefaultTableModel();
+        modeloTabla.addColumn("Codigo");
+        modeloTabla.addColumn("DNI Dueño");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Apellido");
+        modeloTabla.addColumn("Sexo");
+        modeloTabla.addColumn("Especie");
+        modeloTabla.addColumn("Raza");
+        this.TablaMascotas.setModel(modeloTabla);
+        
+    }
+    void setMascota(Mascota mascota) {
+        mascotas.add(mascota);
+        actulizaTabla();
     }
 
+    
+
+    void actulizaTabla() {
+        modeloTabla.setRowCount(0);
+
+        for (Mascota buscaMascTabla : mascotas) {
+            info[0] = buscaMascTabla.getCodigo();
+            info[1] = buscaMascTabla.getDniDueño();
+            info[2] = buscaMascTabla.getNombre();
+            info[3] = buscaMascTabla.getApellido();
+            info[4] = buscaMascTabla.getSexo();
+            info[5] = buscaMascTabla.getEspecie();
+            info[6] = buscaMascTabla.getRaza();
+            modeloTabla.addRow(info);
+
+        }
+
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -35,7 +78,7 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaMascotas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,6 +114,11 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
         btnEliminar.setText("Eliminar");
         btnEliminar.setBorder(null);
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 100, 35));
 
         btnAgregar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -84,7 +132,7 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
         });
         jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, 150, 35));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaMascotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -110,9 +158,9 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
                 "Codigo", "Nombre", "Apellido", "Sexo", "Especie", "Raza", "Fec. Nac."
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TablaMascotas);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 610, 330));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 610, 330));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas9 listaMascotas.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 600));
@@ -142,9 +190,40 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        EliminarTabla();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     private void salir() {
         padre.setVisible(true);
         this.dispose();
+    }
+    public void EliminarTabla() {
+        ///falta implementar
+        int eli;
+        eli = TablaMascotas.getSelectedRow();
+
+        modeloTabla.removeRow(eli);
+        mascotas.remove(eli);
+
+    }
+
+    public void BuscarTabla() {
+        // TODO add your handling code here:
+        modeloTabla.setRowCount(0);
+        info = new String[7];
+        for (Mascota buscaMasc : mascotas) {
+            if (buscaMasc.getDatosEnCadena().toLowerCase()
+                    .contains(txtBuscar.getText().toLowerCase())) {
+                Object[] rowData = {buscaMasc.getCodigo(), buscaMasc.getDniDueño()
+                        , buscaMasc.getNombre(), buscaMasc.getApellido()
+                        , buscaMasc.getFecNac(), buscaMasc.getSexo()
+                        , buscaMasc.getEspecie(), buscaMasc.getRaza()};
+                modeloTabla.addRow(rowData);
+               
+            }
+        }
     }
     /**
      * @param args the command line arguments
@@ -182,6 +261,7 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaMascotas;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
@@ -190,7 +270,6 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
