@@ -7,11 +7,12 @@ package entidades;
 
 /**
  *
- * @author tokiro
+ * @author MIKI
  */
 public class Mascota {
     
-    private Dueño dueño;
+    //private Dueño dueño;
+    //PRUEBAS
     private String codigo;
     private String nombre;
     private String apellido;
