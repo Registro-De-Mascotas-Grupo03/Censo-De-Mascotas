@@ -9,10 +9,10 @@ import java.util.Date;
 
 /**
  *
- * @author tokiro
+ * @author tokiro 
  */
 public class Persona {
-
+//Haciendo prueba de commit
     private String tipoDoc;
     private String numDoc;
     private String nombre;
