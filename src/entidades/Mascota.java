@@ -20,12 +20,40 @@ public class Mascota {
     private String sexo;
     private String especie;
     private String raza;
+    private String dniDueño;
 
     //hgvhg
     
     /**
      * @return the codigo
      */
+    public String getDatosEnCadena() {
+        return "Codigo: " + codigo +
+                "| DNI Dueño: " + dniDueño +
+                "| Nombre: " + nombre +
+                "| Apellido: " + apellido +
+                "| FecNac.: " + fecNac +
+                "| Sexo: " + sexo +
+                "|Especie: " + especie +
+                "|Raza: " + raza;
+    }
+    public String getNombreMascota(){
+        
+        return "Codigo: "+codigo+
+                "| DNI Dueño: "+dniDueño+
+                "| Nombre: "+nombre+
+                "| Apellido: "+apellido+
+                "| FecNac.: "+fecNac+
+                "| Sexo: "+sexo+
+                "|Especie: "+especie+
+                "|Raza: "+raza;
+    }
+    public Object[][] getDatosEnTabla(){
+        Object [][]data = {
+            {codigo, dniDueño, nombre, apellido, fecNac, sexo, especie, raza}
+        };
+        return data;
+    }
     public String getCodigo() {
         return codigo;
     }
@@ -120,6 +148,12 @@ public class Mascota {
     public void setRaza(String raza) {
         this.raza = raza;
     }
-    
+    public String getDniDueño() {
+        return dniDueño;
+    }
+
+    public void setDniDueño(String dniDueño) {
+        this.dniDueño = dniDueño;
+    }
     
 }

@@ -5,12 +5,15 @@
  */
 package pantallas;
 
+import entidades.Mascota;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author tokiro
  */
 public class JFrameAgregarMascota extends javax.swing.JFrame {
-
+    private Mascota mascota;
     private JFrameListaMascotas padre;
     
     public JFrameAgregarMascota() {
@@ -38,12 +41,12 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        rbtnMacho = new javax.swing.JRadioButton();
-        rbtnHembra = new javax.swing.JRadioButton();
+        rbnMacho = new javax.swing.JRadioButton();
+        rbnHembra = new javax.swing.JRadioButton();
         txtCodigo = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
-        txtFecNac = new javax.swing.JTextField();
+        txtFechaNac = new javax.swing.JTextField();
         txtEspecie = new javax.swing.JTextField();
         txtRaza = new javax.swing.JTextField();
         txtDniDueño = new javax.swing.JTextField();
@@ -93,6 +96,11 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
         btnRegistrar.setText("Registrar");
         btnRegistrar.setBorder(null);
         btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, 100, 35));
 
         btnSalir.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -106,17 +114,17 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, 90, 35));
 
-        rbtnMacho.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        rbtnMacho.setText("Macho");
-        rbtnMacho.setBorder(null);
-        rbtnMacho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(rbtnMacho, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, -1, -1));
+        rbnMacho.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        rbnMacho.setText("Macho");
+        rbnMacho.setBorder(null);
+        rbnMacho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(rbnMacho, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, -1, -1));
 
-        rbtnHembra.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        rbtnHembra.setText("Hembra");
-        rbtnHembra.setBorder(null);
-        rbtnHembra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(rbtnHembra, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, -1, -1));
+        rbnHembra.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        rbnHembra.setText("Hembra");
+        rbnHembra.setBorder(null);
+        rbnHembra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(rbnHembra, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, -1, -1));
 
         txtCodigo.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtCodigo.setBorder(null);
@@ -130,9 +138,9 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
         txtApellido.setBorder(null);
         jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 160, 33));
 
-        txtFecNac.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtFecNac.setBorder(null);
-        jPanel1.add(txtFecNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 160, 33));
+        txtFechaNac.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtFechaNac.setBorder(null);
+        jPanel1.add(txtFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 160, 33));
 
         txtEspecie.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtEspecie.setBorder(null);
@@ -167,11 +175,47 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
         salir();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+        Registrar();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
     private void salir() {
         padre.setVisible(true);
         this.dispose();
     }
-    
+    public void Registrar() {
+        ///falta implementar
+
+        if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?")
+                == JOptionPane.OK_OPTION) {
+            mascota = new Mascota();
+            String Sexo = null;
+            if (rbnMacho.isSelected()) {
+                Sexo = "MACHO";
+            }
+            if (rbnHembra.isSelected()) {
+                Sexo = "HEMBRA";
+            }
+            mascota.setCodigo(txtCodigo.getText());
+            mascota.setDniDueño(txtDniDueño.getText());
+            mascota.setNombre(txtNombre.getText());
+            mascota.setApellido(txtApellido.getText());
+            mascota.setFecNac(txtFechaNac.getText());
+            mascota.setSexo(Sexo);
+            mascota.setEspecie(txtEspecie.getText());
+            mascota.setRaza(txtRaza.getText());
+
+            this.padre.setMascota(mascota);
+            this.padre.setVisible(true);
+            this.dispose();
+
+            
+        }
+
+        /*modeloLista.addElement(Datos);
+        mascotas.add(mascota);*/
+    }
     /**
      * @param args the command line arguments
      */
@@ -221,13 +265,13 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton rbtnHembra;
-    private javax.swing.JRadioButton rbtnMacho;
+    private javax.swing.JRadioButton rbnHembra;
+    private javax.swing.JRadioButton rbnMacho;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDniDueño;
     private javax.swing.JTextField txtEspecie;
-    private javax.swing.JTextField txtFecNac;
+    private javax.swing.JTextField txtFechaNac;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRaza;
     // End of variables declaration//GEN-END:variables
