@@ -17,7 +17,7 @@ public class JFrameIngresar extends javax.swing.JFrame {
     public JFrameIngresar() {
         initComponents();
     }
-    
+    //comentario de prueba
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
