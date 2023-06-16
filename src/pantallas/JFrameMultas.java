@@ -5,6 +5,13 @@
  */
 package pantallas;
 
+import entidades.Dueño;
+import java.util.ArrayList;
+import java.util.List;
+import entidades.Multa;
+import java.time.LocalDate;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author tokiro
@@ -13,6 +20,11 @@ public class JFrameMultas extends javax.swing.JFrame {
 
     private JFrameGestorUsuario padre;
     
+    //private Dueño dueño;
+    List<Multa> multas = new ArrayList<>();
+    DefaultTableModel modeloTabla = new DefaultTableModel();
+    String[] i = new String[7];
+    
     public JFrameMultas() {
         initComponents();
     }
@@ -20,31 +32,81 @@ public class JFrameMultas extends javax.swing.JFrame {
     public JFrameMultas(JFrameGestorUsuario padre) {
         initComponents();
         this.padre = padre;
+        tbMultas.setModel(modeloTabla);
+        modeloTabla = new DefaultTableModel();
+        modeloTabla.addColumn("Código de Multa");
+        modeloTabla.addColumn("Tipo de Documento");
+        modeloTabla.addColumn("Nro de Documento");
+        modeloTabla.addColumn("Monto Multa");
+        modeloTabla.addColumn("Fecha");
+        modeloTabla.addColumn("Fecha Vencimiento");
+        modeloTabla.addColumn("Estado");
+        this.tbMultas.setModel(modeloTabla);
+        llenarNombreMeses(LocalDate.now().getMonthValue());
+        eliminaMultasPagadas();
     }
 
+    void setMulta(Multa multa) {
+        multas.add(multa);
+        actualizarTabla();
+    }
+    
+    private void actualizarTabla() {
+        modeloTabla.setRowCount(0);
+        for (Multa multa: multas){
+            i[0] = multa.getCodigoMulta();
+            i[1] = "DNI"; //multa.getDueño().getTipoDoc().toString();
+            i[2] = "000"; //multa.getDueño().getNumDoc().toString();
+            i[3] = String.valueOf(multa.getMonto());
+            i[4] = multa.getFechaGenerada();
+            i[5] = multa.getFechaVencimiento();
+            i[6] = multa.getEstado();
+            modeloTabla.addRow(i);
+        }
+    }
+    
+    private void eliminaMultasPagadas(){
+        int e = 0;
+        for (Multa multa: multas){ 
+            if(Integer.parseInt(multa.getFechaPagado().substring(7, 5)) + 2 >= 
+                    LocalDate.now().getYear()){
+                modeloTabla.removeRow(e);
+                multas.remove(e);
+            }
+            e++;
+        }
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
         btnGenerar = new javax.swing.JButton();
         btnPagar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbMultas = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
+        lblDescripcionFondoMes3 = new javax.swing.JLabel();
+        lblTextoFondoMes1 = new javax.swing.JLabel();
+        lblTextoFondoMes2 = new javax.swing.JLabel();
+        lblDescripcionFondoMes4 = new javax.swing.JLabel();
+        lblTextoFondoMes4 = new javax.swing.JLabel();
+        lblDescripcionFondoMes2 = new javax.swing.JLabel();
+        lblTextoFondoMes3 = new javax.swing.JLabel();
+        lblDescripcionFondoMes1 = new javax.swing.JLabel();
+        lblTextoFondoMulta = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel2.setText("Historial de Multas");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, -1, -1));
+        lblTitulo.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblTitulo.setText("Historial de Multas");
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, -1, -1));
 
         btnGenerar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         btnGenerar.setText("Generar Multa");
@@ -61,6 +123,11 @@ public class JFrameMultas extends javax.swing.JFrame {
         btnPagar.setText("Pagar Multa");
         btnPagar.setBorder(null);
         btnPagar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 450, 130, 35));
 
         btnSalir.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -74,7 +141,7 @@ public class JFrameMultas extends javax.swing.JFrame {
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 510, 120, 35));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbMultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -92,31 +159,65 @@ public class JFrameMultas extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
+                "Código de Multa", "Tipo de Documento", "Nro de Documento", "Monto Multa", "Fecha", "Vencimiento", "Estado"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 710, 250));
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbMultas);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 800, 250));
 
         txtBuscar.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtBuscar.setBorder(null);
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 230, 33));
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 350, 33));
 
-        btnBuscar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        btnBuscar.setText("Buscar");
-        btnBuscar.setBorder(null);
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 110, 35));
+        lblDescripcionFondoMes3.setText("lblDescripcionFondoMes3");
+        jPanel1.add(lblDescripcionFondoMes3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 500, -1, 30));
+
+        lblTextoFondoMes1.setText("lblTextoFondoMes1:");
+        jPanel1.add(lblTextoFondoMes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, -1, 30));
+
+        lblTextoFondoMes2.setText("lblTextoFondoMes2:");
+        jPanel1.add(lblTextoFondoMes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, 30));
+
+        lblDescripcionFondoMes4.setText("lblDescripcionFondoMes4");
+        jPanel1.add(lblDescripcionFondoMes4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, -1, 30));
+
+        lblTextoFondoMes4.setText("lblTextoFondoMes4:");
+        jPanel1.add(lblTextoFondoMes4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 520, -1, 30));
+
+        lblDescripcionFondoMes2.setText("lblDescripcionFondoMes2");
+        jPanel1.add(lblDescripcionFondoMes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, -1, 30));
+
+        lblTextoFondoMes3.setText("lblTextoFondoMes3:");
+        jPanel1.add(lblTextoFondoMes3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, 30));
+
+        lblDescripcionFondoMes1.setText("lblDescripcionFondoMes1");
+        jPanel1.add(lblDescripcionFondoMes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 460, -1, 30));
+
+        lblTextoFondoMulta.setText("Los fondos recaudados por la multa, se utilizaran en:");
+        jPanel1.add(lblTextoFondoMulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, -1, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas9.JPG"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 600));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,9 +238,194 @@ public class JFrameMultas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnGenerarActionPerformed
 
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        buscar();
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+        int e = tbMultas.getSelectedRow();
+        Multa m = multas.get(e);
+        m.setEstado("Pagado");
+        m.setFechaPagado(LocalDate.now().getDayOfMonth() + "/"
+                + LocalDate.now().getMonthValue() + "/"
+                + LocalDate.now().getYear());
+        multas.set(e, m);
+        actualizarTabla();
+    }//GEN-LAST:event_btnPagarActionPerformed
+
     private void salir() {
         padre.setVisible(true);
         this.dispose();
+    }
+    
+    public String calcularCodigo() {
+        String codigo = "";
+        if (modeloTabla.getRowCount() < 1) {
+            return "M0001";
+        } else {
+            for (Multa p : multas) {
+                codigo = p.getCodigoMulta();
+            }
+            return "M" + String.format("%04d", Integer.parseInt(codigo.substring(1, 5)) + 1);
+        }
+    }
+    
+    public void llenarNombreMeses(int mesAct){
+        switch (mesAct){
+            case 1: 
+                this.lblTextoFondoMes1.setText("Enero:");
+                this.lblDescripcionFondoMes1.setText(llenarDescripcionMes(1));
+                this.lblTextoFondoMes2.setText("Febrero:");
+                this.lblDescripcionFondoMes2.setText(llenarDescripcionMes(2));
+                this.lblTextoFondoMes3.setText("Marzo:");
+                this.lblDescripcionFondoMes3.setText(llenarDescripcionMes(3));
+                this.lblTextoFondoMes4.setText("Abril:");
+                this.lblDescripcionFondoMes4.setText(llenarDescripcionMes(4));
+                break;
+            case 2:
+                this.lblTextoFondoMes1.setText("Febrero:");
+                this.lblDescripcionFondoMes1.setText(llenarDescripcionMes(2));
+                this.lblTextoFondoMes2.setText("Marzo:");
+                this.lblDescripcionFondoMes2.setText(llenarDescripcionMes(3));
+                this.lblTextoFondoMes3.setText("Abril:");
+                this.lblDescripcionFondoMes3.setText(llenarDescripcionMes(4));
+                this.lblTextoFondoMes4.setText("Mayo:");
+                this.lblDescripcionFondoMes4.setText(llenarDescripcionMes(5));
+                break;
+            case 3:
+                this.lblTextoFondoMes1.setText("Marzo:");
+                this.lblDescripcionFondoMes1.setText(llenarDescripcionMes(3));
+                this.lblTextoFondoMes2.setText("Abril:");
+                this.lblDescripcionFondoMes2.setText(llenarDescripcionMes(4));
+                this.lblTextoFondoMes3.setText("Mayo:");
+                this.lblDescripcionFondoMes3.setText(llenarDescripcionMes(5));
+                this.lblTextoFondoMes4.setText("Junio:");
+                this.lblDescripcionFondoMes4.setText(llenarDescripcionMes(6));
+                break;
+            case 4:
+                this.lblTextoFondoMes1.setText("Abril:");
+                this.lblDescripcionFondoMes1.setText(llenarDescripcionMes(4));
+                this.lblTextoFondoMes2.setText("Mayo:");
+                this.lblDescripcionFondoMes2.setText(llenarDescripcionMes(5));
+                this.lblTextoFondoMes3.setText("Junio:");
+                this.lblDescripcionFondoMes3.setText(llenarDescripcionMes(6));
+                this.lblTextoFondoMes4.setText("Julio:");
+                this.lblDescripcionFondoMes4.setText(llenarDescripcionMes(7));
+                break;
+            case 5:
+                this.lblTextoFondoMes1.setText("Mayo:");
+                this.lblDescripcionFondoMes1.setText(llenarDescripcionMes(5));
+                this.lblTextoFondoMes2.setText("Junio:");
+                this.lblDescripcionFondoMes2.setText(llenarDescripcionMes(6));
+                this.lblTextoFondoMes3.setText("Julio:");
+                this.lblDescripcionFondoMes3.setText(llenarDescripcionMes(7));
+                this.lblTextoFondoMes4.setText("Agosto:");
+                this.lblDescripcionFondoMes4.setText(llenarDescripcionMes(8));
+                break;
+            case 6:
+                this.lblTextoFondoMes1.setText("Junio:");
+                this.lblDescripcionFondoMes1.setText(llenarDescripcionMes(6));
+                this.lblTextoFondoMes2.setText("Julio:");
+                this.lblDescripcionFondoMes2.setText(llenarDescripcionMes(7));
+                this.lblTextoFondoMes3.setText("Agosto:");
+                this.lblDescripcionFondoMes3.setText(llenarDescripcionMes(8));
+                this.lblTextoFondoMes4.setText("Setiembre:");
+                this.lblDescripcionFondoMes4.setText(llenarDescripcionMes(9));
+                break;
+            case 7:
+                this.lblTextoFondoMes1.setText("Julio:");
+                this.lblDescripcionFondoMes1.setText(llenarDescripcionMes(7));
+                this.lblTextoFondoMes2.setText("Agosto:");
+                this.lblDescripcionFondoMes2.setText(llenarDescripcionMes(8));
+                this.lblTextoFondoMes3.setText("Setiembre:");
+                this.lblDescripcionFondoMes3.setText(llenarDescripcionMes(9));
+                this.lblTextoFondoMes4.setText("Octubre:");
+                this.lblDescripcionFondoMes4.setText(llenarDescripcionMes(10));
+                break;
+            case 8:
+                this.lblTextoFondoMes1.setText("Agosto:");
+                this.lblDescripcionFondoMes1.setText(llenarDescripcionMes(8));
+                this.lblTextoFondoMes2.setText("Setiembre:");
+                this.lblDescripcionFondoMes2.setText(llenarDescripcionMes(9));
+                this.lblTextoFondoMes3.setText("Octubre:");
+                this.lblDescripcionFondoMes3.setText(llenarDescripcionMes(10));
+                this.lblTextoFondoMes4.setText("Noviembre:");
+                this.lblDescripcionFondoMes4.setText(llenarDescripcionMes(11));
+                break;
+            case 9:
+                this.lblTextoFondoMes1.setText("Setiembre:");
+                this.lblDescripcionFondoMes1.setText(llenarDescripcionMes(9));
+                this.lblTextoFondoMes2.setText("Octubre:");
+                this.lblDescripcionFondoMes2.setText(llenarDescripcionMes(10));
+                this.lblTextoFondoMes3.setText("Noviembre:");
+                this.lblDescripcionFondoMes3.setText(llenarDescripcionMes(11));
+                this.lblTextoFondoMes4.setText("Diciembre:");
+                this.lblDescripcionFondoMes4.setText(llenarDescripcionMes(12));
+                break;
+            case 10:
+                this.lblTextoFondoMes1.setText("Octubre:");
+                this.lblDescripcionFondoMes1.setText(llenarDescripcionMes(10));
+                this.lblTextoFondoMes2.setText("Noviembre:");
+                this.lblDescripcionFondoMes2.setText(llenarDescripcionMes(11));
+                this.lblTextoFondoMes3.setText("Diciembre:");
+                this.lblDescripcionFondoMes3.setText(llenarDescripcionMes(12));
+                this.lblTextoFondoMes4.setText("Enero:");
+                this.lblDescripcionFondoMes4.setText(llenarDescripcionMes(1));
+                break;
+            case 11:
+                this.lblTextoFondoMes1.setText("Noviembre:");
+                this.lblDescripcionFondoMes1.setText(llenarDescripcionMes(11));
+                this.lblTextoFondoMes2.setText("Diciembre:");
+                this.lblDescripcionFondoMes2.setText(llenarDescripcionMes(12));
+                this.lblTextoFondoMes3.setText("Enero:");
+                this.lblDescripcionFondoMes3.setText(llenarDescripcionMes(1));
+                this.lblTextoFondoMes4.setText("Febrero:");
+                this.lblDescripcionFondoMes4.setText(llenarDescripcionMes(2));
+                break;
+            default:
+                this.lblTextoFondoMes1.setText("Diciembre:");
+                this.lblDescripcionFondoMes1.setText(llenarDescripcionMes(12));
+                this.lblTextoFondoMes2.setText("Enero:");
+                this.lblDescripcionFondoMes2.setText(llenarDescripcionMes(1));
+                this.lblTextoFondoMes3.setText("Febrero:");
+                this.lblDescripcionFondoMes3.setText(llenarDescripcionMes(2));
+                this.lblTextoFondoMes4.setText("Marzo:");
+                this.lblDescripcionFondoMes4.setText(llenarDescripcionMes(3));
+                break;
+        }
+    }
+     
+    public String llenarDescripcionMes(int mes){
+        switch(mes){
+            case 1: return "Compra de casitas";
+            case 2: return "Campaña de desparacitación";
+            case 3: return "Campaña de adopción";
+            case 4: return "Compra de mantas para el frio";
+            case 5: return "Campaña de vacunación";
+            case 6: return "Refugio de mascotas abandonadas";
+            case 7: return "Campaña de desparacitación";
+            case 8: return "Campaña concientisación de la responsablilidad de tener una mascota";
+            case 9: return "Campaña de estirilización";
+            case 10: return "Compra de alimento";
+            case 11: return "Compra de medicamentos";
+            default: return "Implementación de vevederos en los parques principales";
+        }
+    }
+    
+    public void buscar(){
+        modeloTabla.setRowCount(0);
+        i = new String[7];
+        for (Multa multa : multas) {
+            if (multa.getDatosCadena().toLowerCase()
+                    .contains(txtBuscar.getText().toLowerCase())) {
+                Object[] rowData = {multa.getCodigoMulta()
+                        ,"DNI"//, multa.getDueño().getTipoDoc()
+                        ,"000"//, multa.getDueño().getNumDoc()
+                        , multa.getMonto(), multa.getFechaGenerada()
+                        , multa.getFechaVencimiento(), multa.getEstado()};
+                modeloTabla.addRow(rowData);
+            }
+        }
     }
     
     /**
@@ -178,15 +464,23 @@ public class JFrameMultas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnPagar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblDescripcionFondoMes1;
+    private javax.swing.JLabel lblDescripcionFondoMes2;
+    private javax.swing.JLabel lblDescripcionFondoMes3;
+    private javax.swing.JLabel lblDescripcionFondoMes4;
+    private javax.swing.JLabel lblTextoFondoMes1;
+    private javax.swing.JLabel lblTextoFondoMes2;
+    private javax.swing.JLabel lblTextoFondoMes3;
+    private javax.swing.JLabel lblTextoFondoMes4;
+    private javax.swing.JLabel lblTextoFondoMulta;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTable tbMultas;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

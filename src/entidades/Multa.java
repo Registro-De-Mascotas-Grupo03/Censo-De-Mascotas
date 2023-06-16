@@ -11,33 +11,33 @@ package entidades;
  */
 public class Multa {
     
-    private Dueño dueño;
+    private String codigoMulta; 
+    private Dueño dueño; 
     private Usuario usuario;
-    private String codigoMulta;
-    private String fechaGenerada;
+    private String fechaGenerada; 
     private String fechaVencimiento;
-    private float monto;
-    private String descripción;
-    private String estado;
+    private String fechaPagado;  
+    private Float monto; 
+    private String descripcion;
+    private String estado; 
 
-    public Multa(Dueño dueño, String codigoMulta, String fechaVencimiento) {
+    public Multa(Dueño dueño, Usuario usuario) {
         this.dueño = dueño;
-        this.codigoMulta = codigoMulta;
-        this.fechaVencimiento = fechaVencimiento;
+        this.usuario = usuario;
+        this.estado = "Por Pagar";
     }
-    
-    /**
-     * @return the propietario
-     */
-    public Dueño getPropietario() {
+
+    public String getDatosCadena() {
+        return codigoMulta + "DNI" + "000" +//dueño.getTipoDoc + dueño.getNumDoc() +
+                monto + fechaGenerada + fechaVencimiento + estado;
+    }
+
+    public Dueño getDueño() {
         return dueño;
     }
 
-    /**
-     * @param propietario the propietario to set
-     */
-    public void setPropietario(Dueño propietario) {
-        this.dueño = propietario;
+    public void setDueño(Dueño dueño) {
+        this.dueño = dueño;
     }
 
     /**
@@ -80,6 +80,7 @@ public class Multa {
      */
     public void setFechaGenerada(String fechaGenerada) {
         this.fechaGenerada = fechaGenerada;
+        calcularFechaVencimiento();
     }
 
     /**
@@ -89,39 +90,40 @@ public class Multa {
         return fechaVencimiento;
     }
 
-    /**
-     * @param fechaVencimiento the fechaVencimiento to set
-     */
-    public void setFechaVencimiento(String fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
+    public String getFechaPagado() {
+        return fechaPagado;
+    }
+
+    public void setFechaPagado(String fechaPagado) {
+        this.fechaPagado = fechaPagado;
     }
 
     /**
      * @return the monto
      */
-    public float getMonto() {
+    public Float getMonto() {
         return monto;
     }
 
     /**
      * @param monto the monto to set
      */
-    public void setMonto(float monto) {
+    public void setMonto(Float monto) {
         this.monto = monto;
     }
 
     /**
-     * @return the descripción
+     * @return the descripcion
      */
-    public String getDescripción() {
-        return descripción;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     /**
-     * @param descripción the descripción to set
+     * @param descripcion the descripción to set
      */
-    public void setDescripción(String descripción) {
-        this.descripción = descripción;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     /**
@@ -136,6 +138,15 @@ public class Multa {
      */
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    private void calcularFechaVencimiento() {
+        this.fechaVencimiento = String.format("%02d", Integer.parseInt(
+                this.fechaGenerada.substring(0, 2))) + "/" + 
+                String.format("%02d", Integer.parseInt(
+                        this.fechaGenerada.substring(3, 5)) + 4) + "/" + 
+                String.format("%02d", Integer.parseInt(
+                        this.fechaGenerada.substring(6, 10)));
     }
     
 }

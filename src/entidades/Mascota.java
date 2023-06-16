@@ -29,26 +29,10 @@ public class Mascota {
      * @return the codigo
      */
     public String getDatosEnCadena() {
-        return "Codigo: " + codigo +
-                "| DNI Dueño: " + dniDueño +
-                "| Nombre: " + nombre +
-                "| Apellido: " + apellido +
-                "| FecNac.: " + fecNac +
-                "| Sexo: " + sexo +
-                "|Especie: " + especie +
-                "|Raza: " + raza;
+        return codigo + dniDueño + nombre + apellido + fecNac 
+                + sexo + especie + raza;
     }
-    public String getNombreMascota(){
-        
-        return "Codigo: "+codigo+
-                "| DNI Dueño: "+dniDueño+
-                "| Nombre: "+nombre+
-                "| Apellido: "+apellido+
-                "| FecNac.: "+fecNac+
-                "| Sexo: "+sexo+
-                "|Especie: "+especie+
-                "|Raza: "+raza;
-    }
+    
     public Object[][] getDatosEnTabla(){
         Object [][]data = {
             {codigo, dniDueño, nombre, apellido, fecNac, sexo, especie, raza}

@@ -22,16 +22,16 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
     List<Mascota> mascotas = new ArrayList<>();
     DefaultTableModel modeloTabla = new DefaultTableModel();
     String[] info = new String[7];
+    
     public JFrameListaMascotas() {
         initComponents();
     }
     
     public JFrameListaMascotas(JFrameGestorUsuario padre) {
         initComponents();
-        this.padre = padre;
         TablaMascotas.setModel(modeloTabla);
         //PARA LA TABLA
-        modeloTabla = new DefaultTableModel();
+        //modeloTabla = new DefaultTableModel();
         modeloTabla.addColumn("Codigo");
         modeloTabla.addColumn("DNI Dueño");
         modeloTabla.addColumn("Nombre");
@@ -40,7 +40,7 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
         modeloTabla.addColumn("Especie");
         modeloTabla.addColumn("Raza");
         this.TablaMascotas.setModel(modeloTabla);
-        
+        this.padre = padre;
     }
     void setMascota(Mascota mascota) {
         mascotas.add(mascota);
@@ -97,6 +97,11 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
         btnBuscar.setText("Buscar");
         btnBuscar.setBorder(null);
         btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 100, 35));
 
         btnSalir.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -194,6 +199,10 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
         // TODO add your handling code here:
         EliminarTabla();
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        BuscarTabla();
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void salir() {
         padre.setVisible(true);

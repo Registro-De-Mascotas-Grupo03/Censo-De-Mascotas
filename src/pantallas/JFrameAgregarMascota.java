@@ -187,7 +187,8 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
     public void Registrar() {
         ///falta implementar
 
-        if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?")
+        if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?","" 
+                + "Confirm", JOptionPane.YES_NO_OPTION)
                 == JOptionPane.OK_OPTION) {
             mascota = new Mascota();
             String Sexo = null;

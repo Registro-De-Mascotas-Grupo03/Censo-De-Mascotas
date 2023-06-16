@@ -5,13 +5,23 @@
  */
 package pantallas;
 
+import entidades.Dueño;
+import entidades.Multa;
+import entidades.Usuario;
+import javax.swing.JOptionPane;
+import java.time.LocalDate;
+
 /**
  *
  * @author tokiro
  */
 public class JFrameGenerarMulta extends javax.swing.JFrame {
 
+    private Multa multa;
     private JFrameMultas padre;
+    //private boolean estoyEditando = false;
+    private Dueño dueño;
+    private Usuario usuario;
     
     public JFrameGenerarMulta() {
         initComponents();
@@ -20,6 +30,15 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
     public JFrameGenerarMulta(JFrameMultas padre) {
         initComponents();
         this.padre = padre;
+        this.padre = padre;
+        txtFecha.setVisible(false);
+        lblFecha.setVisible(false);
+        txtFechaV.setVisible(false);
+        lblFechaV.setVisible(false);
+        txtFechaP.setVisible(false);
+        lblFechaP.setVisible(false);
+        
+        this.lblCodigoMulta.setText(padre.calcularCodigo());
     }
     
     @SuppressWarnings("unchecked")
@@ -27,59 +46,64 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblTitulo = new javax.swing.JLabel();
+        lblCodigoM = new javax.swing.JLabel();
+        lblCodigoMulta = new javax.swing.JLabel();
+        lblTipoDocumento = new javax.swing.JLabel();
+        txtTipoDocumento = new javax.swing.JTextField();
         btnGenerar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
+        txtNroDocumento = new javax.swing.JTextField();
+        lblNroDocumento = new javax.swing.JLabel();
+        txtNombreDueño = new javax.swing.JTextField();
+        lblApellido = new javax.swing.JLabel();
+        txtApellidoDueño = new javax.swing.JTextField();
+        lblNombre = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JTextField();
+        lblFecha = new javax.swing.JLabel();
+        txtFechaV = new javax.swing.JTextField();
+        lblFechaV = new javax.swing.JLabel();
+        txtFechaP = new javax.swing.JTextField();
+        lblFechaP = new javax.swing.JLabel();
+        txtMonto = new javax.swing.JTextField();
+        lblMonto = new javax.swing.JLabel();
+        txtDescripcion = new javax.swing.JTextField();
+        lblDescripcion = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
-        jLabel2.setText("Registro de Multas");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
+        lblTitulo.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        lblTitulo.setText("Registro de Multas");
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel3.setText("Codigo Multa:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        lblCodigoM.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblCodigoM.setText("Codigo Multa:");
+        jPanel1.add(lblCodigoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel4.setText("jLabel4");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
+        lblCodigoMulta.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblCodigoMulta.setText("M0000");
+        jPanel1.add(lblCodigoMulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel5.setText("Tipo Documento:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
+        lblTipoDocumento.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblTipoDocumento.setText("Tipo Documento:");
+        jPanel1.add(lblTipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 170, 30));
+        txtTipoDocumento.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtTipoDocumento.setBorder(null);
+        jPanel1.add(txtTipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 170, 30));
 
         btnGenerar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         btnGenerar.setText("Generar");
         btnGenerar.setBorder(null);
         btnGenerar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 100, 33));
 
         btnSalir.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -93,69 +117,69 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 100, 33));
 
-        jTextField2.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jTextField2.setBorder(null);
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 170, 30));
+        txtNroDocumento.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtNroDocumento.setBorder(null);
+        jPanel1.add(txtNroDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 170, 30));
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel6.setText("Nro Documento:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
+        lblNroDocumento.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblNroDocumento.setText("Nro Documento:");
+        jPanel1.add(lblNroDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
-        jTextField3.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jTextField3.setBorder(null);
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 170, 30));
+        txtNombreDueño.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtNombreDueño.setBorder(null);
+        jPanel1.add(txtNombreDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 170, 30));
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel7.setText("Apellido:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+        lblApellido.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblApellido.setText("Apellido:");
+        jPanel1.add(lblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
-        jTextField4.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jTextField4.setBorder(null);
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 170, 30));
+        txtApellidoDueño.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtApellidoDueño.setBorder(null);
+        jPanel1.add(txtApellidoDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 170, 30));
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel8.setText("Nombre:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
+        lblNombre.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblNombre.setText("Nombre:");
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
 
-        jTextField5.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jTextField5.setBorder(null);
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 170, 30));
+        txtFecha.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtFecha.setBorder(null);
+        jPanel1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 170, 30));
 
-        jLabel9.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel9.setText("Fecha:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
+        lblFecha.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblFecha.setText("Fecha:");
+        jPanel1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
 
-        jTextField6.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jTextField6.setBorder(null);
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 170, 30));
+        txtFechaV.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtFechaV.setBorder(null);
+        jPanel1.add(txtFechaV, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 170, 30));
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel10.setText("Vencimiento:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, -1, -1));
+        lblFechaV.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblFechaV.setText("Vencimiento:");
+        jPanel1.add(lblFechaV, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, -1, -1));
 
-        jTextField7.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jTextField7.setBorder(null);
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 170, 30));
+        txtFechaP.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtFechaP.setBorder(null);
+        jPanel1.add(txtFechaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 170, 30));
 
-        jLabel11.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel11.setText("Fecha de Pago:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, -1, -1));
+        lblFechaP.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblFechaP.setText("Fecha de Pago:");
+        jPanel1.add(lblFechaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, -1, -1));
 
-        jTextField8.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jTextField8.setBorder(null);
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 170, 30));
+        txtMonto.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtMonto.setBorder(null);
+        jPanel1.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 170, 30));
 
-        jLabel12.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel12.setText("Monto:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
+        lblMonto.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblMonto.setText("Monto:");
+        jPanel1.add(lblMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, -1, -1));
 
-        jTextField9.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jTextField9.setBorder(null);
-        jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 170, 130));
+        txtDescripcion.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtDescripcion.setBorder(null);
+        jPanel1.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 170, 130));
 
-        jLabel13.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel13.setText("Descripción:");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, -1, -1));
+        lblDescripcion.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblDescripcion.setText("Descripción:");
+        jPanel1.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas9 generaMulta.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 450));
@@ -178,6 +202,29 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
         salir();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+        generar();
+    }//GEN-LAST:event_btnGenerarActionPerformed
+
+    public void generar(){
+        if (JOptionPane.showConfirmDialog(this, "¿Esta seguro de que desea " + 
+                "generar la multa?", "" + "Confirm", JOptionPane.YES_NO_OPTION)
+                == JOptionPane.OK_OPTION){
+            //Encontrar o elegir un Dueño ya existente
+            //Encontrar o elegir un Usuario ya existente
+            multa = new Multa(dueño,usuario);
+            multa.setCodigoMulta(padre.calcularCodigo());
+            multa.setFechaGenerada(LocalDate.now().getDayOfMonth() + "/" 
+                    + String.format("%02d",LocalDate.now().getMonthValue())
+                    + "/" + LocalDate.now().getYear());
+            multa.setMonto(Float.parseFloat(txtMonto.getText()));
+            multa.setDescripcion(txtDescripcion.getText());
+            
+            this.padre.setMulta(multa);
+            salir();
+        }
+    }
+    
     private void salir() {
         padre.setVisible(true);
         this.dispose();
@@ -222,27 +269,27 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
     private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel lblApellido;
+    private javax.swing.JLabel lblCodigoM;
+    private javax.swing.JLabel lblCodigoMulta;
+    private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblFechaP;
+    private javax.swing.JLabel lblFechaV;
+    private javax.swing.JLabel lblMonto;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblNroDocumento;
+    private javax.swing.JLabel lblTipoDocumento;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTextField txtApellidoDueño;
+    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtFechaP;
+    private javax.swing.JTextField txtFechaV;
+    private javax.swing.JTextField txtMonto;
+    private javax.swing.JTextField txtNombreDueño;
+    private javax.swing.JTextField txtNroDocumento;
+    private javax.swing.JTextField txtTipoDocumento;
     // End of variables declaration//GEN-END:variables
 }
