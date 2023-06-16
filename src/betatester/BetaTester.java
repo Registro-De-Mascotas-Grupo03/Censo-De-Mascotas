@@ -5,6 +5,10 @@
  */
 package betatester;
 
+import entidades.Dueño;
+import entidades.Mascota;
+import java.util.ArrayList;
+import java.util.List;
 import pantallas.JFrameIngresar;
 
 /**
@@ -16,6 +20,8 @@ public class BetaTester {
     /**
      * @param args the command line arguments
      */
+    public static List<Dueño> dueños= new ArrayList<>();
+    public static List<Mascota> mascotas = new ArrayList<>();
     public static void main(String[] args) {
         
         JFrameIngresar ingresar = new JFrameIngresar();

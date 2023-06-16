@@ -10,10 +10,11 @@ package entidades;
  * @author MIKI
  */
 public class Mascota {
+
     
-    //probando
-    //private Dueño dueño;
-    //PRUEBAS
+    
+    
+    private Dueño dueño;
     private String codigo;
     private String nombre;
     private String apellido;
@@ -21,24 +22,35 @@ public class Mascota {
     private String sexo;
     private String especie;
     private String raza;
-    private String dniDueño;
 
-    //hgvhg
+    
     
     /**
      * @return the codigo
      */
     public String getDatosEnCadena() {
-        return codigo + dniDueño + nombre + apellido + fecNac 
-                + sexo + especie + raza;
+        return  getCodigo() +getDueño().getNumDoc() +getNombre() +getApellido() +
+                  getFecNac() +getSexo() +getEspecie() +getRaza();
     }
     
-    public Object[][] getDatosEnTabla(){
-        Object [][]data = {
-            {codigo, dniDueño, nombre, apellido, fecNac, sexo, especie, raza}
-        };
-        return data;
+    
+    /**
+     * @return the dueño
+     */
+    public Dueño getDueño() {
+        return dueño;
     }
+
+    /**
+     * @param dueño the dueño to set
+     */
+    public void setDueño(Dueño dueño) {
+        this.dueño = dueño;
+    }
+
+    /**
+     * @return the codigo
+     */
     public String getCodigo() {
         return codigo;
     }
@@ -133,12 +145,7 @@ public class Mascota {
     public void setRaza(String raza) {
         this.raza = raza;
     }
-    public String getDniDueño() {
-        return dniDueño;
-    }
-
-    public void setDniDueño(String dniDueño) {
-        this.dniDueño = dniDueño;
-    }
+    
+    
     
 }

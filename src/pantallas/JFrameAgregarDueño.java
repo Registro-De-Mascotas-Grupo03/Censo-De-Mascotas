@@ -5,6 +5,10 @@
  */
 package pantallas;
 
+import entidades.Dueño;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author tokiro
@@ -12,6 +16,7 @@ package pantallas;
 public class JFrameAgregarDueño extends javax.swing.JFrame {
 
     private JFrameListaDueños padre;
+    Dueño dueño;
     
     public JFrameAgregarDueño() {
         initComponents();
@@ -28,8 +33,6 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -37,6 +40,10 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        cbTipoDoc = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtNumDoc = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -56,33 +63,25 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
         jLabel2.setText("Registro de Dueños");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel3.setText("Codigo:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
-
-        txtCodigo.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtCodigo.setBorder(null);
-        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 160, 33));
-
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jLabel4.setText("Nombres:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtNombre.setBorder(null);
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 160, 33));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 160, 33));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jLabel5.setText("Apellidos:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, -1));
 
         txtApellido.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtApellido.setBorder(null);
-        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 160, 33));
+        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 160, 33));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jLabel6.setText("Sexo:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
 
         txtTelefono.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtTelefono.setBorder(null);
@@ -91,6 +90,22 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jLabel10.setText("Correo:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
+
+        cbTipoDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "CEDULA", "CARNET DE EXTRANJERIA", " " }));
+        cbTipoDoc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(cbTipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 160, 30));
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jLabel11.setText("Tipo Doc:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jLabel12.setText("Num.Doc: ");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
+
+        txtNumDoc.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtNumDoc.setBorder(null);
+        jPanel1.add(txtNumDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 160, 33));
 
         txtCorreo.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtCorreo.setBorder(null);
@@ -106,11 +121,11 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jLabel7.setText("Dirección:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, -1));
 
         txtDireccion.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtDireccion.setBorder(null);
-        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 160, 33));
+        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 160, 33));
 
         txtFecNac.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtFecNac.setBorder(null);
@@ -120,6 +135,11 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
         btnRegistrar.setText("Registrar");
         btnRegistrar.setBorder(null);
         btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, 100, 35));
 
         btnSalir.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -135,7 +155,7 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
 
         cbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hombre", "Mujer" }));
         cbSexo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(cbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 223, 160, 30));
+        jPanel1.add(cbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 160, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas7 agregaDueño.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 350));
@@ -158,9 +178,50 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
         salir();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+         NuevoDueño();
+        salir();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void NuevoDueño() {
+        DateTimeFormatter date=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fecNac;
+        
+        
+        
+        dueño= new Dueño();
+        dueño.setTipoDoc(this.cbTipoDoc.getItemAt(cbTipoDoc.getSelectedIndex()));
+        dueño.setNumDoc(txtNumDoc.getText());
+        dueño.setNombre(txtNombre.getText());
+        dueño.setApellido(txtApellido.getText());
+        dueño.setDireccion(txtDireccion.getText());
+        dueño.setCorreoPersonal(txtCorreo.getText());
+        dueño.setTelefono(txtTelefono.getText());
+        fecNac=LocalDate.parse(txtFecNac.getText(),date);
+        dueño.setFecNac(fecNac);
+        dueño.setSexo(this.cbSexo.getItemAt(cbSexo.getSelectedIndex()));
+        
+        dueño.setEstado("Habilitado");
+        dueño.setEdad(obtenerEdad(fecNac));
+        this.padre.agregarNuevoDueño(dueño);
+    }
     private void salir() {
         padre.setVisible(true);
         this.dispose();
+    }
+    private int obtenerEdad(LocalDate fecNac){
+        int edad;
+        LocalDate fechaActual=LocalDate.now();
+        
+        if(fecNac.getDayOfYear()<=fechaActual.getDayOfYear()){
+            edad=fechaActual.getYear()-fecNac.getYear();
+        }
+        else{
+            edad=fechaActual.getYear()-fecNac.getYear()-1;
+        }
+       
+        
+        return edad;
     }
     
     /**
@@ -202,10 +263,12 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbSexo;
+    private javax.swing.JComboBox<String> cbTipoDoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -214,11 +277,11 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtFecNac;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNumDoc;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
  */
 package entidades;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -12,18 +13,18 @@ import java.util.Date;
  * @author tokiro 
  */
 public class Persona {
-//Haciendo prueba de commit
+
     private String tipoDoc;
     private String numDoc;
     private String nombre;
     private String apellido;
-    private Date fecNac;
+    private LocalDate fecNac;
     private int edad;
     private String direccion;
     private String sexo;
     private String correoPersonal;
     private String telefono;
-
+    private String estado;
     /**
      * @return the tipoDoc
      */
@@ -83,14 +84,14 @@ public class Persona {
     /**
      * @return the fecNac
      */
-    public Date getFecNac() {
+    public LocalDate getFecNac() {
         return fecNac;
     }
 
     /**
      * @param fecNac the fecNac to set
      */
-    public void setFecNac(Date fecNac) {
+    public void setFecNac(LocalDate fecNac) {
         this.fecNac = fecNac;
     }
 
@@ -163,5 +164,23 @@ public class Persona {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+//Haciendo prueba de commit
+    
+
+
 
 }

@@ -5,6 +5,8 @@
  */
 package pantallas;
 
+import betatester.BetaTester;
+import entidades.Dueño;
 import entidades.Mascota;
 import javax.swing.JOptionPane;
 
@@ -15,6 +17,7 @@ import javax.swing.JOptionPane;
 public class JFrameAgregarMascota extends javax.swing.JFrame {
     private Mascota mascota;
     private JFrameListaMascotas padre;
+    private Dueño dueño;
     
     public JFrameAgregarMascota() {
         initComponents();
@@ -23,6 +26,13 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
     public JFrameAgregarMascota(JFrameListaMascotas padre) {
         initComponents();
         this.padre = padre;
+    }
+    public JFrameAgregarMascota(JFrameListaMascotas padre,Dueño dueño) {
+        initComponents();
+        this.padre = padre;
+        txtDniDueño.setText(dueño.getNumDoc());
+        txtDniDueño.setEnabled(false);
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -46,7 +56,7 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
-        txtFechaNac = new javax.swing.JTextField();
+        txtFecNac = new javax.swing.JTextField();
         txtEspecie = new javax.swing.JTextField();
         txtRaza = new javax.swing.JTextField();
         txtDniDueño = new javax.swing.JTextField();
@@ -138,9 +148,9 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
         txtApellido.setBorder(null);
         jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 160, 33));
 
-        txtFechaNac.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtFechaNac.setBorder(null);
-        jPanel1.add(txtFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 160, 33));
+        txtFecNac.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtFecNac.setBorder(null);
+        jPanel1.add(txtFecNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 160, 33));
 
         txtEspecie.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtEspecie.setBorder(null);
@@ -186,9 +196,9 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
     }
     public void Registrar() {
         ///falta implementar
+       
 
-        if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?","" 
-                + "Confirm", JOptionPane.YES_NO_OPTION)
+        if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?")
                 == JOptionPane.OK_OPTION) {
             mascota = new Mascota();
             String Sexo = null;
@@ -199,15 +209,24 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
                 Sexo = "HEMBRA";
             }
             mascota.setCodigo(txtCodigo.getText());
-            mascota.setDniDueño(txtDniDueño.getText());
+            
+            for (Dueño dueñoA :BetaTester.dueños){
+                if(dueñoA.getNumDoc().equals(txtDniDueño.getText())){
+                    this.dueño=dueñoA;
+                    break;
+                }
+            }
+            
+            mascota.setDueño(dueño);
             mascota.setNombre(txtNombre.getText());
             mascota.setApellido(txtApellido.getText());
-            mascota.setFecNac(txtFechaNac.getText());
+            mascota.setFecNac(txtFecNac.getText());
             mascota.setSexo(Sexo);
             mascota.setEspecie(txtEspecie.getText());
             mascota.setRaza(txtRaza.getText());
 
             this.padre.setMascota(mascota);
+            dueño.getMascotas().add(mascota);
             this.padre.setVisible(true);
             this.dispose();
 
@@ -272,7 +291,7 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDniDueño;
     private javax.swing.JTextField txtEspecie;
-    private javax.swing.JTextField txtFechaNac;
+    private javax.swing.JTextField txtFecNac;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRaza;
     // End of variables declaration//GEN-END:variables

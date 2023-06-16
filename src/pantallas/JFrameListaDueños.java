@@ -5,6 +5,11 @@
  */
 package pantallas;
 
+import betatester.BetaTester;
+import entidades.Dueño;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author tokiro
@@ -12,6 +17,7 @@ package pantallas;
 public class JFrameListaDueños extends javax.swing.JFrame {
 
     private JFrameGestorUsuario padre;
+    DefaultTableModel modeloTableDueños;
     
     public JFrameListaDueños() {
         initComponents();
@@ -20,6 +26,18 @@ public class JFrameListaDueños extends javax.swing.JFrame {
     public JFrameListaDueños(JFrameGestorUsuario padre) {
         initComponents();
         this.padre = padre;
+        
+        modeloTableDueños= new DefaultTableModel();
+        modeloTableDueños.addColumn("DNI");
+        modeloTableDueños.addColumn("Nombres");
+        modeloTableDueños.addColumn("Apellidos");
+        modeloTableDueños.addColumn("Sexo");
+        modeloTableDueños.addColumn("Correo");
+        modeloTableDueños.addColumn("Estado");
+        
+        
+        this.tbDueños.setModel(modeloTableDueños);
+        llenarTabla("");
     }
     
     @SuppressWarnings("unchecked")
@@ -29,9 +47,10 @@ public class JFrameListaDueños extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
+        btnAgregarMascota = new javax.swing.JButton();
+        btnDeshabilitar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbDueños = new javax.swing.JTable();
         btnAgregar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -47,15 +66,36 @@ public class JFrameListaDueños extends javax.swing.JFrame {
 
         txtBuscar.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtBuscar.setBorder(null);
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 210, 35));
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 370, 35));
 
-        btnBuscar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        btnBuscar.setText("Buscar");
-        btnBuscar.setBorder(null);
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 100, 35));
+        btnAgregarMascota.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        btnAgregarMascota.setText("AgregarMascota");
+        btnAgregarMascota.setBorder(null);
+        btnAgregarMascota.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarMascota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarMascotaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAgregarMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 170, 35));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        btnDeshabilitar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        btnDeshabilitar.setText("Deshabilitar Dueño");
+        btnDeshabilitar.setBorder(null);
+        btnDeshabilitar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDeshabilitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeshabilitarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDeshabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 510, 150, 40));
+
+        tbDueños.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -81,7 +121,7 @@ public class JFrameListaDueños extends javax.swing.JFrame {
                 "Codigo", "Nombre", "Apellido", "Sexo", "Especie", "Raza", "Fec. Nac."
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbDueños);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 610, 330));
 
@@ -100,6 +140,11 @@ public class JFrameListaDueños extends javax.swing.JFrame {
         btnEliminar.setText("Eliminar");
         btnEliminar.setBorder(null);
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 100, 35));
 
         btnSalir.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -141,6 +186,121 @@ public class JFrameListaDueños extends javax.swing.JFrame {
         salir();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnAgregarMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMascotaActionPerformed
+        String numDoc;
+        JFrameIngresar abuelo=new JFrameIngresar();
+        JFrameGestorUsuario padre=new JFrameGestorUsuario(abuelo);
+        JFrameListaMascotas nuevo = new JFrameListaMascotas(padre);
+        int fila=tbDueños.getSelectedRow();
+        if(fila>=0){
+            numDoc=String.valueOf(modeloTableDueños.getValueAt(fila, 0));
+            for(Dueño dueño : BetaTester.dueños){
+                if(numDoc==dueño.getNumDoc()){
+                    JFrameAgregarMascota agrega = 
+                            new JFrameAgregarMascota(nuevo,dueño);
+                    agrega.setLocationRelativeTo(null);
+                    agrega.setVisible(true);
+                     this.setVisible(false);
+                    
+                    break;
+                }
+            }
+            
+        } else{
+            JOptionPane.showMessageDialog(null,"Seleccionar Fila");
+        }
+    }//GEN-LAST:event_btnAgregarMascotaActionPerformed
+
+    private void btnDeshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshabilitarActionPerformed
+        String numDoc;
+        int fila=tbDueños.getSelectedRow();
+        if(fila>=0){
+            numDoc=String.valueOf(modeloTableDueños.getValueAt(fila, 0));
+
+            for(Dueño dueño : BetaTester.dueños){
+                if(numDoc==dueño.getNumDoc()){
+                    dueño.setEstado("Deshabilitado");
+
+                    break;
+                }
+            }
+
+        } else{
+            JOptionPane.showMessageDialog(null,"Debe seleccionar una fila");
+        }
+        llenarTabla("");
+    }//GEN-LAST:event_btnDeshabilitarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        String numDoc;
+        int fila=tbDueños.getSelectedRow();
+        if(fila>=0){
+            numDoc=String.valueOf(modeloTableDueños.getValueAt(fila, 0));
+            
+            for(Dueño dueño : BetaTester.dueños){
+                if(numDoc==dueño.getNumDoc()){
+                    BetaTester.dueños.remove(dueño);
+                    modeloTableDueños.removeRow(fila);
+                    
+                    break;
+                }
+            }
+            
+            
+        } else{
+            JOptionPane.showMessageDialog(null,"Seleccionar Fila");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        busquedaSensitiva();
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void busquedaSensitiva() {
+        limpiarTabla();
+        for (Dueño dueño : BetaTester.dueños) {
+            String[] fila=new String[6];
+            if (dueño.getNombre().toLowerCase()
+                    .contains(txtBuscar.getText().toLowerCase())||
+                    dueño.getNumDoc().toLowerCase()
+                            .contains(txtBuscar.getText().toLowerCase())) {
+                fila[0]=dueño.getNumDoc();
+                fila[1]=dueño.getNombre();
+                fila[2]=dueño.getApellido();
+                fila[3]=dueño.getSexo();
+                fila[4]=dueño.getCorreoPersonal();
+                fila[5]=dueño.getEstado();
+                modeloTableDueños.addRow(fila);
+            }
+        }
+    }
+    public void agregarNuevoDueño(Dueño dueño){
+        BetaTester.dueños.add(dueño);
+        llenarTabla("");
+    }
+    private void llenarTabla(String criterio){
+        limpiarTabla();
+        
+        for(Dueño dueño : BetaTester.dueños){
+            String[] fila=new String[6];
+            if(dueño.getNombre()!= null && dueño.getNombre().contains(criterio)){
+                fila[0]=dueño.getNumDoc();
+                fila[1]=dueño.getNombre();
+                fila[2]=dueño.getApellido();
+                fila[3]=dueño.getSexo();
+                fila[4]=dueño.getCorreoPersonal();
+                fila[5]=dueño.getEstado();
+                modeloTableDueños.addRow(fila);
+            }
+        }
+        
+    }
+    private void limpiarTabla() {
+        int fila=tbDueños.getRowCount();
+        for(int i=fila-1;i>=0;i--){
+            modeloTableDueños.removeRow(i);
+        }
+    }
     private void salir() {
         padre.setVisible(true);
         this.dispose();
@@ -183,14 +343,15 @@ public class JFrameListaDueños extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnAgregarMascota;
+    private javax.swing.JButton btnDeshabilitar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbDueños;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
