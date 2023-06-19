@@ -7,6 +7,7 @@ package betatester;
 
 import entidades.Dueño;
 import entidades.Mascota;
+import entidades.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import pantallas.JFrameIngresar;
@@ -22,8 +23,16 @@ public class BetaTester {
      */
     public static List<Dueño> dueños= new ArrayList<>();
     public static List<Mascota> mascotas = new ArrayList<>();
+    public static List<Usuario> usuarios = new ArrayList<>();
+    
     public static void main(String[] args) {
         
+        Usuario usuario = new Usuario("Admin", "123456");
+        usuario.setRol("Administrador");
+        usuarios.add(usuario);
+        usuario = new Usuario("Trabajador", "123");
+        usuario.setRol("Operador");
+        usuarios.add(usuario);
         JFrameIngresar ingresar = new JFrameIngresar();
         ingresar.setLocationRelativeTo(null);
         ingresar.setVisible(true);

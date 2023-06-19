@@ -5,7 +5,10 @@
  */
 package pantallas;
 
+import betatester.BetaTester;
+import entidades.Usuario;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,7 +16,7 @@ import java.awt.Color;
  */
 public class JFrameIngresar extends javax.swing.JFrame {
 
-    
+    Usuario usuario;
     public JFrameIngresar() {
         initComponents();
     }
@@ -118,10 +121,22 @@ public class JFrameIngresar extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        JFrameGestorUsuario usu = new JFrameGestorUsuario(this);
-        usu.setLocationRelativeTo(null);
-        usu.setVisible(true);
-        this.setVisible(false);
+         boolean Validado= true;
+        usuario = new Usuario(txtUsuario.getText(), txtContra.getText());
+        for (Usuario usuarioA : BetaTester.usuarios) {
+            if (usuario.getUsuario().equals(usuarioA.getUsuario())
+                    && usuario.getContraseña().equals(usuarioA.getContraseña())) {
+                Validado=false;
+                JFrameGestorUsuario usu = new JFrameGestorUsuario(this, usuarioA);
+                usu.setLocationRelativeTo(null);
+                usu.setVisible(true);
+                this.setVisible(false);
+                break;
+            }
+        }
+        if(Validado){
+            JOptionPane.showMessageDialog(this,"Usuario o contraseña incorrecta");
+        }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

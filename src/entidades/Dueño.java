@@ -13,7 +13,10 @@ import java.util.List;
  * @author tokiro
  */
 public class Dueño extends Persona{
+
+   
     
+    private String sexo;
     private List<Mascota> mascotas= new ArrayList<>();
     private List<Multa> multas =new ArrayList<>();
     /**
@@ -43,5 +46,17 @@ public class Dueño extends Persona{
     public void setMultas(List<Multa> multas) {
         this.multas = multas;
     }
-    
+     /**
+     * @return the sexo
+     */
+    public String getSexo() {
+        return sexo;
+    }
+
+    /**
+     * @param sexo the sexo to set
+     */
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
 }

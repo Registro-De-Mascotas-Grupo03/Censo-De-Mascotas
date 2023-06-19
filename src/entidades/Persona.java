@@ -21,7 +21,6 @@ public class Persona {
     private LocalDate fecNac;
     private int edad;
     private String direccion;
-    private String sexo;
     private String correoPersonal;
     private String telefono;
     private String estado;
@@ -121,20 +120,6 @@ public class Persona {
      */
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    /**
-     * @return the sexo
-     */
-    public String getSexo() {
-        return sexo;
-    }
-
-    /**
-     * @param sexo the sexo to set
-     */
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
     }
 
     /**

@@ -13,12 +13,11 @@ public class Usuario extends Persona{
 
     private Usuario supervisor;
     private String rol;
-    private String correo;
+    private String usuario;
     private String contraseña;
 
-    public Usuario(String rol, String correo, String contraseña) {
-        this.rol = rol;
-        this.correo = correo;
+    public Usuario( String usuario, String contraseña) {
+        this.usuario = usuario;
         this.contraseña = contraseña;
     }
 
@@ -37,17 +36,17 @@ public class Usuario extends Persona{
     }
 
     /**
-     * @return the correo
+     * @return the usuario
      */
-    public String getCorreo() {
-        return correo;
+    public String getUsuario() {
+        return usuario;
     }
 
     /**
-     * @param correo the correo to set
+     * @param usuario the usuario to set
      */
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     /**

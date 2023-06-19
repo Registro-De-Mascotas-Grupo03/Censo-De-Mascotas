@@ -7,6 +7,7 @@ package pantallas;
 
 import betatester.BetaTester;
 import entidades.Dueño;
+import entidades.Usuario;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -189,7 +190,7 @@ public class JFrameListaDueños extends javax.swing.JFrame {
     private void btnAgregarMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMascotaActionPerformed
         String numDoc;
         JFrameIngresar abuelo=new JFrameIngresar();
-        JFrameGestorUsuario padre=new JFrameGestorUsuario(abuelo);
+        JFrameGestorUsuario padre=new JFrameGestorUsuario(abuelo,this.padre.usuario);
         JFrameListaMascotas nuevo = new JFrameListaMascotas(padre);
         int fila=tbDueños.getSelectedRow();
         if(fila>=0){

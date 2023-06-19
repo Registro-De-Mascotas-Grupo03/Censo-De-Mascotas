@@ -5,6 +5,7 @@
  */
 package pantallas;
 
+import entidades.Usuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,14 +15,24 @@ import javax.swing.JOptionPane;
 public class JFrameGestorUsuario extends javax.swing.JFrame {
 
     private JFrameIngresar padre;
+    public Usuario usuario;
     
     public JFrameGestorUsuario() {
         initComponents();
     }
 
-    public JFrameGestorUsuario(JFrameIngresar padre) {
+    public JFrameGestorUsuario(JFrameIngresar padre,Usuario usuario) {
         initComponents();
         this.padre = padre;
+        this.usuario=usuario;
+        lblUsuario.setText("Usuario:  "+usuario.getUsuario());
+        lblRolUsuario.setText("Rol: "+usuario.getRol());
+        if(!usuario.getRol().equals("Administrador")){
+           btnReporte.setVisible(false);
+            btnUsuario.setVisible(false);
+            
+            
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -33,7 +44,8 @@ public class JFrameGestorUsuario extends javax.swing.JFrame {
         btnDueño = new javax.swing.JButton();
         btnMascota = new javax.swing.JButton();
         btnReporte = new javax.swing.JButton();
-        btnAsignarRol = new javax.swing.JButton();
+        lblRolUsuario = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         btnMultas = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -88,16 +100,11 @@ public class JFrameGestorUsuario extends javax.swing.JFrame {
         });
         jPanel1.add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 130, 50));
 
-        btnAsignarRol.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        btnAsignarRol.setText("Ver Rol");
-        btnAsignarRol.setBorder(null);
-        btnAsignarRol.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAsignarRol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAsignarRolActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnAsignarRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 130, 50));
+        lblRolUsuario.setText("Rol: ");
+        jPanel1.add(lblRolUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+
+        lblUsuario.setText("Usuario: ");
+        jPanel1.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         btnSalir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnSalir.setText("Salir");
@@ -170,13 +177,6 @@ public class JFrameGestorUsuario extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnReporteActionPerformed
 
-    private void btnAsignarRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarRolActionPerformed
-        JFrameAsignarRol asignar = new JFrameAsignarRol(this);
-        asignar.setLocationRelativeTo(null);
-        asignar.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnAsignarRolActionPerformed
-
     private void btnMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultasActionPerformed
         JFrameMultas multa = new JFrameMultas(this);
         multa.setLocationRelativeTo(null);
@@ -231,7 +231,6 @@ public class JFrameGestorUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAsignarRol;
     private javax.swing.JButton btnDueño;
     private javax.swing.JButton btnMascota;
     private javax.swing.JButton btnMultas;
@@ -241,5 +240,7 @@ public class JFrameGestorUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblRolUsuario;
+    private javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
 }

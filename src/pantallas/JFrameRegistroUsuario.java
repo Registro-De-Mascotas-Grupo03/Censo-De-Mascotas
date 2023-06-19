@@ -13,18 +13,18 @@ import java.awt.Color;
  * @author tokiro
  */
 public class JFrameRegistroUsuario extends javax.swing.JFrame {
-    
+
     private JFrameListaUsuarios padre;
-    
+
     public JFrameRegistroUsuario() {
         initComponents();
     }
-    
+
     public JFrameRegistroUsuario(JFrameListaUsuarios padre) {
         initComponents();
         this.padre = padre;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -37,6 +37,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
         txtFecNac = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         txtContra2 = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
         txtContra = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         btnRegistrar = new javax.swing.JButton();
@@ -59,7 +60,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 txtDniMousePressed(evt);
             }
         });
-        jPanel1.add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 290, 40));
+        jPanel1.add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 290, 40));
 
         txtNombre.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(204, 204, 204));
@@ -70,7 +71,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 txtNombreMousePressed(evt);
             }
         });
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 290, 40));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 290, 40));
 
         txtApellido.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtApellido.setForeground(new java.awt.Color(204, 204, 204));
@@ -81,7 +82,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 txtApellidoMousePressed(evt);
             }
         });
-        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 290, 40));
+        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 290, 40));
 
         txtDireccion.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtDireccion.setForeground(new java.awt.Color(204, 204, 204));
@@ -92,7 +93,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 txtDireccionMousePressed(evt);
             }
         });
-        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 290, 40));
+        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 290, 40));
 
         txtFecNac.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtFecNac.setForeground(new java.awt.Color(204, 204, 204));
@@ -103,7 +104,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 txtFecNacMousePressed(evt);
             }
         });
-        jPanel1.add(txtFecNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 290, 40));
+        jPanel1.add(txtFecNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 290, 40));
 
         txtCorreo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(204, 204, 204));
@@ -114,7 +115,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 txtCorreoMousePressed(evt);
             }
         });
-        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 290, 40));
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 290, 40));
 
         txtContra2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtContra2.setForeground(new java.awt.Color(204, 204, 204));
@@ -125,7 +126,18 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 txtContra2MousePressed(evt);
             }
         });
-        jPanel1.add(txtContra2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 290, 40));
+        jPanel1.add(txtContra2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 520, 290, 40));
+
+        txtUsuario.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
+        txtUsuario.setText("  Usuario");
+        txtUsuario.setBorder(null);
+        txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtUsuarioMousePressed(evt);
+            }
+        });
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, 290, 40));
 
         txtContra.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtContra.setForeground(new java.awt.Color(204, 204, 204));
@@ -136,13 +148,13 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 txtContraMousePressed(evt);
             }
         });
-        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, 290, 40));
+        jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 470, 290, 40));
 
         jComboBox1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(153, 153, 153));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hombre", "Mujer" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Asesor" }));
         jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 290, 40));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 290, 40));
 
         btnRegistrar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnRegistrar.setText("Registrar");
@@ -170,11 +182,11 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
         btnValidar.setText("Validar");
         btnValidar.setBorder(null);
         btnValidar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 100, 40));
+        jPanel1.add(btnValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 100, 40));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel3.setText("Registro de Usuarios");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas7 resgistroUsuario.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 650));
@@ -202,290 +214,361 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtDniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDniMousePressed
-        if (txtDni.getText().equals("  Dni")){
+        if (txtDni.getText().equals("  Dni")) {
             txtDni.setText("");
             txtDni.setForeground(Color.black);
         }
-        if (txtNombre.getText().isEmpty()){
+        if (txtNombre.getText().isEmpty()) {
             txtNombre.setText("  Nombres");
-            txtNombre.setForeground(new Color(204,204,204));
+            txtNombre.setForeground(new Color(204, 204, 204));
         }
-        if (txtApellido.getText().isEmpty()){
+        if (txtApellido.getText().isEmpty()) {
             txtApellido.setText("  Apellidos");
-            txtApellido.setForeground(new Color(204,204,204));
+            txtApellido.setForeground(new Color(204, 204, 204));
         }
-        if (txtDireccion.getText().isEmpty()){
+        if (txtDireccion.getText().isEmpty()) {
             txtDireccion.setText("  Dirección");
-            txtDireccion.setForeground(new Color(204,204,204));
+            txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        if (txtFecNac.getText().isEmpty()){
+        if (txtFecNac.getText().isEmpty()) {
             txtFecNac.setText("  Fecha de Nacimiento");
-            txtFecNac.setForeground(new Color(204,204,204));
+            txtFecNac.setForeground(new Color(204, 204, 204));
         }
-        if (txtCorreo.getText().isEmpty()){
+        if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
-            txtCorreo.setForeground(new Color(204,204,204));
+            txtCorreo.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra.getText().isEmpty()){
+        if (txtContra.getText().isEmpty()) {
             txtContra.setText("  Contraseña");
-            txtContra.setForeground(new Color(204,204,204));
+            txtContra.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra2.getText().isEmpty()){
+        if (txtContra2.getText().isEmpty()) {
             txtContra2.setText("  Confirmar Contraseña");
-            txtContra2.setForeground(new Color(204,204,204));
+            txtContra2.setForeground(new Color(204, 204, 204));
+        }
+        if (txtUsuario.getText().isEmpty()) {
+            txtUsuario.setText("  Usuario");
+            txtUsuario.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_txtDniMousePressed
 
     private void txtNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMousePressed
-        if (txtNombre.getText().equals("  Nombres")){
+        if (txtNombre.getText().equals("  Nombres")) {
             txtNombre.setText("");
             txtNombre.setForeground(Color.black);
         }
-        if (txtDni.getText().isEmpty()){
+        if (txtDni.getText().isEmpty()) {
             txtDni.setText("  Dni");
-            txtDni.setForeground(new Color(204,204,204));
+            txtDni.setForeground(new Color(204, 204, 204));
         }
-        if (txtApellido.getText().isEmpty()){
+        if (txtApellido.getText().isEmpty()) {
             txtApellido.setText("  Apellidos");
-            txtApellido.setForeground(new Color(204,204,204));
+            txtApellido.setForeground(new Color(204, 204, 204));
         }
-        if (txtDireccion.getText().isEmpty()){
+        if (txtDireccion.getText().isEmpty()) {
             txtDireccion.setText("  Dirección");
-            txtDireccion.setForeground(new Color(204,204,204));
+            txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        if (txtFecNac.getText().isEmpty()){
+        if (txtFecNac.getText().isEmpty()) {
             txtFecNac.setText("  Fecha de Nacimiento");
-            txtFecNac.setForeground(new Color(204,204,204));
+            txtFecNac.setForeground(new Color(204, 204, 204));
         }
-        if (txtCorreo.getText().isEmpty()){
+        if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
-            txtCorreo.setForeground(new Color(204,204,204));
+            txtCorreo.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra.getText().isEmpty()){
+        if (txtContra.getText().isEmpty()) {
             txtContra.setText("  Contraseña");
-            txtContra.setForeground(new Color(204,204,204));
+            txtContra.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra2.getText().isEmpty()){
+        if (txtContra2.getText().isEmpty()) {
             txtContra2.setText("  Confirmar Contraseña");
-            txtContra2.setForeground(new Color(204,204,204));
+            txtContra2.setForeground(new Color(204, 204, 204));
+        }
+        if (txtUsuario.getText().isEmpty()) {
+            txtUsuario.setText("  Usuario");
+            txtUsuario.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_txtNombreMousePressed
 
     private void txtApellidoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtApellidoMousePressed
-        if (txtApellido.getText().equals("  Apellidos")){
+        if (txtApellido.getText().equals("  Apellidos")) {
             txtApellido.setText("");
             txtApellido.setForeground(Color.black);
         }
-        if (txtDni.getText().isEmpty()){
+        if (txtDni.getText().isEmpty()) {
             txtDni.setText("  Dni");
-            txtDni.setForeground(new Color(204,204,204));
+            txtDni.setForeground(new Color(204, 204, 204));
         }
-        if (txtNombre.getText().isEmpty()){
+        if (txtNombre.getText().isEmpty()) {
             txtNombre.setText("  Nombres");
-            txtNombre.setForeground(new Color(204,204,204));
+            txtNombre.setForeground(new Color(204, 204, 204));
         }
-        if (txtDireccion.getText().isEmpty()){
+        if (txtDireccion.getText().isEmpty()) {
             txtDireccion.setText("  Dirección");
-            txtDireccion.setForeground(new Color(204,204,204));
+            txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        if (txtFecNac.getText().isEmpty()){
+        if (txtFecNac.getText().isEmpty()) {
             txtFecNac.setText("  Fecha de Nacimiento");
-            txtFecNac.setForeground(new Color(204,204,204));
+            txtFecNac.setForeground(new Color(204, 204, 204));
         }
-        if (txtCorreo.getText().isEmpty()){
+        if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
-            txtCorreo.setForeground(new Color(204,204,204));
+            txtCorreo.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra.getText().isEmpty()){
+        if (txtContra.getText().isEmpty()) {
             txtContra.setText("  Contraseña");
-            txtContra.setForeground(new Color(204,204,204));
+            txtContra.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra2.getText().isEmpty()){
+        if (txtContra2.getText().isEmpty()) {
             txtContra2.setText("  Confirmar Contraseña");
-            txtContra2.setForeground(new Color(204,204,204));
+            txtContra2.setForeground(new Color(204, 204, 204));
+        }
+        if (txtUsuario.getText().isEmpty()) {
+            txtUsuario.setText("  Usuario");
+            txtUsuario.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_txtApellidoMousePressed
 
     private void txtDireccionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDireccionMousePressed
-        if (txtDireccion.getText().equals("  Dirección")){
+        if (txtDireccion.getText().equals("  Dirección")) {
             txtDireccion.setText("");
             txtDireccion.setForeground(Color.black);
         }
-        if (txtDni.getText().isEmpty()){
+        if (txtDni.getText().isEmpty()) {
             txtDni.setText("  Dni");
-            txtDni.setForeground(new Color(204,204,204));
+            txtDni.setForeground(new Color(204, 204, 204));
         }
-        if (txtNombre.getText().isEmpty()){
+        if (txtNombre.getText().isEmpty()) {
             txtNombre.setText("  Nombres");
-            txtNombre.setForeground(new Color(204,204,204));
+            txtNombre.setForeground(new Color(204, 204, 204));
         }
-        if (txtApellido.getText().isEmpty()){
+        if (txtApellido.getText().isEmpty()) {
             txtApellido.setText("  Apellidos");
-            txtApellido.setForeground(new Color(204,204,204));
+            txtApellido.setForeground(new Color(204, 204, 204));
         }
-        if (txtFecNac.getText().isEmpty()){
+        if (txtFecNac.getText().isEmpty()) {
             txtFecNac.setText("  Fecha de Nacimiento");
-            txtFecNac.setForeground(new Color(204,204,204));
+            txtFecNac.setForeground(new Color(204, 204, 204));
         }
-        if (txtCorreo.getText().isEmpty()){
+        if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
-            txtCorreo.setForeground(new Color(204,204,204));
+            txtCorreo.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra.getText().isEmpty()){
+        if (txtContra.getText().isEmpty()) {
             txtContra.setText("  Contraseña");
-            txtContra.setForeground(new Color(204,204,204));
+            txtContra.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra2.getText().isEmpty()){
+        if (txtContra2.getText().isEmpty()) {
             txtContra2.setText("  Confirmar Contraseña");
-            txtContra2.setForeground(new Color(204,204,204));
+            txtContra2.setForeground(new Color(204, 204, 204));
+        }
+        if (txtUsuario.getText().isEmpty()) {
+            txtUsuario.setText("  Usuario");
+            txtUsuario.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_txtDireccionMousePressed
 
     private void txtFecNacMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFecNacMousePressed
-        if (txtFecNac.getText().equals("  Fecha de Nacimiento")){
+        if (txtFecNac.getText().equals("  Fecha de Nacimiento")) {
             txtFecNac.setText("");
             txtFecNac.setForeground(Color.black);
         }
-        if (txtDni.getText().isEmpty()){
+        if (txtDni.getText().isEmpty()) {
             txtDni.setText("  Dni");
-            txtDni.setForeground(new Color(204,204,204));
+            txtDni.setForeground(new Color(204, 204, 204));
         }
-        if (txtNombre.getText().isEmpty()){
+        if (txtNombre.getText().isEmpty()) {
             txtNombre.setText("  Nombres");
-            txtNombre.setForeground(new Color(204,204,204));
+            txtNombre.setForeground(new Color(204, 204, 204));
         }
-        if (txtApellido.getText().isEmpty()){
+        if (txtApellido.getText().isEmpty()) {
             txtApellido.setText("  Apellidos");
-            txtApellido.setForeground(new Color(204,204,204));
+            txtApellido.setForeground(new Color(204, 204, 204));
         }
-        if (txtDireccion.getText().isEmpty()){
+        if (txtDireccion.getText().isEmpty()) {
             txtDireccion.setText("  Dirección");
-            txtDireccion.setForeground(new Color(204,204,204));
+            txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        if (txtCorreo.getText().isEmpty()){
+        if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
-            txtCorreo.setForeground(new Color(204,204,204));
+            txtCorreo.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra.getText().isEmpty()){
+        if (txtContra.getText().isEmpty()) {
             txtContra.setText("  Contraseña");
-            txtContra.setForeground(new Color(204,204,204));
+            txtContra.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra2.getText().isEmpty()){
+        if (txtContra2.getText().isEmpty()) {
             txtContra2.setText("  Confirmar Contraseña");
-            txtContra2.setForeground(new Color(204,204,204));
+            txtContra2.setForeground(new Color(204, 204, 204));
+        }
+        if (txtUsuario.getText().isEmpty()) {
+            txtUsuario.setText("  Usuario");
+            txtUsuario.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_txtFecNacMousePressed
 
     private void txtCorreoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCorreoMousePressed
-        if (txtCorreo.getText().equals("  Correo")){
+        if (txtCorreo.getText().equals("  Correo")) {
             txtCorreo.setText("");
             txtCorreo.setForeground(Color.black);
         }
-        if (txtDni.getText().isEmpty()){
+        if (txtDni.getText().isEmpty()) {
             txtDni.setText("  Dni");
-            txtDni.setForeground(new Color(204,204,204));
+            txtDni.setForeground(new Color(204, 204, 204));
         }
-        if (txtNombre.getText().isEmpty()){
+        if (txtNombre.getText().isEmpty()) {
             txtNombre.setText("  Nombres");
-            txtNombre.setForeground(new Color(204,204,204));
+            txtNombre.setForeground(new Color(204, 204, 204));
         }
-        if (txtApellido.getText().isEmpty()){
+        if (txtApellido.getText().isEmpty()) {
             txtApellido.setText("  Apellidos");
-            txtApellido.setForeground(new Color(204,204,204));
+            txtApellido.setForeground(new Color(204, 204, 204));
         }
-        if (txtDireccion.getText().isEmpty()){
+        if (txtDireccion.getText().isEmpty()) {
             txtDireccion.setText("  Dirección");
-            txtDireccion.setForeground(new Color(204,204,204));
+            txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        if (txtFecNac.getText().isEmpty()){
+        if (txtFecNac.getText().isEmpty()) {
             txtFecNac.setText("  Fecha de Nacimiento");
-            txtFecNac.setForeground(new Color(204,204,204));
+            txtFecNac.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra.getText().isEmpty()){
+        if (txtContra.getText().isEmpty()) {
             txtContra.setText("  Contraseña");
-            txtContra.setForeground(new Color(204,204,204));
+            txtContra.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra2.getText().isEmpty()){
+        if (txtContra2.getText().isEmpty()) {
             txtContra2.setText("  Confirmar Contraseña");
-            txtContra2.setForeground(new Color(204,204,204));
+            txtContra2.setForeground(new Color(204, 204, 204));
+        }
+        if (txtUsuario.getText().isEmpty()) {
+            txtUsuario.setText("  Usuario");
+            txtUsuario.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_txtCorreoMousePressed
 
     private void txtContraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraMousePressed
-        if (txtContra.getText().equals("  Contraseña")){
+        if (txtContra.getText().equals("  Contraseña")) {
             txtContra.setText("");
             txtContra.setForeground(Color.black);
-        }        
-        if (txtDni.getText().isEmpty()){
+        }
+        if (txtDni.getText().isEmpty()) {
             txtDni.setText("  Dni");
-            txtDni.setForeground(new Color(204,204,204));
+            txtDni.setForeground(new Color(204, 204, 204));
         }
-        if (txtNombre.getText().isEmpty()){
+        if (txtNombre.getText().isEmpty()) {
             txtNombre.setText("  Nombres");
-            txtNombre.setForeground(new Color(204,204,204));
+            txtNombre.setForeground(new Color(204, 204, 204));
         }
-        if (txtApellido.getText().isEmpty()){
+        if (txtApellido.getText().isEmpty()) {
             txtApellido.setText("  Apellidos");
-            txtApellido.setForeground(new Color(204,204,204));
+            txtApellido.setForeground(new Color(204, 204, 204));
         }
-        if (txtDireccion.getText().isEmpty()){
+        if (txtDireccion.getText().isEmpty()) {
             txtDireccion.setText("  Dirección");
-            txtDireccion.setForeground(new Color(204,204,204));
+            txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        if (txtFecNac.getText().isEmpty()){
+        if (txtFecNac.getText().isEmpty()) {
             txtFecNac.setText("  Fecha de Nacimiento");
-            txtFecNac.setForeground(new Color(204,204,204));
+            txtFecNac.setForeground(new Color(204, 204, 204));
         }
-        if (txtCorreo.getText().isEmpty()){
+        if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
-            txtCorreo.setForeground(new Color(204,204,204));
+            txtCorreo.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra2.getText().isEmpty()){
+        if (txtContra2.getText().isEmpty()) {
             txtContra2.setText("  Confirmar Contraseña");
-            txtContra2.setForeground(new Color(204,204,204));
+            txtContra2.setForeground(new Color(204, 204, 204));
+        }
+        if (txtUsuario.getText().isEmpty()) {
+            txtUsuario.setText("  Usuario");
+            txtUsuario.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_txtContraMousePressed
 
     private void txtContra2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContra2MousePressed
-        if (txtContra2.getText().equals("  Confirmar Contraseña")){
+        if (txtContra2.getText().equals("  Confirmar Contraseña")) {
             txtContra2.setText("");
             txtContra2.setForeground(Color.black);
-        }        
-        if (txtDni.getText().isEmpty()){
+        }
+        if (txtDni.getText().isEmpty()) {
             txtDni.setText("  Dni");
-            txtDni.setForeground(new Color(204,204,204));
+            txtDni.setForeground(new Color(204, 204, 204));
         }
-        if (txtNombre.getText().isEmpty()){
+        if (txtNombre.getText().isEmpty()) {
             txtNombre.setText("  Nombres");
-            txtNombre.setForeground(new Color(204,204,204));
+            txtNombre.setForeground(new Color(204, 204, 204));
         }
-        if (txtApellido.getText().isEmpty()){
+        if (txtApellido.getText().isEmpty()) {
             txtApellido.setText("  Apellidos");
-            txtApellido.setForeground(new Color(204,204,204));
+            txtApellido.setForeground(new Color(204, 204, 204));
         }
-        if (txtDireccion.getText().isEmpty()){
+        if (txtDireccion.getText().isEmpty()) {
             txtDireccion.setText("  Dirección");
-            txtDireccion.setForeground(new Color(204,204,204));
+            txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        if (txtFecNac.getText().isEmpty()){
+        if (txtFecNac.getText().isEmpty()) {
             txtFecNac.setText("  Fecha de Nacimiento");
-            txtFecNac.setForeground(new Color(204,204,204));
+            txtFecNac.setForeground(new Color(204, 204, 204));
         }
-        if (txtCorreo.getText().isEmpty()){
+        if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
-            txtCorreo.setForeground(new Color(204,204,204));
+            txtCorreo.setForeground(new Color(204, 204, 204));
         }
-        if (txtContra.getText().isEmpty()){
+        if (txtContra.getText().isEmpty()) {
             txtContra.setText("  Contraseña");
-            txtContra.setForeground(new Color(204,204,204));
+            txtContra.setForeground(new Color(204, 204, 204));
+        }
+        if (txtUsuario.getText().isEmpty()) {
+            txtUsuario.setText("  Usuario");
+            txtUsuario.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_txtContra2MousePressed
+
+    private void txtUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMousePressed
+        if (txtUsuario.getText().equals("  Usuario")) {
+            txtUsuario.setText("");
+            txtUsuario.setForeground(Color.black);
+        }
+        if (txtDni.getText().isEmpty()) {
+            txtDni.setText("  Dni");
+            txtDni.setForeground(new Color(204, 204, 204));
+        }
+        if (txtNombre.getText().isEmpty()) {
+            txtNombre.setText("  Nombres");
+            txtNombre.setForeground(new Color(204, 204, 204));
+        }
+        if (txtApellido.getText().isEmpty()) {
+            txtApellido.setText("  Apellidos");
+            txtApellido.setForeground(new Color(204, 204, 204));
+        }
+        if (txtDireccion.getText().isEmpty()) {
+            txtDireccion.setText("  Dirección");
+            txtDireccion.setForeground(new Color(204, 204, 204));
+        }
+        if (txtFecNac.getText().isEmpty()) {
+            txtFecNac.setText("  Fecha de Nacimiento");
+            txtFecNac.setForeground(new Color(204, 204, 204));
+        }
+        if (txtCorreo.getText().isEmpty()) {
+            txtCorreo.setText("  Correo");
+            txtCorreo.setForeground(new Color(204, 204, 204));
+        }
+        if (txtContra.getText().isEmpty()) {
+            txtContra.setText("  Contraseña");
+            txtContra.setForeground(new Color(204, 204, 204));
+        }
+        if (txtContra2.getText().isEmpty()) {
+            txtContra2.setText("  Confirmar Contraseña");
+            txtContra2.setForeground(new Color(204, 204, 204));
+        }
+    }//GEN-LAST:event_txtUsuarioMousePressed
 
     private void salir() {
         padre.setVisible(true);
         this.dispose();
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -537,5 +620,6 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtFecNac;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
