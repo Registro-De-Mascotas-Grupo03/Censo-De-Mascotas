@@ -5,7 +5,8 @@
  */
 package pantallas;
 
-import entidades.Dueño;
+import entidades.ExportarArchivo;
+import java.io.IOException;
 
 /**
  *
@@ -24,8 +25,9 @@ public class JFrameDescargas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        rbnExcel = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         btnDescargar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -36,12 +38,14 @@ public class JFrameDescargas extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jRadioButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jRadioButton1.setText("Excel");
-        jRadioButton1.setBorder(null);
-        jRadioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
+        buttonGroup1.add(rbnExcel);
+        rbnExcel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        rbnExcel.setText("Excel");
+        rbnExcel.setBorder(null);
+        rbnExcel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(rbnExcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jRadioButton2.setText("PDF");
         jRadioButton2.setActionCommand("PDF ");
@@ -92,7 +96,15 @@ public class JFrameDescargas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarActionPerformed
-
+        ExportarArchivo obj;
+        if (rbnExcel.isSelected()) {
+            try {
+                obj = new ExportarArchivo();
+                obj.exportarExcel(padre.jTableReporte);
+            } catch (IOException ex) {
+                System.out.println("Error: " + ex);
+            }
+        }
     }//GEN-LAST:event_btnDescargarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -143,10 +155,11 @@ public class JFrameDescargas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDescargar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton rbnExcel;
     // End of variables declaration//GEN-END:variables
 }

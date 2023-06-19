@@ -13,9 +13,7 @@ import java.util.List;
  * @author tokiro
  */
 public class Dueño extends Persona{
-
-   
-    
+      
     private String sexo;
     private List<Mascota> mascotas= new ArrayList<>();
     private List<Multa> multas =new ArrayList<>();

@@ -11,9 +11,6 @@ package entidades;
  */
 public class Mascota {
 
-    
-    
-    
     private Dueño dueño;
     private String codigo;
     private String nombre;
@@ -23,17 +20,14 @@ public class Mascota {
     private String especie;
     private String raza;
 
-    
-    
     /**
      * @return the codigo
      */
     public String getDatosEnCadena() {
-        return  getCodigo() +getDueño().getNumDoc() +getNombre() +getApellido() +
-                  getFecNac() +getSexo() +getEspecie() +getRaza();
+        return getCodigo() + getDueño().getNumDoc() + getNombre() + getApellido()
+                + getFecNac() + getSexo() + getEspecie() + getRaza();
     }
-    
-    
+
     /**
      * @return the dueño
      */
@@ -145,7 +139,5 @@ public class Mascota {
     public void setRaza(String raza) {
         this.raza = raza;
     }
-    
-    
-    
+
 }

@@ -6,11 +6,10 @@
 package entidades;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  *
- * @author tokiro 
+ * @author tokiro
  */
 public class Persona {
 
@@ -24,6 +23,7 @@ public class Persona {
     private String correoPersonal;
     private String telefono;
     private String estado;
+
     /**
      * @return the tipoDoc
      */
@@ -164,8 +164,5 @@ public class Persona {
         this.estado = estado;
     }
 //Haciendo prueba de commit
-    
-
-
 
 }
