@@ -28,7 +28,7 @@ public class JFrameReportes extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableReporte = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
         btnDescargar = new javax.swing.JButton();
         btnFiltrar = new javax.swing.JButton();
@@ -43,7 +43,7 @@ public class JFrameReportes extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableReporte.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -69,7 +69,7 @@ public class JFrameReportes extends javax.swing.JFrame {
                 "Codigo", "Nombre", "Apellido", "Sexo", "Especie", "Raza", "Fec. Nac."
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableReporte);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 610, 330));
 
@@ -200,7 +200,7 @@ public class JFrameReportes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable jTableReporte;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }
