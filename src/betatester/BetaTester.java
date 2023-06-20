@@ -28,10 +28,15 @@ public class BetaTester {
     public static void main(String[] args) {
         
         Usuario usuario = new Usuario("Admin", "123456");
-        usuario.setRol("Administrador");
+        usuario.setRol("Administrador");       
         usuarios.add(usuario);
+        usuario.setNombre("");
+        usuario.setNumDoc("");
+        
         usuario = new Usuario("Trabajador", "123");
         usuario.setRol("Operador");
+        usuario.setNombre("");
+        usuario.setNumDoc("");
         usuarios.add(usuario);
         JFrameIngresar ingresar = new JFrameIngresar();
         ingresar.setLocationRelativeTo(null);

@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class Persona {
 
-    private String tipoDoc;
+     private String tipoDoc;
     private String numDoc;
     private String nombre;
     private String apellido;
@@ -165,6 +165,36 @@ public class Persona {
     }
 //Haciendo prueba de commit
     
+    
+    
+    
+    
+
+   /* public String getDatosEnCadena() {
+        return "DNI: " + tipoDoc +              
+                "| Nombre: " + nombre +
+                "| Apellido: " + apellido +
+                "| Correo: " + correoPersonal+
+                "| Direccion: " + direccion ;
+    }
+    
+    public String getNombreUsuario(){
+        
+        return "DNI: " + tipoDoc +              
+                "| Nombre: " + nombre +
+                "| Apellido: " + apellido +
+                "| Correo: " + correoPersonal +
+                "| Direccion: " + direccion ;
+    }
+    
+    public Object[][] getDatosEnTabla(){
+        Object [][]data = {
+            {tipoDoc, nombre, apellido, correoPersonal, direccion}
+        };
+        return data;
+    }*/
+    
+
 
 
 

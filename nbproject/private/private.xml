@@ -3,11 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/brick/OneDrive/Escritorio/PROYECTO_POO/PROYECTO_AVANCES/Censo-de-Mascotas/src/pantallas/JFrameListaDueños.java</file>
-            <file>file:/C:/Users/brick/OneDrive/Escritorio/PROYECTO_POO/PROYECTO_AVANCES/Censo-de-Mascotas/src/pantallas/JFrameAgregarDueño.java</file>
-            <file>file:/C:/Users/brick/OneDrive/Escritorio/PROYECTO_POO/PROYECTO_AVANCES/Censo-de-Mascotas/src/pantallas/JFrameAgregarMascota.java</file>
-            <file>file:/C:/Users/brick/OneDrive/Escritorio/PROYECTO_POO/PROYECTO_AVANCES/Censo-de-Mascotas/src/pantallas/JFrameListaMascotas.java</file>
-            <file>file:/C:/Users/brick/OneDrive/Escritorio/PROYECTO_POO/PROYECTO_AVANCES/Censo-de-Mascotas/src/entidades/Dueño.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/pantallas/JFrameAgregarMascota.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/pantallas/JFrameGenerarMulta.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/entidades/Persona.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/pantallas/JFrameIngresar.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/pantallas/JFrameReportes.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/entidades/Multa.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/pantallas/JFrameRegistroUsuario.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/entidades/Usuario.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/betatester/BetaTester.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/pantallas/JFrameListaMascotas.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/pantallas/JFrameGestorUsuario.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/entidades/Dueño.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/pantallas/JFrameListaUsuarios.java</file>
+            <file>file:/C:/Users/Jean%20Pierre/Desktop/Proyecto/Censo-de-Mascotas/src/pantallas/JFrameRecuperaContra.java</file>
         </group>
     </open-files>
 </project-private>

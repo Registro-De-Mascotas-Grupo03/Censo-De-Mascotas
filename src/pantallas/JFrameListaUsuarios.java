@@ -5,79 +5,143 @@
  */
 package pantallas;
 
+import betatester.BetaTester;
+import entidades.Dueño;
+import entidades.Usuario;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author tokiro
+ * @author jean pierre
  */
 public class JFrameListaUsuarios extends javax.swing.JFrame {
 
+    
+    DefaultTableModel modeloTabla;
+    
+    
+    
     private JFrameGestorUsuario padre;
     
-    public JFrameListaUsuarios() {
-        initComponents();
-    }
 
     public JFrameListaUsuarios(JFrameGestorUsuario padre) {
         initComponents();
         this.padre = padre;
+        
+        modeloTabla = new DefaultTableModel();
+        
+        modeloTabla.addColumn("Dni");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Apellido");
+        modeloTabla.addColumn("Correo");
+        modeloTabla.addColumn("Direccion");
+        
+        this.TablaUsuario.setModel(modeloTabla);
+        actualizaTabla("");
     }
+    
+    void setUsuario(Usuario usuario){
+        BetaTester.usuarios.add(usuario);
+        actualizaTabla("");
+    }
+    
+    public JFrameListaUsuarios() {
+        initComponents();
+            
+    }
+    
+    private void actualizaTabla(String criterio){
+        limpiarTabla();
+        
+        for (Usuario buscaUsuario : BetaTester.usuarios){
+            String[] info = new String[5];
+            if(buscaUsuario.getNombre() != null && buscaUsuario.getNombre().contains(criterio)){
+               info[0] = buscaUsuario.getNumDoc();
+               info[1] = buscaUsuario.getNombre();
+               info[2] = buscaUsuario.getApellido();
+               info[3] = buscaUsuario.getCorreoPersonal();
+               info[4] = buscaUsuario.getDireccion();                    
+               modeloTabla.addRow(info); 
+                
+                
+                
+            }
+            
+            
+        }
+        
+    }
+    
+    
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnBuscar = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaUsuario = new javax.swing.JTable();
         btnAgregar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnBuscar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        btnBuscar.setText("Buscar");
-        btnBuscar.setBorder(null);
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 100, 35));
-
         txtBuscar.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtBuscar.setBorder(null);
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 210, 35));
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 320, 30));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Nombre", "Apellido", "Sexo", "Especie", "Raza", "Fec. Nac."
+                "N. Documento", "Nombre", "Apellido", "Correo", "Direccion"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(TablaUsuario);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 610, 330));
 
@@ -96,6 +160,11 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
         btnEliminar.setText("Eliminar");
         btnEliminar.setBorder(null);
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 100, 35));
 
         btnSalir.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -113,6 +182,14 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
         jLabel2.setText("Usuarios");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
 
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 90, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas7 listaDueños.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 600));
 
@@ -124,7 +201,7 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -141,10 +218,86 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
         salir();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        eliminarTabla();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        //BuscarTabla();
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        BuscarTabla();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    
+    public void BuscarTabla(){
+        limpiarTabla();                           
+        for (Usuario buscaUsuario : BetaTester.usuarios) { 
+            String[] info =new String[5];
+            if (buscaUsuario.getNombre().toLowerCase()
+                    .contains(txtBuscar.getText().toLowerCase()) || buscaUsuario.getNumDoc()
+                            .toLowerCase().contains(txtBuscar.getText().toLowerCase())) {
+                info[0] = buscaUsuario.getNumDoc();
+                info[1] = buscaUsuario.getNombre();
+                info[2] = buscaUsuario.getApellido();
+                info[3] = buscaUsuario.getCorreoPersonal();
+                info[4] = buscaUsuario.getDireccion();
+                modeloTabla.addRow(info);
+                
+                
+                /*Object[] rowData = {buscaUsuario.getNumDoc(), buscaUsuario.getNombre()
+                        , buscaUsuario.getApellido(), buscaUsuario.getDireccion()
+                        , buscaUsuario.getCorreoPersonal()};
+                modeloTabla.addRow(rowData);*/
+               
+            }           
+        }                     
+    }
+    
+    private void limpiarTabla() {
+        int info=TablaUsuario.getRowCount();
+        for(int i=info-1;i>=0;i--){
+            modeloTabla.removeRow(i);
+        }
+    }
     private void salir() {
         padre.setVisible(true);
         this.dispose();
     }
+    
+    
+    public void eliminarTabla() {
+        
+        int eli;
+        eli = TablaUsuario.getSelectedRow();
+
+        modeloTabla.removeRow(eli);
+        BetaTester.usuarios.remove(eli);
+
+    }
+    
+    
+    /*private void busquedaSensitiva() {
+        limpiarTabla();
+        for (Dueño dueño : BetaTester.dueños) {
+            String[] fila=new String[6];
+            if (dueño.getNombre().toLowerCase()
+                    .contains(txtBuscar.getText().toLowerCase())||
+                    dueño.getNumDoc().toLowerCase()
+                            .contains(txtBuscar.getText().toLowerCase())) {
+                fila[0]=dueño.getNumDoc();
+                fila[1]=dueño.getNombre();
+                fila[2]=dueño.getApellido();
+                fila[3]=dueño.getSexo();
+                fila[4]=dueño.getCorreoPersonal();
+                fila[5]=dueño.getEstado();
+                modeloTableDueños.addRow(fila);
+            }
+        }
+    }*/
+    
+    
     
     /**
      * @param args the command line arguments
@@ -182,6 +335,7 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaUsuario;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
@@ -190,7 +344,6 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

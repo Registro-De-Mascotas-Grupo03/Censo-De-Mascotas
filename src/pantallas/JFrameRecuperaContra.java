@@ -77,6 +77,11 @@ public class JFrameRecuperaContra extends javax.swing.JFrame {
         jButton1.setText("Siguiente");
         jButton1.setBorder(null);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 100, 33));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas7 recuperaContra.jpg"))); // NOI18N
@@ -99,6 +104,10 @@ public class JFrameRecuperaContra extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         salir();
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void salir() {
         padre.setVisible(true);
