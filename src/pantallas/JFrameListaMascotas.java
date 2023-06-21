@@ -7,8 +7,6 @@ package pantallas;
 
 import betatester.BetaTester;
 import entidades.Mascota;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,8 +22,7 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
     String[] info = new String[7];
     
     public JFrameListaMascotas() {
-        initComponents();
-        //PARA LA TABLA
+        initComponents();         
         
         
         modeloTabla.addColumn("Codigo");
@@ -213,7 +210,7 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        
         EliminarTabla();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -236,7 +233,7 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
     }
 
     public void BuscarTabla() {
-        // TODO add your handling code here:
+        
         modeloTabla.setRowCount(0);
         info = new String[7];
         for (Mascota buscaMasc : BetaTester.mascotas) {

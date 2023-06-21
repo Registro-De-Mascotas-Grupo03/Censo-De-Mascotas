@@ -39,6 +39,7 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -124,12 +125,14 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, 90, 35));
 
+        buttonGroup1.add(rbnMacho);
         rbnMacho.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         rbnMacho.setText("Macho");
         rbnMacho.setBorder(null);
         rbnMacho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(rbnMacho, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, -1, -1));
 
+        buttonGroup1.add(rbnHembra);
         rbnHembra.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         rbnHembra.setText("Hembra");
         rbnHembra.setBorder(null);
@@ -186,7 +189,7 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
+        
         Registrar();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -195,8 +198,7 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
         this.dispose();
     }
     public void Registrar() {
-        ///falta implementar
-       
+              
 
         if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?")
                 == JOptionPane.OK_OPTION) {
@@ -232,9 +234,6 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
 
             
         }
-
-        /*modeloLista.addElement(Datos);
-        mascotas.add(mascota);*/
     }
     /**
      * @param args the command line arguments
@@ -274,6 +273,7 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

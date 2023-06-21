@@ -7,8 +7,6 @@ package pantallas;
 
 import entidades.Usuario;
 import java.awt.Color;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,13 +15,10 @@ import javax.swing.JOptionPane;
  */
 public class JFrameRegistroUsuario extends javax.swing.JFrame {
 
-    
-    private JFrameListaUsuarios padre;   
-    
-    public String Datos = null;
+    private JFrameListaUsuarios padre;  
 
     Usuario usuario;
-    
+
     public JFrameRegistroUsuario() {
         initComponents();
     }
@@ -33,12 +28,11 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
         this.padre = padre;
     }
 
-    public void Registrar(){
+    public void Registrar() {
         if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?")
-                == JOptionPane.OK_OPTION){
-            
-                                                         
-            usuario = new Usuario(txtUsuario.getText(), txtContra.getText());        
+                == JOptionPane.OK_OPTION) {
+
+            usuario = new Usuario(txtUsuario.getText(), txtContra.getText());
             usuario.setNumDoc(txtDni.getText());
             usuario.setNombre(txtNombre.getText());
             usuario.setApellido(txtApellido.getText());
@@ -47,35 +41,13 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
             usuario.setCorreoPersonal(txtCorreo.getText());
             usuario.setContraseña(txtContra.getText());
             usuario.setContraseña2(txtContra2.getText());
-            
-            
-            
-            
-            
+
             this.padre.setUsuario(usuario);
             this.padre.setVisible(true);
             this.dispose();
-            
-            Datos = ("DNI::"          + usuario.getNumDoc()                  
-                    + "| Nombre: "    + usuario.getNombre()
-                    + "| Apellido: "  + usuario.getApellido()
-                    + "| Correo: "      + usuario.getCorreoPersonal()
-                    + "| Direccion: " + usuario.getDireccion());
-       
-  
-            
-            
-            
- 
-            
-        }     
-        
+        }
     }
-    
-    
-    
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -94,6 +66,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         btnValidar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -110,7 +83,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 txtDniMousePressed(evt);
             }
         });
-        jPanel1.add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 290, 40));
+        jPanel1.add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 290, 40));
 
         txtNombre.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(204, 204, 204));
@@ -121,7 +94,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 txtNombreMousePressed(evt);
             }
         });
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 290, 40));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 290, 40));
 
         txtApellido.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtApellido.setForeground(new java.awt.Color(204, 204, 204));
@@ -132,7 +105,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 txtApellidoMousePressed(evt);
             }
         });
-        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 290, 40));
+        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 290, 40));
 
         txtDireccion.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtDireccion.setForeground(new java.awt.Color(204, 204, 204));
@@ -143,7 +116,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 txtDireccionMousePressed(evt);
             }
         });
-        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 290, 40));
+        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 290, 40));
 
         txtCorreo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(204, 204, 204));
@@ -193,7 +166,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
         cbRol.setForeground(new java.awt.Color(153, 153, 153));
         cbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Asesor" }));
         cbRol.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(cbRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 290, 40));
+        jPanel1.add(cbRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 290, 40));
 
         btnRegistrar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnRegistrar.setText("Registrar");
@@ -204,7 +177,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 570, 120, 40));
+        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 580, 120, 40));
 
         btnSalir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnSalir.setText("Salir");
@@ -215,17 +188,22 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 570, 100, 40));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 580, 100, 40));
 
         btnValidar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnValidar.setText("Validar");
         btnValidar.setBorder(null);
         btnValidar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 100, 40));
+        jPanel1.add(btnValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 100, 40));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel3.setText("Registro de Usuarios");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
+
+        jComboBox1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(204, 204, 204));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 290, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas7 resgistroUsuario.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 650));
@@ -273,7 +251,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
             txtDireccion.setText("  Dirección");
             txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
             txtCorreo.setForeground(new Color(204, 204, 204));
@@ -309,7 +287,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
             txtDireccion.setText("  Dirección");
             txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
             txtCorreo.setForeground(new Color(204, 204, 204));
@@ -345,8 +323,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
             txtDireccion.setText("  Dirección");
             txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        
-        
+
         if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
             txtCorreo.setForeground(new Color(204, 204, 204));
@@ -382,7 +359,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
             txtApellido.setText("  Apellidos");
             txtApellido.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
             txtCorreo.setForeground(new Color(204, 204, 204));
@@ -422,7 +399,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
             txtDireccion.setText("  Dirección");
             txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (txtContra.getText().isEmpty()) {
             txtContra.setText("  Contraseña");
             txtContra.setForeground(new Color(204, 204, 204));
@@ -458,7 +435,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
             txtDireccion.setText("  Dirección");
             txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
             txtCorreo.setForeground(new Color(204, 204, 204));
@@ -494,7 +471,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
             txtDireccion.setText("  Dirección");
             txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
             txtCorreo.setForeground(new Color(204, 204, 204));
@@ -530,7 +507,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
             txtDireccion.setText("  Dirección");
             txtDireccion.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("  Correo");
             txtCorreo.setForeground(new Color(204, 204, 204));
@@ -590,6 +567,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnValidar;
     private javax.swing.JComboBox<String> cbRol;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

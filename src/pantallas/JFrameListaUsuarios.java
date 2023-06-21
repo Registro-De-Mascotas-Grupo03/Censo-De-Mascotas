@@ -6,11 +6,7 @@
 package pantallas;
 
 import betatester.BetaTester;
-import entidades.Dueño;
 import entidades.Usuario;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,66 +15,52 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JFrameListaUsuarios extends javax.swing.JFrame {
 
-    
     DefaultTableModel modeloTabla;
-    
-    
-    
+
     private JFrameGestorUsuario padre;
-    
 
     public JFrameListaUsuarios(JFrameGestorUsuario padre) {
         initComponents();
         this.padre = padre;
-        
+
         modeloTabla = new DefaultTableModel();
-        
+
         modeloTabla.addColumn("Dni");
         modeloTabla.addColumn("Nombre");
         modeloTabla.addColumn("Apellido");
         modeloTabla.addColumn("Correo");
         modeloTabla.addColumn("Direccion");
-        
+
         this.TablaUsuario.setModel(modeloTabla);
         actualizaTabla("");
     }
-    
-    void setUsuario(Usuario usuario){
+
+    void setUsuario(Usuario usuario) {
         BetaTester.usuarios.add(usuario);
         actualizaTabla("");
     }
-    
+
     public JFrameListaUsuarios() {
         initComponents();
-            
+
     }
-    
-    private void actualizaTabla(String criterio){
+
+    private void actualizaTabla(String criterio) {
         limpiarTabla();
-        
-        for (Usuario buscaUsuario : BetaTester.usuarios){
+
+        for (Usuario buscaUsuario : BetaTester.usuarios) {
             String[] info = new String[5];
-            if(buscaUsuario.getNombre() != null && buscaUsuario.getNombre().contains(criterio)){
-               info[0] = buscaUsuario.getNumDoc();
-               info[1] = buscaUsuario.getNombre();
-               info[2] = buscaUsuario.getApellido();
-               info[3] = buscaUsuario.getCorreoPersonal();
-               info[4] = buscaUsuario.getDireccion();                    
-               modeloTabla.addRow(info); 
-                
-                
-                
+            if (buscaUsuario.getNombre() != null && buscaUsuario.getNombre().contains(criterio)) {
+                info[0] = buscaUsuario.getNumDoc();
+                info[1] = buscaUsuario.getNombre();
+                info[2] = buscaUsuario.getApellido();
+                info[3] = buscaUsuario.getCorreoPersonal();
+                info[4] = buscaUsuario.getDireccion();
+                modeloTabla.addRow(info);
             }
-            
-            
         }
-        
     }
-    
-    
-    
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -100,11 +82,6 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
 
         txtBuscar.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtBuscar.setBorder(null);
-        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtBuscarKeyReleased(evt);
-            }
-        });
         jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 320, 30));
 
         TablaUsuario.setModel(new javax.swing.table.DefaultTableModel(
@@ -222,53 +199,41 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
         eliminarTabla();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
-        //BuscarTabla();
-    }//GEN-LAST:event_txtBuscarKeyReleased
-
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         BuscarTabla();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    
-    public void BuscarTabla(){
-        limpiarTabla();                           
-        for (Usuario buscaUsuario : BetaTester.usuarios) { 
-            String[] info =new String[5];
+    public void BuscarTabla() {
+        limpiarTabla();
+        for (Usuario buscaUsuario : BetaTester.usuarios) {
+            String[] info = new String[5];
             if (buscaUsuario.getNombre().toLowerCase()
                     .contains(txtBuscar.getText().toLowerCase()) || buscaUsuario.getNumDoc()
-                            .toLowerCase().contains(txtBuscar.getText().toLowerCase())) {
+                    .toLowerCase().contains(txtBuscar.getText().toLowerCase())) {
                 info[0] = buscaUsuario.getNumDoc();
                 info[1] = buscaUsuario.getNombre();
                 info[2] = buscaUsuario.getApellido();
                 info[3] = buscaUsuario.getCorreoPersonal();
                 info[4] = buscaUsuario.getDireccion();
-                modeloTabla.addRow(info);
-                
-                
-                /*Object[] rowData = {buscaUsuario.getNumDoc(), buscaUsuario.getNombre()
-                        , buscaUsuario.getApellido(), buscaUsuario.getDireccion()
-                        , buscaUsuario.getCorreoPersonal()};
-                modeloTabla.addRow(rowData);*/
-               
-            }           
-        }                     
+                modeloTabla.addRow(info);                
+            }
+        }
     }
-    
+
     private void limpiarTabla() {
-        int info=TablaUsuario.getRowCount();
-        for(int i=info-1;i>=0;i--){
+        int info = TablaUsuario.getRowCount();
+        for (int i = info - 1; i >= 0; i--) {
             modeloTabla.removeRow(i);
         }
     }
+
     private void salir() {
         padre.setVisible(true);
         this.dispose();
     }
-    
-    
+
     public void eliminarTabla() {
-        
+
         int eli;
         eli = TablaUsuario.getSelectedRow();
 
@@ -276,29 +241,7 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
         BetaTester.usuarios.remove(eli);
 
     }
-    
-    
-    /*private void busquedaSensitiva() {
-        limpiarTabla();
-        for (Dueño dueño : BetaTester.dueños) {
-            String[] fila=new String[6];
-            if (dueño.getNombre().toLowerCase()
-                    .contains(txtBuscar.getText().toLowerCase())||
-                    dueño.getNumDoc().toLowerCase()
-                            .contains(txtBuscar.getText().toLowerCase())) {
-                fila[0]=dueño.getNumDoc();
-                fila[1]=dueño.getNombre();
-                fila[2]=dueño.getApellido();
-                fila[3]=dueño.getSexo();
-                fila[4]=dueño.getCorreoPersonal();
-                fila[5]=dueño.getEstado();
-                modeloTableDueños.addRow(fila);
-            }
-        }
-    }*/
-    
-    
-    
+  
     /**
      * @param args the command line arguments
      */

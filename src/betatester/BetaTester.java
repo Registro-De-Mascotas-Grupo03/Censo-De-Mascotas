@@ -37,6 +37,7 @@ public class BetaTester {
         usuario.setRol("Operador");
         usuario.setNombre("");
         usuario.setNumDoc("");
+        usuario.setCorreoPersonal("piconm17@gmail.com");
         usuarios.add(usuario);
         JFrameIngresar ingresar = new JFrameIngresar();
         ingresar.setLocationRelativeTo(null);

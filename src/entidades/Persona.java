@@ -162,43 +162,6 @@ public class Persona {
      */
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-//Haciendo prueba de commit
-<<<<<<< HEAD
+    }    
     
-    
-    
-    
-    
-
-   /* public String getDatosEnCadena() {
-        return "DNI: " + tipoDoc +              
-                "| Nombre: " + nombre +
-                "| Apellido: " + apellido +
-                "| Correo: " + correoPersonal+
-                "| Direccion: " + direccion ;
-    }
-    
-    public String getNombreUsuario(){
-        
-        return "DNI: " + tipoDoc +              
-                "| Nombre: " + nombre +
-                "| Apellido: " + apellido +
-                "| Correo: " + correoPersonal +
-                "| Direccion: " + direccion ;
-    }
-    
-    public Object[][] getDatosEnTabla(){
-        Object [][]data = {
-            {tipoDoc, nombre, apellido, correoPersonal, direccion}
-        };
-        return data;
-    }*/
-    
-
-
-
-=======
->>>>>>> 5c7a04df142fe332448b9b19d4a6cec77ad80cf0
-
 }

@@ -5,6 +5,21 @@
  */
 package pantallas;
 
+import betatester.BetaTester;
+import entidades.Usuario;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author tokiro
@@ -12,6 +27,15 @@ package pantallas;
 public class JFrameRecuperaContra extends javax.swing.JFrame {
 
     private JFrameIngresar padre;
+    private static String emailFrom = "tokiro.roma@gmail.com";
+    private static String passwordFrom = "lnmulmaemgfrruab";
+    private String emailTo;
+    private String subject;
+    private String content;
+
+    private Properties mProperties;
+    private Session mSession;
+    private MimeMessage mCorreo;
     
     public JFrameRecuperaContra() {
         initComponents();
@@ -20,6 +44,71 @@ public class JFrameRecuperaContra extends javax.swing.JFrame {
     public JFrameRecuperaContra(JFrameIngresar padre) {
         initComponents();
         this.padre = padre;
+        mProperties = new Properties();
+    }
+    
+    private void createEmail() {
+
+        emailTo = txtCorreo.getText().trim();
+        subject = " OLVIDO SU CONTRASEÑA? ";
+        content = "";
+
+        Usuario usuario = buscarCorreo(emailTo);
+        if (emailTo != null) {
+            String contraseña = usuario.getContraseña();
+            String mensaje = " \nSu contraseña es: " + contraseña;
+            content = mensaje;
+        }
+
+        mProperties.put("mail.smtp.host", "smtp.gmail.com");
+        mProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        mProperties.setProperty("mail.smtp.starttls.enable", "true");
+        mProperties.setProperty("mail.smtp.port", "587");
+        mProperties.setProperty("mail.smtp.user", emailFrom);
+        mProperties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+        mProperties.setProperty("mail.smtp.auth", "true");
+
+        mSession = Session.getDefaultInstance(mProperties);
+
+        try {
+            mCorreo = new MimeMessage(mSession);
+            mCorreo.setFrom(new InternetAddress(emailFrom));
+            mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
+            mCorreo.setSubject(subject);
+            mCorreo.setText(content, "ISO-8859-1", "html");
+
+        } catch (AddressException ex) {
+            Logger.getLogger(JFrameRecuperaContra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(JFrameRecuperaContra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void sendEmail() {
+        try {
+            Transport mTransport = mSession.getTransport("smtp");
+            mTransport.connect(emailFrom, passwordFrom);
+            mTransport.sendMessage(mCorreo, mCorreo.getRecipients(Message.RecipientType.TO));
+            mTransport.close();
+
+            JOptionPane.showMessageDialog(null, "correo enviado");
+
+        } catch (NoSuchProviderException ex) {
+            Logger.getLogger(JFrameRecuperaContra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(JFrameRecuperaContra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private Usuario buscarCorreo(String correo) {
+
+        for (Usuario usuario : BetaTester.usuarios) {
+            if (correo.equals(usuario.getCorreoPersonal())) {
+
+                return usuario;
+            }
+        }
+        return null;
     }
     
     @SuppressWarnings("unchecked")
@@ -32,9 +121,9 @@ public class JFrameRecuperaContra extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnEnviar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,22 +156,22 @@ public class JFrameRecuperaContra extends javax.swing.JFrame {
         jLabel5.setText("Para recuperar tu contraseña, ingresa el correo");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 290, 30));
+        txtCorreo.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 290, 30));
 
         jLabel6.setText("Recibirás un código de verificación al correo.");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jButton1.setText("Siguiente");
-        jButton1.setBorder(null);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnEnviar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        btnEnviar.setText("Enviar");
+        btnEnviar.setBorder(null);
+        btnEnviar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnEnviarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 100, 33));
+        jPanel1.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 100, 33));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas7 recuperaContra.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
@@ -105,9 +194,10 @@ public class JFrameRecuperaContra extends javax.swing.JFrame {
         salir();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        createEmail();
+        sendEmail();
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void salir() {
         padre.setVisible(true);
@@ -150,8 +240,8 @@ public class JFrameRecuperaContra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -159,6 +249,6 @@ public class JFrameRecuperaContra extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }
