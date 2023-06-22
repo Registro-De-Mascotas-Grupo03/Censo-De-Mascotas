@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 /**
  *
- * @author tokiro
+ * @author Fabricio
  */
 public class Persona {
 

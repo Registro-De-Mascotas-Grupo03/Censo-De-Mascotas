@@ -6,6 +6,7 @@
 package pantallas;
 
 import betatester.BetaTester;
+import entidades.Dueño;
 import entidades.Mascota;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,18 +14,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author tokiro
  */
-
 public class JFrameListaMascotas extends javax.swing.JFrame {
 
     private JFrameGestorUsuario padre;
-    
+
     DefaultTableModel modeloTabla = new DefaultTableModel();
     String[] info = new String[7];
-    
+
     public JFrameListaMascotas() {
-        initComponents();         
-        
-        
+        initComponents();
+
         modeloTabla.addColumn("Codigo");
         modeloTabla.addColumn("DNI Dueño");
         modeloTabla.addColumn("Nombre");
@@ -35,16 +34,13 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
         actulizaTabla();
         this.tbMascotas.setModel(modeloTabla);
     }
-    
+
     public JFrameListaMascotas(JFrameGestorUsuario padre) {
         initComponents();
-        
+
         this.padre = padre;
-        
-        
+
         //PARA LA TABLA
-        
-        
         modeloTabla.addColumn("Codigo");
         modeloTabla.addColumn("DNI Dueño");
         modeloTabla.addColumn("Nombre");
@@ -55,16 +51,16 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
         actulizaTabla();
         this.tbMascotas.setModel(modeloTabla);
     }
+
     void setMascota(Mascota mascota) {
-        
+
         BetaTester.mascotas.add(mascota);
+        
         actulizaTabla();
     }
 
-    
-
     void actulizaTabla() {
-       modeloTabla.setRowCount(0);
+        modeloTabla.setRowCount(0);
 
         for (Mascota buscaMascTabla : BetaTester.mascotas) {
             info[0] = buscaMascTabla.getCodigo();
@@ -79,7 +75,7 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
         }
 
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -210,45 +206,67 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
-        EliminarTabla();
+
+        eliminarMascota();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        BuscarTabla();
+        buscarMascota();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void salir() {
         padre.setVisible(true);
         this.dispose();
     }
-    public void EliminarTabla() {
-        
-         int eli;
-        eli = tbMascotas.getSelectedRow();
 
-        modeloTabla.removeRow(eli);
-        BetaTester.mascotas.remove(eli);
+    public void eliminarMascota() {
+        String codigo;
+        int eli= tbMascotas.getSelectedRow(); 
+        
+        if (eli >= 0) {
+            codigo = String.valueOf(modeloTabla.getValueAt(eli, 0));
+
+            for (Mascota mascota : BetaTester.mascotas) {
+                if (codigo.equals(mascota.getCodigo())) {
+                    eliminarMascotaDeDueño(mascota);
+                    BetaTester.mascotas.remove(mascota);
+                    modeloTabla.removeRow(eli);
+                    
+                    break;
+                }
+            }
+
+        }
+        
 
     }
+    public void eliminarMascotaDeDueño(Mascota mascota){
+        for (Dueño dueño : BetaTester.dueños) {
+                if (dueño.getNumDoc().equals(mascota.getDueño().getNumDoc())) {
+                    dueño.getMascotas().remove(mascota);
+                    break;
+                }
+            }
+    }
 
-    public void BuscarTabla() {
-        
+    public void buscarMascota() {
+
         modeloTabla.setRowCount(0);
         info = new String[7];
         for (Mascota buscaMasc : BetaTester.mascotas) {
             if (buscaMasc.getDatosEnCadena().toLowerCase()
                     .contains(txtBuscar.getText().toLowerCase())) {
-                Object[] rowData = {buscaMasc.getCodigo(), 
-                    buscaMasc.getDueño().getNumDoc()
-                        , buscaMasc.getNombre(), buscaMasc.getApellido()
-                        , buscaMasc.getFecNac(), buscaMasc.getSexo()
-                        , buscaMasc.getEspecie(), buscaMasc.getRaza()};
+                Object[] rowData = {buscaMasc.getCodigo(),
+                    buscaMasc.getDueño().getNumDoc(),
+                     buscaMasc.getNombre(), buscaMasc.getApellido(),
+                     buscaMasc.getFecNac(), buscaMasc.getSexo(),
+                     buscaMasc.getEspecie(), buscaMasc.getRaza()};
                 modeloTabla.addRow(rowData);
-               
+
             }
         }
     }
+
     /**
      * @param args the command line arguments
      */

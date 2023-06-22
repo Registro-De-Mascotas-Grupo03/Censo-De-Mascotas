@@ -6,8 +6,11 @@
 package pantallas;
 
 import entidades.Dueño;
+import excepcionesPersonalizadas.MiExcepcionDeFecha;
+import funciones.Utilitario;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,16 +20,16 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
 
     private JFrameListaDueños padre;
     Dueño dueño;
-    
+
     public JFrameAgregarDueño() {
         initComponents();
     }
-    
+
     public JFrameAgregarDueño(JFrameListaDueños padre) {
         initComponents();
         this.padre = padre;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -179,51 +182,75 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-         NuevoDueño();
-        salir();
+        if (ValidaIngresos()) {
+            NuevoDueño();
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor asegurate de llenar "
+                    + "todos los datos correctamente.");
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void NuevoDueño() {
-        DateTimeFormatter date=DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate fecNac;
-        
-        
-        
-        dueño= new Dueño();
-        dueño.setTipoDoc(this.cbTipoDoc.getItemAt(cbTipoDoc.getSelectedIndex()));
-        dueño.setNumDoc(txtNumDoc.getText());
-        dueño.setNombre(txtNombre.getText());
-        dueño.setApellido(txtApellido.getText());
-        dueño.setDireccion(txtDireccion.getText());
-        dueño.setCorreoPersonal(txtCorreo.getText());
-        dueño.setTelefono(txtTelefono.getText());
-        fecNac=LocalDate.parse(txtFecNac.getText(),date);
-        dueño.setFecNac(fecNac);
-        dueño.setSexo(this.cbSexo.getItemAt(cbSexo.getSelectedIndex()));
-        
-        dueño.setEstado("Habilitado");
-        dueño.setEdad(obtenerEdad(fecNac));
-        this.padre.agregarNuevoDueño(dueño);
+    private boolean ValidaIngresos() {
+        if (txtNumDoc.getText().isEmpty() || txtNombre.getText().isEmpty()
+                || txtApellido.getText().isEmpty()
+                || txtTelefono.getText().isEmpty()
+                || txtCorreo.getText().isEmpty()
+                || txtDireccion.getText().isEmpty()
+                || txtFecNac.getText().isEmpty()) {
+            return false;
+
+        }
+        return true;
+
     }
+
+    private void NuevoDueño() {
+
+        try {
+            LocalDate fecNac;
+
+            dueño = new Dueño();
+            dueño.setTipoDoc(this.cbTipoDoc.getItemAt(cbTipoDoc.getSelectedIndex()));
+            dueño.setNumDoc(txtNumDoc.getText());
+            dueño.setNombre(txtNombre.getText());
+            dueño.setApellido(txtApellido.getText());
+            dueño.setDireccion(txtDireccion.getText());
+            dueño.setCorreoPersonal(txtCorreo.getText());
+            dueño.setTelefono(txtTelefono.getText());
+            fecNac = Utilitario.convertirAFecha(txtFecNac.getText());
+            dueño.setFecNac(fecNac);
+            dueño.setEdad(obtenerEdad(fecNac));
+            dueño.setSexo(this.cbSexo.getItemAt(cbSexo.getSelectedIndex()));
+            dueño.setEstado("Habilitado");
+            this.padre.agregarNuevoDueño(dueño);
+            salir();
+
+        } catch (MiExcepcionDeFecha e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        }
+
+    }
+
     private void salir() {
         padre.setVisible(true);
         this.dispose();
     }
-    private int obtenerEdad(LocalDate fecNac){
+
+    private int obtenerEdad(LocalDate fecNac) {
         int edad;
-        LocalDate fechaActual=LocalDate.now();
-        
-        if(fecNac.getDayOfYear()<=fechaActual.getDayOfYear()){
-            edad=fechaActual.getYear()-fecNac.getYear();
+        LocalDate fechaActual = LocalDate.now();
+
+        if (fecNac.getDayOfYear() <= fechaActual.getDayOfYear()) {
+            edad = fechaActual.getYear() - fecNac.getYear();
+        } else {
+            edad = fechaActual.getYear() - fecNac.getYear() - 1;
         }
-        else{
-            edad=fechaActual.getYear()-fecNac.getYear()-1;
-        }
-       
-        
+
         return edad;
     }
-    
+
     /**
      * @param args the command line arguments
      */

@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author tokiro
+ * @author Fabricio
  */
 public class Dueño extends Persona{
       

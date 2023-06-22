@@ -8,6 +8,8 @@ package pantallas;
 import betatester.BetaTester;
 import entidades.Dueño;
 import entidades.Mascota;
+import excepcionesPersonalizadas.MiExcepcionNula;
+import funciones.Utilitario;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,10 +17,11 @@ import javax.swing.JOptionPane;
  * @author tokiro
  */
 public class JFrameAgregarMascota extends javax.swing.JFrame {
+
     private Mascota mascota;
     private JFrameListaMascotas padre;
     private Dueño dueño;
-    
+
     public JFrameAgregarMascota() {
         initComponents();
     }
@@ -26,15 +29,18 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
     public JFrameAgregarMascota(JFrameListaMascotas padre) {
         initComponents();
         this.padre = padre;
+        rbnMacho.setSelected(true);
     }
-    public JFrameAgregarMascota(JFrameListaMascotas padre,Dueño dueño) {
+
+    public JFrameAgregarMascota(JFrameListaMascotas padre, Dueño dueño) {
         initComponents();
         this.padre = padre;
         txtDniDueño.setText(dueño.getNumDoc());
         txtDniDueño.setEnabled(false);
-        
+        rbnMacho.setSelected(true);
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -189,7 +195,7 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        
+
         Registrar();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -197,44 +203,69 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
         padre.setVisible(true);
         this.dispose();
     }
-    public void Registrar() {
-              
 
-        if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?")
-                == JOptionPane.OK_OPTION) {
-            mascota = new Mascota();
-            String Sexo = null;
-            if (rbnMacho.isSelected()) {
-                Sexo = "MACHO";
-            }
-            if (rbnHembra.isSelected()) {
-                Sexo = "HEMBRA";
-            }
-            mascota.setCodigo(txtCodigo.getText());
-            
-            for (Dueño dueñoA :BetaTester.dueños){
-                if(dueñoA.getNumDoc().equals(txtDniDueño.getText())){
-                    this.dueño=dueñoA;
-                    break;
-                }
-            }
-            
-            mascota.setDueño(dueño);
-            mascota.setNombre(txtNombre.getText());
-            mascota.setApellido(txtApellido.getText());
-            mascota.setFecNac(txtFecNac.getText());
-            mascota.setSexo(Sexo);
-            mascota.setEspecie(txtEspecie.getText());
-            mascota.setRaza(txtRaza.getText());
+    private boolean ValidaIngresos() {
+        if (txtApellido.getText().isEmpty() || txtCodigo.getText().isEmpty()
+                || txtDniDueño.getText().isEmpty()
+                || txtEspecie.getText().isEmpty()
+                || txtFecNac.getText().isEmpty()
+                || txtNombre.getText().isEmpty()
+                || txtRaza.getText().isEmpty()) {
+            return false;
 
-            this.padre.setMascota(mascota);
-            dueño.getMascotas().add(mascota);
-            this.padre.setVisible(true);
-            this.dispose();
-
-            
         }
+        return true;
+
     }
+    private void Registrar() {
+
+        try {
+            if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?")
+                    == JOptionPane.OK_OPTION && ValidaIngresos()) {
+                mascota = new Mascota();
+                String Sexo = null;
+                if (rbnMacho.isSelected()) {
+                    Sexo = "MACHO";
+                }
+                if (rbnHembra.isSelected()) {
+                    Sexo = "HEMBRA";
+                }
+                mascota.setCodigo(txtCodigo.getText());
+
+                for (Dueño dueñoA : BetaTester.dueños) {
+                    if (dueñoA.getNumDoc().equals(txtDniDueño.getText())) {
+                        this.dueño = dueñoA;
+                        break;
+                    }
+                }
+
+                mascota.setDueño(dueño);
+                mascota.setNombre(txtNombre.getText());
+                mascota.setApellido(txtApellido.getText());
+                mascota.setFecNac(txtFecNac.getText());
+                mascota.setSexo(Sexo);
+                mascota.setEspecie(txtEspecie.getText());
+                mascota.setRaza(txtRaza.getText());
+
+                Utilitario.obtenerLista(dueño).add(mascota);
+                this.padre.setMascota(mascota);
+                
+                this.padre.setVisible(true);
+                this.dispose();
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Por favor asegurate de llenar "
+                    + "todos los datos correctamente.");
+            }
+
+        } catch (MiExcepcionNula e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+
+        }
+
+    }
+
     /**
      * @param args the command line arguments
      */

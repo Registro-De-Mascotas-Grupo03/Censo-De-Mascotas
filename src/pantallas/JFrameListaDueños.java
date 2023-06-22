@@ -7,6 +7,7 @@ package pantallas;
 
 import betatester.BetaTester;
 import entidades.Dueño;
+import entidades.Mascota;
 import entidades.Usuario;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -19,28 +20,27 @@ public class JFrameListaDueños extends javax.swing.JFrame {
 
     private JFrameGestorUsuario padre;
     DefaultTableModel modeloTableDueños;
-    
+
     public JFrameListaDueños() {
         initComponents();
     }
-    
+
     public JFrameListaDueños(JFrameGestorUsuario padre) {
         initComponents();
         this.padre = padre;
-        
-        modeloTableDueños= new DefaultTableModel();
+
+        modeloTableDueños = new DefaultTableModel();
         modeloTableDueños.addColumn("DNI");
         modeloTableDueños.addColumn("Nombres");
         modeloTableDueños.addColumn("Apellidos");
         modeloTableDueños.addColumn("Sexo");
         modeloTableDueños.addColumn("Correo");
         modeloTableDueños.addColumn("Estado");
-        
-        
+
         this.tbDueños.setModel(modeloTableDueños);
         llenarTabla("");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,7 +49,7 @@ public class JFrameListaDueños extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         btnAgregarMascota = new javax.swing.JButton();
-        btnDeshabilitar = new javax.swing.JButton();
+        btnDeshabilitarYHabilitar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDueños = new javax.swing.JTable();
         btnAgregar = new javax.swing.JButton();
@@ -85,16 +85,16 @@ public class JFrameListaDueños extends javax.swing.JFrame {
         });
         jPanel1.add(btnAgregarMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 170, 35));
 
-        btnDeshabilitar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        btnDeshabilitar.setText("Deshabilitar Dueño");
-        btnDeshabilitar.setBorder(null);
-        btnDeshabilitar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDeshabilitar.addActionListener(new java.awt.event.ActionListener() {
+        btnDeshabilitarYHabilitar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        btnDeshabilitarYHabilitar.setText("Deshabilitar/ Habilitar ");
+        btnDeshabilitarYHabilitar.setBorder(null);
+        btnDeshabilitarYHabilitar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDeshabilitarYHabilitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeshabilitarActionPerformed(evt);
+                btnDeshabilitarYHabilitarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDeshabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 510, 150, 40));
+        jPanel1.add(btnDeshabilitarYHabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 510, 180, 30));
 
         tbDueños.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,7 +160,7 @@ public class JFrameListaDueños extends javax.swing.JFrame {
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 510, 100, 35));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas7 listaDueños.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 600));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 620));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,70 +189,92 @@ public class JFrameListaDueños extends javax.swing.JFrame {
 
     private void btnAgregarMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMascotaActionPerformed
         String numDoc;
-        JFrameIngresar abuelo=new JFrameIngresar();
-        JFrameGestorUsuario padre=new JFrameGestorUsuario(abuelo,this.padre.usuario);
+        JFrameIngresar abuelo = new JFrameIngresar();
+        JFrameGestorUsuario padre = new JFrameGestorUsuario(abuelo, this.padre.usuario);
         JFrameListaMascotas nuevo = new JFrameListaMascotas(padre);
-        int fila=tbDueños.getSelectedRow();
-        if(fila>=0){
-            numDoc=String.valueOf(modeloTableDueños.getValueAt(fila, 0));
-            for(Dueño dueño : BetaTester.dueños){
-                if(numDoc==dueño.getNumDoc()){
-                    JFrameAgregarMascota agrega = 
-                            new JFrameAgregarMascota(nuevo,dueño);
+        int fila = tbDueños.getSelectedRow();
+        if (fila >= 0) {
+            numDoc = String.valueOf(modeloTableDueños.getValueAt(fila, 0));
+            for (Dueño dueño : BetaTester.dueños) {
+                if (numDoc == dueño.getNumDoc()) {
+                    JFrameAgregarMascota agrega
+                            = new JFrameAgregarMascota(nuevo, dueño);
                     agrega.setLocationRelativeTo(null);
                     agrega.setVisible(true);
-                     this.setVisible(false);
-                    
+                    this.setVisible(false);
+
                     break;
                 }
             }
-            
-        } else{
-            JOptionPane.showMessageDialog(null,"Seleccionar Fila");
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccionar Fila");
         }
     }//GEN-LAST:event_btnAgregarMascotaActionPerformed
 
-    private void btnDeshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshabilitarActionPerformed
+    private void btnDeshabilitarYHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshabilitarYHabilitarActionPerformed
         String numDoc;
-        int fila=tbDueños.getSelectedRow();
-        if(fila>=0){
-            numDoc=String.valueOf(modeloTableDueños.getValueAt(fila, 0));
+        String estado;
+        int fila = tbDueños.getSelectedRow();
 
-            for(Dueño dueño : BetaTester.dueños){
-                if(numDoc==dueño.getNumDoc()){
-                    dueño.setEstado("Deshabilitado");
+        if (fila >= 0) {
+            numDoc = String.valueOf(modeloTableDueños.getValueAt(fila, 0));
+            estado = String.valueOf(modeloTableDueños.getValueAt(fila, 5));
+            if (estado.equals("Habilitado")) {
+                for (Dueño dueño : BetaTester.dueños) {
+                    if (numDoc == dueño.getNumDoc()) {
+                        dueño.setEstado("Deshabilitado");
 
-                    break;
+                        break;
+                    }
+                }
+            }
+            else{
+                for (Dueño dueño : BetaTester.dueños) {
+                    if (numDoc == dueño.getNumDoc()) {
+                        dueño.setEstado("Habilitado");
+
+                        break;
+                    }
                 }
             }
 
-        } else{
-            JOptionPane.showMessageDialog(null,"Debe seleccionar una fila");
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
         }
         llenarTabla("");
-    }//GEN-LAST:event_btnDeshabilitarActionPerformed
+
+    }//GEN-LAST:event_btnDeshabilitarYHabilitarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         String numDoc;
-        int fila=tbDueños.getSelectedRow();
-        if(fila>=0){
-            numDoc=String.valueOf(modeloTableDueños.getValueAt(fila, 0));
-            
-            for(Dueño dueño : BetaTester.dueños){
-                if(numDoc==dueño.getNumDoc()){
+        int fila = tbDueños.getSelectedRow();
+        if (fila >= 0) {
+            numDoc = String.valueOf(modeloTableDueños.getValueAt(fila, 0));
+
+            for (Dueño dueño : BetaTester.dueños) {
+                if (numDoc.equals(dueño.getNumDoc())) {
+                    eliminaMascotasDeDueño(dueño);
                     BetaTester.dueños.remove(dueño);
                     modeloTableDueños.removeRow(fila);
                     
                     break;
                 }
             }
-            
-            
-        } else{
-            JOptionPane.showMessageDialog(null,"Seleccionar Fila");
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccionar Fila");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void eliminaMascotasDeDueño(Dueño dueño){
+        for (Mascota mascota : BetaTester.mascotas) {
+                if (dueño.getNumDoc().equals(mascota.getDueño().getNumDoc())) {
+                    BetaTester.mascotas.remove(mascota);
+                    
+                }
+            }
+    }
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         busquedaSensitiva();
     }//GEN-LAST:event_txtBuscarKeyReleased
@@ -260,53 +282,57 @@ public class JFrameListaDueños extends javax.swing.JFrame {
     private void busquedaSensitiva() {
         limpiarTabla();
         for (Dueño dueño : BetaTester.dueños) {
-            String[] fila=new String[6];
+            String[] fila = new String[6];
             if (dueño.getNombre().toLowerCase()
-                    .contains(txtBuscar.getText().toLowerCase())||
-                    dueño.getNumDoc().toLowerCase()
+                    .contains(txtBuscar.getText().toLowerCase())
+                    || dueño.getNumDoc().toLowerCase()
                             .contains(txtBuscar.getText().toLowerCase())) {
-                fila[0]=dueño.getNumDoc();
-                fila[1]=dueño.getNombre();
-                fila[2]=dueño.getApellido();
-                fila[3]=dueño.getSexo();
-                fila[4]=dueño.getCorreoPersonal();
-                fila[5]=dueño.getEstado();
+                fila[0] = dueño.getNumDoc();
+                fila[1] = dueño.getNombre();
+                fila[2] = dueño.getApellido();
+                fila[3] = dueño.getSexo();
+                fila[4] = dueño.getCorreoPersonal();
+                fila[5] = dueño.getEstado();
                 modeloTableDueños.addRow(fila);
             }
         }
     }
-    public void agregarNuevoDueño(Dueño dueño){
+
+    public void agregarNuevoDueño(Dueño dueño) {
         BetaTester.dueños.add(dueño);
         llenarTabla("");
     }
-    private void llenarTabla(String criterio){
+
+    private void llenarTabla(String criterio) {
         limpiarTabla();
-        
-        for(Dueño dueño : BetaTester.dueños){
-            String[] fila=new String[6];
-            if(dueño.getNombre()!= null && dueño.getNombre().contains(criterio)){
-                fila[0]=dueño.getNumDoc();
-                fila[1]=dueño.getNombre();
-                fila[2]=dueño.getApellido();
-                fila[3]=dueño.getSexo();
-                fila[4]=dueño.getCorreoPersonal();
-                fila[5]=dueño.getEstado();
+
+        for (Dueño dueño : BetaTester.dueños) {
+            String[] fila = new String[6];
+            if (dueño.getNombre() != null && dueño.getNombre().contains(criterio)) {
+                fila[0] = dueño.getNumDoc();
+                fila[1] = dueño.getNombre();
+                fila[2] = dueño.getApellido();
+                fila[3] = dueño.getSexo();
+                fila[4] = dueño.getCorreoPersonal();
+                fila[5] = dueño.getEstado();
                 modeloTableDueños.addRow(fila);
             }
         }
-        
+
     }
+
     private void limpiarTabla() {
-        int fila=tbDueños.getRowCount();
-        for(int i=fila-1;i>=0;i--){
+        int fila = tbDueños.getRowCount();
+        for (int i = fila - 1; i >= 0; i--) {
             modeloTableDueños.removeRow(i);
         }
     }
+
     private void salir() {
         padre.setVisible(true);
         this.dispose();
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -345,7 +371,7 @@ public class JFrameListaDueños extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarMascota;
-    private javax.swing.JButton btnDeshabilitar;
+    private javax.swing.JButton btnDeshabilitarYHabilitar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
