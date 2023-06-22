@@ -5,9 +5,12 @@
  */
 package pantallas;
 
+import entidades.ExportarArchivo;
+import java.io.IOException;
+
 /**
  *
- * @author tokiro
+ * @author tokiro 
  */
 public class JFrameReportes extends javax.swing.JFrame {
 
@@ -113,7 +116,6 @@ public class JFrameReportes extends javax.swing.JFrame {
         jLabel3.setText("Filtrar por:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
 
-        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(cbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 93, 160, 30));
 
@@ -143,10 +145,13 @@ public class JFrameReportes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarActionPerformed
-        JFrameDescargas descargar = new JFrameDescargas(this);
-        descargar.setLocationRelativeTo(null);
-        descargar.setVisible(true);
-        this.setVisible(false);
+        ExportarArchivo obj;
+        try {
+                obj = new ExportarArchivo();
+                obj.exportarExcel(jTableReporte);
+            } catch (IOException ex) {
+                System.out.println("Error: " + ex);
+            }
     }//GEN-LAST:event_btnDescargarActionPerformed
 
     private void salir() {
@@ -200,7 +205,7 @@ public class JFrameReportes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable jTableReporte;
+    private javax.swing.JTable jTableReporte;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }
