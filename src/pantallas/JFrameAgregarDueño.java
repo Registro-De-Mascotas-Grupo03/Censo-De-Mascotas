@@ -5,11 +5,19 @@
  */
 package pantallas;
 
+import betatester.BetaTester;
 import entidades.Dueño;
+import excepcionesPersonalizadas.MiExcepcionDeArchivo;
+import excepcionesPersonalizadas.MiExcepcionDeClase;
+import excepcionesPersonalizadas.MiExcepcionDeEscritura;
 import excepcionesPersonalizadas.MiExcepcionDeFecha;
 import funciones.Utilitario;
+import java.io.File;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -182,16 +190,16 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        if (ValidaIngresos()) {
-            NuevoDueño();
-            
+        if (validaIngresos()) {
+            nuevoDueño();
+
         } else {
             JOptionPane.showMessageDialog(null, "Por favor asegurate de llenar "
                     + "todos los datos correctamente.");
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private boolean ValidaIngresos() {
+    private boolean validaIngresos() {
         if (txtNumDoc.getText().isEmpty() || txtNombre.getText().isEmpty()
                 || txtApellido.getText().isEmpty()
                 || txtTelefono.getText().isEmpty()
@@ -201,13 +209,24 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
             return false;
 
         }
+        for (Dueño dueño : BetaTester.dueños) {
+            if (txtNumDoc.getText().equals(dueño.getNumDoc())) {
+                JOptionPane.showMessageDialog(null, "Ya existe un dueño con ese"
+                        + " Número de Documento");
+                return false;
+
+                
+            }
+        }
         return true;
 
     }
 
-    private void NuevoDueño() {
+    private void nuevoDueño() {
 
         try {
+            Utilitario.crearArchivo("Dueños.txt");
+
             LocalDate fecNac;
 
             dueño = new Dueño();
@@ -224,11 +243,21 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
             dueño.setSexo(this.cbSexo.getItemAt(cbSexo.getSelectedIndex()));
             dueño.setEstado("Habilitado");
             this.padre.agregarNuevoDueño(dueño);
+
+            Utilitario.escribirDueñosEnArchivo("Dueños.txt", BetaTester.dueños);
+            Utilitario.leerDueñosEnArchivo("Dueños.txt");
             salir();
 
         } catch (MiExcepcionDeFecha e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
 
+        } catch (MiExcepcionDeEscritura e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        } catch (MiExcepcionDeArchivo e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (MiExcepcionDeClase e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
     }

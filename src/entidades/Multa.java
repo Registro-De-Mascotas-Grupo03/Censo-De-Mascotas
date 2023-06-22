@@ -5,11 +5,13 @@
  */
 package entidades;
 
+import java.io.Serializable;
+
 /**
  *
  * @author tokiro
  */
-public class Multa {
+public class Multa implements Serializable{
     
     private String codigoMulta; 
     private Dueño dueño; 

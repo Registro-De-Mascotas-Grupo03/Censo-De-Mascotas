@@ -5,11 +5,13 @@
  */
 package entidades;
 
+import java.io.Serializable;
+
 /**
  *
  * @author MIKI
  */
-public class Mascota {
+public class Mascota implements Serializable{
 
     private Dueño dueño;
     private String codigo;

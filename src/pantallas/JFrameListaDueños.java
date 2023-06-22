@@ -9,6 +9,12 @@ import betatester.BetaTester;
 import entidades.Dueño;
 import entidades.Mascota;
 import entidades.Usuario;
+import excepcionesPersonalizadas.MiExcepcionDeArchivo;
+import excepcionesPersonalizadas.MiExcepcionDeClase;
+import excepcionesPersonalizadas.MiExcepcionDeEscritura;
+import excepcionesPersonalizadas.MiExcepcionDeFecha;
+import funciones.Utilitario;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -217,63 +223,93 @@ public class JFrameListaDueños extends javax.swing.JFrame {
         String estado;
         int fila = tbDueños.getSelectedRow();
 
-        if (fila >= 0) {
-            numDoc = String.valueOf(modeloTableDueños.getValueAt(fila, 0));
-            estado = String.valueOf(modeloTableDueños.getValueAt(fila, 5));
-            if (estado.equals("Habilitado")) {
-                for (Dueño dueño : BetaTester.dueños) {
-                    if (numDoc == dueño.getNumDoc()) {
-                        dueño.setEstado("Deshabilitado");
+        try {
+            if (fila >= 0) {
+                numDoc = String.valueOf(modeloTableDueños.getValueAt(fila, 0));
+                estado = String.valueOf(modeloTableDueños.getValueAt(fila, 5));
+                if (estado.equals("Habilitado")) {
+                    for (Dueño dueño : BetaTester.dueños) {
+                        if (numDoc == dueño.getNumDoc()) {
+                            dueño.setEstado("Deshabilitado");
 
-                        break;
+                            break;
+                        }
                     }
-                }
-            }
-            else{
-                for (Dueño dueño : BetaTester.dueños) {
-                    if (numDoc == dueño.getNumDoc()) {
-                        dueño.setEstado("Habilitado");
 
-                        break;
+                } else {
+                    for (Dueño dueño : BetaTester.dueños) {
+                        if (numDoc == dueño.getNumDoc()) {
+                            dueño.setEstado("Habilitado");
+
+                            break;
+                        }
                     }
-                }
-            }
 
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
+                }
+                Utilitario.escribirDueñosEnArchivo("Dueños.txt", BetaTester.dueños);
+                Utilitario.leerDueñosEnArchivo("Dueños.txt");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
+            }
+            llenarTabla("");
+
+        } catch (MiExcepcionDeEscritura e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        } catch (MiExcepcionDeArchivo e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (MiExcepcionDeClase e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        llenarTabla("");
+
 
     }//GEN-LAST:event_btnDeshabilitarYHabilitarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         String numDoc;
         int fila = tbDueños.getSelectedRow();
-        if (fila >= 0) {
-            numDoc = String.valueOf(modeloTableDueños.getValueAt(fila, 0));
 
-            for (Dueño dueño : BetaTester.dueños) {
-                if (numDoc.equals(dueño.getNumDoc())) {
-                    eliminaMascotasDeDueño(dueño);
-                    BetaTester.dueños.remove(dueño);
-                    modeloTableDueños.removeRow(fila);
-                    
-                    break;
+        try {
+            if (fila >= 0) {
+                numDoc = String.valueOf(modeloTableDueños.getValueAt(fila, 0));
+
+                for (Dueño dueño : BetaTester.dueños) {
+                    if (numDoc.equals(dueño.getNumDoc())) {
+                        eliminaMascotasDeDueño(dueño);
+                        BetaTester.dueños.remove(dueño);
+                        modeloTableDueños.removeRow(fila);
+
+                        break;
+                    }
                 }
-            }
+                Utilitario.escribirDueñosEnArchivo("Dueños.txt", BetaTester.dueños);
+                Utilitario.leerDueñosEnArchivo("Dueños.txt");
 
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccionar Fila");
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccionar Fila");
+            }
+            llenarTabla("");
+
+        } catch (MiExcepcionDeEscritura e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        } catch (MiExcepcionDeArchivo e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (MiExcepcionDeClase e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
+
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void eliminaMascotasDeDueño(Dueño dueño){
+    private void eliminaMascotasDeDueño(Dueño dueño) {
         for (Mascota mascota : BetaTester.mascotas) {
-                if (dueño.getNumDoc().equals(mascota.getDueño().getNumDoc())) {
-                    BetaTester.mascotas.remove(mascota);
-                    
-                }
+            if (dueño.getNumDoc().equals(mascota.getDueño().getNumDoc())) {
+                BetaTester.mascotas.remove(mascota);
+
             }
+        }
     }
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         busquedaSensitiva();

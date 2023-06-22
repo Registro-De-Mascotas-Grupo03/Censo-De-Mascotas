@@ -8,8 +8,15 @@ package betatester;
 import entidades.Dueño;
 import entidades.Mascota;
 import entidades.Usuario;
+import excepcionesPersonalizadas.MiExcepcionDeArchivo;
+import excepcionesPersonalizadas.MiExcepcionDeClase;
+import excepcionesPersonalizadas.MiExcepcionDeEscritura;
+import funciones.Utilitario;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import pantallas.JFrameIngresar;
 
 /**
@@ -26,7 +33,16 @@ public class BetaTester {
     public static List<Usuario> usuarios = new ArrayList<>();
     
     public static void main(String[] args) {
-        
+        try {
+            Utilitario.leerDueñosEnArchivo("Dueños.txt");
+        } catch (MiExcepcionDeEscritura e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        } catch (MiExcepcionDeArchivo e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (MiExcepcionDeClase e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
         Usuario usuario = new Usuario("Admin", "123456");
         usuario.setRol("Administrador");       
         usuarios.add(usuario);

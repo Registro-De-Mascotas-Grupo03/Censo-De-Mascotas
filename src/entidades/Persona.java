@@ -5,13 +5,14 @@
  */
 package entidades;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  *
  * @author Fabricio
  */
-public class Persona {
+public class Persona implements Serializable {
 
      private String tipoDoc;
     private String numDoc;

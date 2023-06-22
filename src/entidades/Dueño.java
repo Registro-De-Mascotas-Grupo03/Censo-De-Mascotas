@@ -5,6 +5,7 @@
  */
 package entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +13,21 @@ import java.util.List;
  *
  * @author Fabricio
  */
-public class Dueño extends Persona{
+public class Dueño extends Persona
+               implements Serializable {
       
     private String sexo;
     private List<Mascota> mascotas= new ArrayList<>();
     private List<Multa> multas =new ArrayList<>();
+    
+    //public String toString(){
+        //return this.getNumDoc()+this.getNombre()+this.getApellido()+
+          //      this.getDireccion()+this.getCorreoPersonal()+
+            //    String.valueOf(this.getEdad())
+              //  +this.getSexo()+String.valueOf(this.getFecNac())
+                //+this.getTelefono()+this.getTipoDoc()+this.getEstado()+
+                //+this.get
+    //}
     /**
      * @return the mascotas
      */
