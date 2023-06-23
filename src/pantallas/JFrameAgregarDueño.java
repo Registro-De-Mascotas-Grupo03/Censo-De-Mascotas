@@ -12,12 +12,7 @@ import excepcionesPersonalizadas.MiExcepcionDeClase;
 import excepcionesPersonalizadas.MiExcepcionDeEscritura;
 import excepcionesPersonalizadas.MiExcepcionDeFecha;
 import funciones.Utilitario;
-import java.io.File;
-import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**

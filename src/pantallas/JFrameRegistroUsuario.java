@@ -5,8 +5,16 @@
  */
 package pantallas;
 
+import betatester.BetaTester;
+import entidades.Dueño;
+import entidades.Multa;
 import entidades.Usuario;
+import excepcionesPersonalizadas.MiExcepcionDeArchivo;
+import excepcionesPersonalizadas.MiExcepcionDeClase;
+import excepcionesPersonalizadas.MiExcepcionDeEscritura;
+import funciones.Utilitario;
 import java.awt.Color;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class JFrameRegistroUsuario extends javax.swing.JFrame {
 
-    private JFrameListaUsuarios padre;  
+    private JFrameListaUsuarios padre;
 
     Usuario usuario;
 
@@ -29,22 +37,37 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
     }
 
     public void Registrar() {
-        if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?")
-                == JOptionPane.OK_OPTION) {
 
-            usuario = new Usuario(txtUsuario.getText(), txtContra.getText());
-            usuario.setNumDoc(txtDni.getText());
-            usuario.setNombre(txtNombre.getText());
-            usuario.setApellido(txtApellido.getText());
-            usuario.setDireccion(txtDireccion.getText());
-            usuario.setRol(this.cbRol.getItemAt(cbRol.getSelectedIndex()));
-            usuario.setCorreoPersonal(txtCorreo.getText());
-            usuario.setContraseña(txtContra.getText());
-            usuario.setContraseña2(txtContra2.getText());
+        try {
+            if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?")
+                    == JOptionPane.OK_OPTION) {
+                Utilitario.crearArchivo("Usuarios.txt");
 
-            this.padre.setUsuario(usuario);
-            this.padre.setVisible(true);
-            this.dispose();
+                usuario = new Usuario(txtUsuario.getText(), txtContra.getText());
+                usuario.setNumDoc(txtDni.getText());
+                usuario.setNombre(txtNombre.getText());
+                usuario.setApellido(txtApellido.getText());
+                usuario.setDireccion(txtDireccion.getText());
+                usuario.setRol(this.cbRol.getItemAt(cbRol.getSelectedIndex()));
+                usuario.setCorreoPersonal(txtCorreo.getText());
+                usuario.setContraseña(txtContra.getText());
+                usuario.setContraseña2(txtContra2.getText());
+
+                this.padre.setUsuario(usuario);
+                Utilitario.escribirUsuariosEnArchivo("Usuarios.txt",
+                        BetaTester.usuarios);
+                Utilitario.leerUsuariosEnArchivo("Usuarios.txt");
+                this.padre.setVisible(true);
+                this.dispose();
+            }
+
+        } catch (MiExcepcionDeEscritura e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        } catch (MiExcepcionDeArchivo e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (MiExcepcionDeClase e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -64,7 +87,6 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
         cbRol = new javax.swing.JComboBox<>();
         btnRegistrar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        btnValidar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -190,12 +212,6 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 580, 100, 40));
 
-        btnValidar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnValidar.setText("Validar");
-        btnValidar.setBorder(null);
-        btnValidar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(btnValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 100, 40));
-
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel3.setText("Registro de Usuarios");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
@@ -228,10 +244,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        JFrameListaUsuarios pantallaUsuario = new JFrameListaUsuarios();
-        pantallaUsuario.setLocationRelativeTo(null);
-        pantallaUsuario.setVisible(true);
-        this.setVisible(false);
+        salir();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtDniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDniMousePressed
@@ -565,7 +578,6 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnValidar;
     private javax.swing.JComboBox<String> cbRol;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

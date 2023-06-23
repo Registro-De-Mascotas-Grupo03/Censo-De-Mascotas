@@ -5,11 +5,14 @@
  */
 package entidades;
 
+import java.io.Serializable;
+
 /**
  *
  * @author tokiro
  */
-public class Usuario extends Persona {
+public class Usuario extends Persona
+        implements Serializable {
 
     public Usuario() {
     }

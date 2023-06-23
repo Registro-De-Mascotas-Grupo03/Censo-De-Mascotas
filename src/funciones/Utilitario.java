@@ -8,6 +8,8 @@ package funciones;
 import betatester.BetaTester;
 import entidades.Dueño;
 import entidades.Mascota;
+import entidades.Multa;
+import entidades.Usuario;
 import excepcionesPersonalizadas.MiExcepcionDeArchivo;
 import excepcionesPersonalizadas.MiExcepcionDeClase;
 import excepcionesPersonalizadas.MiExcepcionDeEscritura;
@@ -62,10 +64,11 @@ public class Utilitario {
     }
 
     public static void crearArchivo(String nombreArchivo)
-            throws MiExcepcionDeArchivo {
+            throws MiExcepcionDeArchivo,MiExcepcionDeEscritura {
 
         try {
             FileOutputStream archivo = new FileOutputStream("archivos\\" + nombreArchivo);
+            
 
         } catch (FileNotFoundException ex) {
             throw new MiExcepcionDeArchivo();
@@ -97,6 +100,108 @@ public class Utilitario {
             ObjectInputStream entrada = new ObjectInputStream(archivo);
 
             BetaTester.dueños = (List<Dueño>) entrada.readObject();
+            entrada.close();
+            archivo.close();
+
+        } catch (IOException ex) {
+            throw new MiExcepcionDeEscritura();
+        } catch (ClassNotFoundException ex) {
+            throw new MiExcepcionDeClase();
+        }
+    }
+    public static void escribirMascotasEnArchivo(String nombreArchivo,
+            List<Mascota> mascotas)
+            throws MiExcepcionDeArchivo, MiExcepcionDeEscritura {
+
+        try {
+            FileOutputStream archivo = new FileOutputStream("archivos\\" + nombreArchivo);
+            ObjectOutputStream salida = new ObjectOutputStream(archivo);
+
+            salida.writeObject(mascotas);
+            salida.close();
+            archivo.close();
+        } catch (IOException ex) {
+            throw new MiExcepcionDeEscritura();
+        }
+    }
+
+    public static void leerMascotasEnArchivo(String nombreArchivo)
+            throws MiExcepcionDeArchivo, MiExcepcionDeEscritura,
+            MiExcepcionDeClase {
+
+        try {
+            FileInputStream archivo = new FileInputStream("archivos\\" + nombreArchivo);
+            ObjectInputStream entrada = new ObjectInputStream(archivo);
+
+            BetaTester.mascotas = (List<Mascota>) entrada.readObject();
+            entrada.close();
+            archivo.close();
+
+        } catch (IOException ex) {
+            throw new MiExcepcionDeEscritura();
+        } catch (ClassNotFoundException ex) {
+            throw new MiExcepcionDeClase();
+        }
+    }
+     public static void escribirMultasEnArchivo(String nombreArchivo,
+            List<Multa> multas)
+            throws MiExcepcionDeArchivo, MiExcepcionDeEscritura {
+
+        try {
+            FileOutputStream archivo = new FileOutputStream("archivos\\" + nombreArchivo);
+            ObjectOutputStream salida = new ObjectOutputStream(archivo);
+
+            salida.writeObject(multas);
+            salida.close();
+            archivo.close();
+        } catch (IOException ex) {
+            throw new MiExcepcionDeEscritura();
+        }
+    }
+
+    public static void leerMultasEnArchivo(String nombreArchivo)
+            throws MiExcepcionDeArchivo, MiExcepcionDeEscritura,
+            MiExcepcionDeClase {
+
+        try {
+            FileInputStream archivo = new FileInputStream("archivos\\" + nombreArchivo);
+            ObjectInputStream entrada = new ObjectInputStream(archivo);
+
+            BetaTester.multas = (List<Multa>) entrada.readObject();
+            entrada.close();
+            archivo.close();
+
+        } catch (IOException ex) {
+            throw new MiExcepcionDeEscritura();
+        } catch (ClassNotFoundException ex) {
+            throw new MiExcepcionDeClase();
+        }
+    }
+    public static void escribirUsuariosEnArchivo(String nombreArchivo,
+            List<Usuario> usuarios)
+            throws MiExcepcionDeArchivo, MiExcepcionDeEscritura {
+
+        try {
+            FileOutputStream archivo = new FileOutputStream("archivos\\" + nombreArchivo);
+            ObjectOutputStream salida = new ObjectOutputStream(archivo);
+
+            salida.writeObject(usuarios);
+            salida.close();
+            archivo.close();
+        } catch (IOException ex) {
+            throw new MiExcepcionDeEscritura();
+        }
+    }
+
+    public static void leerUsuariosEnArchivo(String nombreArchivo)
+            throws MiExcepcionDeArchivo, MiExcepcionDeEscritura,
+            MiExcepcionDeClase {
+
+        try {
+            FileInputStream archivo = new FileInputStream("archivos\\" + nombreArchivo);
+            ObjectInputStream entrada = new ObjectInputStream(archivo);
+
+            BetaTester.usuarios = (List<Usuario>) entrada.readObject();
             entrada.close();
             archivo.close();
 

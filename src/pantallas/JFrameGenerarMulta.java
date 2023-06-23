@@ -7,8 +7,14 @@ package pantallas;
 
 import betatester.BetaTester;
 import entidades.Dueño;
+import entidades.Mascota;
 import entidades.Multa;
 import entidades.Usuario;
+import excepcionesPersonalizadas.MiExcepcionDeArchivo;
+import excepcionesPersonalizadas.MiExcepcionDeClase;
+import excepcionesPersonalizadas.MiExcepcionDeEscritura;
+import excepcionesPersonalizadas.MiExcepcionNula;
+import funciones.Utilitario;
 import javax.swing.JOptionPane;
 import java.time.LocalDate;
 
@@ -22,11 +28,11 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
     private JFrameMultas padre;
     private Dueño dueño;
     private Usuario usuario;
-    
+
     public JFrameGenerarMulta() {
         initComponents();
     }
-    
+
     public JFrameGenerarMulta(JFrameMultas padre, Usuario usuario) {
         initComponents();
         this.padre = padre;
@@ -41,10 +47,10 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
         lblEstado1.setVisible(false);
         lblNombreU.setVisible(false);
         txtNombreU.setVisible(false);
-        
+
         this.lblCodigoMulta.setText(padre.calcularCodigo());
     }
-    
+
     public JFrameGenerarMulta(JFrameMultas padre, Multa multa) {
         initComponents();
         this.padre = padre;
@@ -55,12 +61,10 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
         lblFechaV.setVisible(true);
         lblEstado.setVisible(true);
         lblNombreU.setVisible(true);
-        if (multa.getEstado() == "Por Pagar"){
+        if (multa.getEstado() == "Por Pagar") {
             lblFechaP.setVisible(false);
             txtFechaP.setVisible(false);
-        }
-        else
-        {
+        } else {
             txtFechaP.setText(multa.getFechaPagado());
         }
         lblTitulo.setText("Visualizar Multa - " + multa.getCodigoMulta());
@@ -74,8 +78,8 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
         this.lblEstado1.setText(multa.getEstado());
         this.txtDescripcion.setText(multa.getDescripcion());
     }
-    
-    public JFrameGenerarMulta(JFrameMultas padre, Usuario usuario, Dueño dueño){
+
+    public JFrameGenerarMulta(JFrameMultas padre, Usuario usuario, Dueño dueño) {
         initComponents();
         this.padre = padre;
         this.usuario = usuario;
@@ -89,13 +93,13 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
         lblEstado1.setVisible(false);
         lblNombreU.setVisible(false);
         txtNombreU.setVisible(false);
-        
+
         txtNroDocumento.setText(dueño.getNumDoc());
         txtNroDocumento.setEnabled(false);
-        
+
         this.lblCodigoMulta.setText(padre.calcularCodigo());
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -260,35 +264,54 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
         generar();
     }//GEN-LAST:event_btnGenerarActionPerformed
 
-    public void generar(){
-        if (JOptionPane.showConfirmDialog(this, "¿Esta seguro de que desea " + 
-                "generar la multa?", "" + "Confirm", JOptionPane.YES_NO_OPTION)
-                == JOptionPane.OK_OPTION){
-            for (Dueño dueñoA : BetaTester.dueños) {
-                if (dueñoA.getNumDoc().equals(txtNroDocumento.getText())) {
-                    this.dueño = dueñoA;
-                    break;
+    public void generar() {
+
+        try {
+            if (JOptionPane.showConfirmDialog(this, "¿Esta seguro de que desea "
+                    + "generar la multa?", "" + "Confirm", JOptionPane.YES_NO_OPTION)
+                    == JOptionPane.OK_OPTION) {
+                Utilitario.crearArchivo("Multas.txt");
+                for (Dueño dueñoA : BetaTester.dueños) {
+                    if (dueñoA.getNumDoc().equals(txtNroDocumento.getText())) {
+                        this.dueño = dueñoA;
+                        break;
+                    }
                 }
+                Utilitario.obtenerLista(dueño);
+                multa = new Multa(this.dueño, this.usuario);
+                
+                multa.setCodigoMulta(padre.calcularCodigo());
+                multa.setFechaGenerada(String.format("%02d", LocalDate.now().
+                        getDayOfMonth()) + "/" + String.format("%02d",
+                                LocalDate.now().getMonthValue()) + "/"
+                        + LocalDate.now().getYear());
+                multa.setMonto(Float.parseFloat(txtMonto.getText()));
+                multa.setDescripcion(txtDescripcion.getText());
+
+                this.padre.setMulta(multa);
+                Utilitario.escribirMultasEnArchivo("Multas.txt",
+                        BetaTester.multas);
+                Utilitario.leerMultasEnArchivo("Multas.txt");
+                salir();
             }
-            multa = new Multa(this.dueño,this.usuario);
-            multa.setCodigoMulta(padre.calcularCodigo());
-            multa.setFechaGenerada(String.format("%02d",LocalDate.now().
-                    getDayOfMonth()) + "/" + String.format("%02d",
-                    LocalDate.now().getMonthValue()) + "/" + 
-                    LocalDate.now().getYear());
-            multa.setMonto(Float.parseFloat(txtMonto.getText()));
-            multa.setDescripcion(txtDescripcion.getText());
-            
-            this.padre.setMulta(multa);
-            salir();
+
+        } catch (MiExcepcionDeEscritura e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        } catch (MiExcepcionDeArchivo e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (MiExcepcionDeClase e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }catch (MiExcepcionNula e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
-    
+
     private void salir() {
         padre.setVisible(true);
         this.dispose();
     }
-    
+
     /**
      * @param args the command line arguments
      */

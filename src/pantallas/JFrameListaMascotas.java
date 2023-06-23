@@ -8,6 +8,13 @@ package pantallas;
 import betatester.BetaTester;
 import entidades.Dueño;
 import entidades.Mascota;
+import entidades.Multa;
+import excepcionesPersonalizadas.MiExcepcionDeArchivo;
+import excepcionesPersonalizadas.MiExcepcionDeClase;
+import excepcionesPersonalizadas.MiExcepcionDeEscritura;
+import funciones.Utilitario;
+import java.time.LocalDate;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -55,7 +62,7 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
     void setMascota(Mascota mascota) {
 
         BetaTester.mascotas.add(mascota);
-        
+
         actulizaTabla();
     }
 
@@ -220,33 +227,52 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
     }
 
     public void eliminarMascota() {
-        String codigo;
-        int eli= tbMascotas.getSelectedRow(); 
-        
-        if (eli >= 0) {
-            codigo = String.valueOf(modeloTabla.getValueAt(eli, 0));
 
-            for (Mascota mascota : BetaTester.mascotas) {
-                if (codigo.equals(mascota.getCodigo())) {
-                    eliminarMascotaDeDueño(mascota);
-                    BetaTester.mascotas.remove(mascota);
-                    modeloTabla.removeRow(eli);
-                    
-                    break;
+        try {
+            String codigo;
+            int eli = tbMascotas.getSelectedRow();
+
+            if (eli >= 0) {
+                codigo = String.valueOf(modeloTabla.getValueAt(eli, 0));
+
+                for (Mascota mascota : BetaTester.mascotas) {
+                    if (codigo.equals(mascota.getCodigo())) {
+                        eliminarMascotaDeDueño(mascota);
+                        BetaTester.mascotas.remove(mascota);
+                        modeloTabla.removeRow(eli);
+
+                        break;
+                    }
                 }
-            }
 
+            }
+            //Para actualizar la data de los archivos 
+            Utilitario.escribirMascotasEnArchivo("Mascotas.txt",
+                    BetaTester.mascotas);
+            Utilitario.leerMascotasEnArchivo("Mascotas.txt");
+            
+            Utilitario.escribirDueñosEnArchivo("Dueños.txt", BetaTester.dueños);
+                Utilitario.leerDueñosEnArchivo("Dueños.txt");
+            
+
+        } catch (MiExcepcionDeEscritura e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        } catch (MiExcepcionDeArchivo e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (MiExcepcionDeClase e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        
 
     }
-    public void eliminarMascotaDeDueño(Mascota mascota){
+
+    public void eliminarMascotaDeDueño(Mascota mascota) {
         for (Dueño dueño : BetaTester.dueños) {
-                if (dueño.getNumDoc().equals(mascota.getDueño().getNumDoc())) {
-                    dueño.getMascotas().remove(mascota);
-                    break;
-                }
+            if (dueño.getNumDoc().equals(mascota.getDueño().getNumDoc())) {
+                dueño.getMascotas().remove(mascota);
+                break;
             }
+        }
     }
 
     public void buscarMascota() {
@@ -258,9 +284,9 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
                     .contains(txtBuscar.getText().toLowerCase())) {
                 Object[] rowData = {buscaMasc.getCodigo(),
                     buscaMasc.getDueño().getNumDoc(),
-                     buscaMasc.getNombre(), buscaMasc.getApellido(),
-                     buscaMasc.getFecNac(), buscaMasc.getSexo(),
-                     buscaMasc.getEspecie(), buscaMasc.getRaza()};
+                    buscaMasc.getNombre(), buscaMasc.getApellido(),
+                    buscaMasc.getFecNac(), buscaMasc.getSexo(),
+                    buscaMasc.getEspecie(), buscaMasc.getRaza()};
                 modeloTabla.addRow(rowData);
 
             }

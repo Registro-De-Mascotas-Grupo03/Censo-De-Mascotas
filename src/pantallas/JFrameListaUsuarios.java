@@ -6,7 +6,14 @@
 package pantallas;
 
 import betatester.BetaTester;
+import entidades.Dueño;
+import entidades.Mascota;
 import entidades.Usuario;
+import excepcionesPersonalizadas.MiExcepcionDeArchivo;
+import excepcionesPersonalizadas.MiExcepcionDeClase;
+import excepcionesPersonalizadas.MiExcepcionDeEscritura;
+import funciones.Utilitario;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,13 +32,13 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
 
         modeloTabla = new DefaultTableModel();
 
-        modeloTabla.addColumn("Dni");
+        modeloTabla.addColumn("Numero de Documento");
         modeloTabla.addColumn("Nombre");
         modeloTabla.addColumn("Apellido");
         modeloTabla.addColumn("Correo");
         modeloTabla.addColumn("Direccion");
 
-        this.TablaUsuario.setModel(modeloTabla);
+        this.tbUsuarios.setModel(modeloTabla);
         actualizaTabla("");
     }
 
@@ -68,7 +75,7 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         txtBuscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaUsuario = new javax.swing.JTable();
+        tbUsuarios = new javax.swing.JTable();
         btnAgregar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -84,7 +91,7 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
         txtBuscar.setBorder(null);
         jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 320, 30));
 
-        TablaUsuario.setModel(new javax.swing.table.DefaultTableModel(
+        tbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -118,7 +125,7 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(TablaUsuario);
+        jScrollPane1.setViewportView(tbUsuarios);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 610, 330));
 
@@ -196,7 +203,8 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        eliminarTabla();
+        eliminarUsuario();
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -215,13 +223,13 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
                 info[2] = buscaUsuario.getApellido();
                 info[3] = buscaUsuario.getCorreoPersonal();
                 info[4] = buscaUsuario.getDireccion();
-                modeloTabla.addRow(info);                
+                modeloTabla.addRow(info);
             }
         }
     }
 
     private void limpiarTabla() {
-        int info = TablaUsuario.getRowCount();
+        int info = tbUsuarios.getRowCount();
         for (int i = info - 1; i >= 0; i--) {
             modeloTabla.removeRow(i);
         }
@@ -232,16 +240,41 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
         this.dispose();
     }
 
-    public void eliminarTabla() {
+    public void eliminarUsuario() {
 
-        int eli;
-        eli = TablaUsuario.getSelectedRow();
+        try {
+            String numDoc;
+            int eli = tbUsuarios.getSelectedRow();
 
-        modeloTabla.removeRow(eli);
-        BetaTester.usuarios.remove(eli);
+            if (eli >= 0) {
+                numDoc = String.valueOf(modeloTabla.getValueAt(eli, 0));
+
+                for (Usuario usuario : BetaTester.usuarios) {
+                    if (numDoc.equals(usuario.getNumDoc())) {
+
+                        BetaTester.usuarios.remove(usuario);
+                        modeloTabla.removeRow(eli);
+
+                        break;
+                    }
+                }
+
+            }
+            Utilitario.escribirUsuariosEnArchivo("Usuarios.txt",
+                    BetaTester.usuarios);
+            Utilitario.leerUsuariosEnArchivo("Usuarios.txt");
+
+        } catch (MiExcepcionDeEscritura e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        } catch (MiExcepcionDeArchivo e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (MiExcepcionDeClase e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
 
     }
-  
+
     /**
      * @param args the command line arguments
      */
@@ -278,7 +311,6 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TablaUsuario;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
@@ -287,6 +319,7 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbUsuarios;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

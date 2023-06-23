@@ -35,6 +35,10 @@ public class BetaTester {
     public static void main(String[] args) {
         try {
             Utilitario.leerDueñosEnArchivo("Dueños.txt");
+            Utilitario.leerMascotasEnArchivo("Mascotas.txt");
+            Utilitario.leerUsuariosEnArchivo("Usuarios.txt");
+            Utilitario.leerMultasEnArchivo("Multas.txt");
+            
         } catch (MiExcepcionDeEscritura e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
 
@@ -43,18 +47,17 @@ public class BetaTester {
         } catch (MiExcepcionDeClase e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        Usuario usuario = new Usuario("Admin", "123456");
-        usuario.setRol("Administrador");       
-        usuarios.add(usuario);
-        usuario.setNombre("");
-        usuario.setNumDoc("");
+        //No borrar, capaz vuela todo y perdemos acceso
+        //Usuario usuario = new Usuario("Admin", "123456");
+        //usuario.setRol("Administrador");       
         
-        usuario = new Usuario("Trabajador", "123");
-        usuario.setRol("Operador");
-        usuario.setNombre("");
-        usuario.setNumDoc("");
-        usuario.setCorreoPersonal("piconm17@gmail.com");
-        usuarios.add(usuario);
+        //usuario.setNombre("Emilio");
+        //usuario.setApellido("Corrales");
+        //usuario.setNumDoc("123546789");
+        //usuario.setCorreoPersonal("piconm17@gmail.com");
+        //usuarios.add(usuario);
+        
+        
         JFrameIngresar ingresar = new JFrameIngresar();
         ingresar.setLocationRelativeTo(null);
         ingresar.setVisible(true);

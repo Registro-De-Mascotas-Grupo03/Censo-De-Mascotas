@@ -8,6 +8,9 @@ package pantallas;
 import betatester.BetaTester;
 import entidades.Dueño;
 import entidades.Mascota;
+import excepcionesPersonalizadas.MiExcepcionDeArchivo;
+import excepcionesPersonalizadas.MiExcepcionDeClase;
+import excepcionesPersonalizadas.MiExcepcionDeEscritura;
 import excepcionesPersonalizadas.MiExcepcionNula;
 import funciones.Utilitario;
 import javax.swing.JOptionPane;
@@ -217,11 +220,13 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
         return true;
 
     }
+
     private void Registrar() {
 
         try {
             if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?")
                     == JOptionPane.OK_OPTION && ValidaIngresos()) {
+                Utilitario.crearArchivo("Mascotas.txt");
                 mascota = new Mascota();
                 String Sexo = null;
                 if (rbnMacho.isSelected()) {
@@ -248,20 +253,29 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
                 mascota.setRaza(txtRaza.getText());
 
                 Utilitario.obtenerLista(dueño).add(mascota);
+
                 this.padre.setMascota(mascota);
-                
+                Utilitario.escribirMascotasEnArchivo("Mascotas.txt",
+                        BetaTester.mascotas);
+                Utilitario.leerMascotasEnArchivo("Mascotas.txt");
                 this.padre.setVisible(true);
                 this.dispose();
 
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Por favor asegurate de llenar "
-                    + "todos los datos correctamente.");
+                        + "todos los datos correctamente.");
             }
 
         } catch (MiExcepcionNula e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
 
+        } catch (MiExcepcionDeEscritura e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        } catch (MiExcepcionDeArchivo e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (MiExcepcionDeClase e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
     }

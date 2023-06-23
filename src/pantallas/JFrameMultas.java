@@ -8,6 +8,10 @@ package pantallas;
 import betatester.BetaTester;
 import entidades.Multa;
 import entidades.Usuario;
+import excepcionesPersonalizadas.MiExcepcionDeArchivo;
+import excepcionesPersonalizadas.MiExcepcionDeClase;
+import excepcionesPersonalizadas.MiExcepcionDeEscritura;
+import funciones.Utilitario;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -20,14 +24,14 @@ public class JFrameMultas extends javax.swing.JFrame {
 
     private JFrameGestorUsuario padre;
     private Usuario usuario;
-    
+
     DefaultTableModel modeloTabla = new DefaultTableModel();
     String[] i = new String[7];
-    
+
     public JFrameMultas() {
         initComponents();
     }
-    
+
     public JFrameMultas(JFrameGestorUsuario padre, Usuario usuario) {
         initComponents();
         this.padre = padre;
@@ -50,10 +54,17 @@ public class JFrameMultas extends javax.swing.JFrame {
         BetaTester.multas.add(multa);
         actualizarTabla();
     }
-    
+
+    private void limpiarTabla() {
+        int fila = tbMultas.getRowCount();
+        for (int i = fila - 1; i >= 0; i--) {
+            modeloTabla.removeRow(i);
+        }
+    }
+
     private void actualizarTabla() {
-        modeloTabla.setRowCount(0);
-        for (Multa multa: BetaTester.multas){
+        limpiarTabla();
+        for (Multa multa : BetaTester.multas) {
             i[0] = multa.getCodigoMulta();
             i[1] = multa.getDueño().getTipoDoc().toString();
             i[2] = multa.getDueño().getNumDoc().toString();
@@ -64,13 +75,12 @@ public class JFrameMultas extends javax.swing.JFrame {
             modeloTabla.addRow(i);
         }
     }
-    
-    private void eliminaMultasPagadas(){
+
+    private void eliminaMultasPagadas() {
         int e = 0;
-        for (Multa multa: BetaTester.multas){ 
-            if(multa.getEstado() == "Pagado")
-            {
-                if (Integer.parseInt( multa.getFechaPagado().substring(6, 10))
+        for (Multa multa : BetaTester.multas) {
+            if (multa.getEstado() == "Pagado") {
+                if (Integer.parseInt(multa.getFechaPagado().substring(6, 10))
                         + 2 <= LocalDate.now().getYear()) {
                     modeloTabla.removeRow(e);
                     BetaTester.multas.remove(e);
@@ -79,7 +89,7 @@ public class JFrameMultas extends javax.swing.JFrame {
             e++;
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -247,7 +257,7 @@ public class JFrameMultas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        JFrameGenerarMulta multa = new JFrameGenerarMulta(this,usuario);
+        JFrameGenerarMulta multa = new JFrameGenerarMulta(this, usuario);
         multa.setLocationRelativeTo(null);
         multa.setVisible(true);
         this.setVisible(false);
@@ -258,37 +268,49 @@ public class JFrameMultas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-        int e = tbMultas.getSelectedRow();
-        if (e >= 0) {
-            Multa m = BetaTester.multas.get(e);
-            m.setEstado("Pagado");
-            m.setFechaPagado(String.format("%02d",LocalDate.now().
-                    getDayOfMonth()) + "/" + String.format("%02d",
-                    LocalDate.now().getMonthValue()) + "/" + 
-                    LocalDate.now().getYear());
-            BetaTester.multas.set(e, m);
-            actualizarTabla();
+
+        try {
+            int e = tbMultas.getSelectedRow();
+            if (e >= 0) {
+                Multa m = BetaTester.multas.get(e);
+                m.setEstado("Pagado");
+                m.setFechaPagado(String.format("%02d", LocalDate.now().
+                        getDayOfMonth()) + "/" + String.format("%02d",
+                                LocalDate.now().getMonthValue()) + "/"
+                        + LocalDate.now().getYear());
+                BetaTester.multas.set(e, m);
+                actualizarTabla();
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor, seleccione una "
+                        + "Multa para pagarla");
+            }
+            Utilitario.escribirMultasEnArchivo("Multas.txt",
+                    BetaTester.multas);
+            Utilitario.leerMultasEnArchivo("Multas.txt");
+
+        } catch (MiExcepcionDeEscritura e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        } catch (MiExcepcionDeArchivo e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (MiExcepcionDeClase e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        else
-        {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione una "
-                    + "Multa para pagarla");
-        }
+
+
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
         int e = tbMultas.getSelectedRow();
         if (e >= 0) {
-            JFrameGenerarMulta multa = new JFrameGenerarMulta(this, 
+            JFrameGenerarMulta multa = new JFrameGenerarMulta(this,
                     BetaTester.multas.get(e));
             multa.setLocationRelativeTo(null);
             multa.setVisible(true);
             this.setVisible(false);
-        }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione una "
-                + "Multa para mostrarla");
+                    + "Multa para mostrarla");
         }
     }//GEN-LAST:event_btnVerActionPerformed
 
@@ -296,7 +318,7 @@ public class JFrameMultas extends javax.swing.JFrame {
         padre.setVisible(true);
         this.dispose();
     }
-    
+
     public String calcularCodigo() {
         String codigo = "";
         if (modeloTabla.getRowCount() < 1) {
@@ -305,14 +327,14 @@ public class JFrameMultas extends javax.swing.JFrame {
             for (Multa p : BetaTester.multas) {
                 codigo = p.getCodigoMulta();
             }
-            return "M" + String.format("%04d", 
+            return "M" + String.format("%04d",
                     Integer.parseInt(codigo.substring(1, 5)) + 1);
         }
     }
-    
-    public void llenarNombreMeses(int mesAct){
-        switch (mesAct){
-            case 1: 
+
+    public void llenarNombreMeses(int mesAct) {
+        switch (mesAct) {
+            case 1:
                 this.lblTextoFondoMes1.setText("Enero:");
                 this.lblDescripcionFondoMes1.setText(llenarDescripcionMes(1));
                 this.lblTextoFondoMes2.setText("Febrero:");
@@ -434,25 +456,37 @@ public class JFrameMultas extends javax.swing.JFrame {
                 break;
         }
     }
-     
-    public String llenarDescripcionMes(int mes){
-        switch(mes){
-            case 1: return "Compra de casitas";
-            case 2: return "Campaña de desparacitación";
-            case 3: return "Campaña de adopción";
-            case 4: return "Compra de mantas para el frio";
-            case 5: return "Campaña de vacunación";
-            case 6: return "Refugio de mascotas abandonadas";
-            case 7: return "Campaña de desparacitación";
-            case 8: return "Campaña concientisación de la responsablilidad de tener una mascota";
-            case 9: return "Campaña de estirilización";
-            case 10: return "Compra de alimento";
-            case 11: return "Compra de medicamentos";
-            default: return "Implementación de vevederos en los parques principales";
+
+    public String llenarDescripcionMes(int mes) {
+        switch (mes) {
+            case 1:
+                return "Compra de casitas";
+            case 2:
+                return "Campaña de desparacitación";
+            case 3:
+                return "Campaña de adopción";
+            case 4:
+                return "Compra de mantas para el frio";
+            case 5:
+                return "Campaña de vacunación";
+            case 6:
+                return "Refugio de mascotas abandonadas";
+            case 7:
+                return "Campaña de desparacitación";
+            case 8:
+                return "Campaña concientisación de la responsablilidad de tener una mascota";
+            case 9:
+                return "Campaña de estirilización";
+            case 10:
+                return "Compra de alimento";
+            case 11:
+                return "Compra de medicamentos";
+            default:
+                return "Implementación de vevederos en los parques principales";
         }
     }
-    
-    public void buscar(){
+
+    public void buscar() {
         modeloTabla.setRowCount(0);
         i = new String[7];
         for (Multa multa : BetaTester.multas) {
@@ -467,7 +501,7 @@ public class JFrameMultas extends javax.swing.JFrame {
             }
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */

@@ -429,7 +429,7 @@ public class JFrameReportes extends javax.swing.JFrame {
     private void llenarTablaConMultas() {
         limpiarTabla();
         for (Multa multa : BetaTester.multas) {
-            String[] fila = new String[6];
+            String[] fila = new String[7];
             fila[0] = multa.getCodigoMulta();
             fila[1] = multa.getDueño().getTipoDoc().toString();
             fila[2] = multa.getDueño().getNumDoc().toString();
@@ -461,7 +461,7 @@ public class JFrameReportes extends javax.swing.JFrame {
         limpiarTabla();
 
         for (Mascota buscaMascTabla : BetaTester.mascotas) {
-            String[] info = new String[5];
+            String[] info = new String[7];
             info[0] = buscaMascTabla.getCodigo();
             info[1] = buscaMascTabla.getDueño().getNumDoc();
             info[2] = buscaMascTabla.getNombre();

@@ -8,13 +8,13 @@ package pantallas;
 import betatester.BetaTester;
 import entidades.Dueño;
 import entidades.Mascota;
-import entidades.Usuario;
+
 import excepcionesPersonalizadas.MiExcepcionDeArchivo;
 import excepcionesPersonalizadas.MiExcepcionDeClase;
 import excepcionesPersonalizadas.MiExcepcionDeEscritura;
-import excepcionesPersonalizadas.MiExcepcionDeFecha;
+
 import funciones.Utilitario;
-import java.time.LocalDate;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
