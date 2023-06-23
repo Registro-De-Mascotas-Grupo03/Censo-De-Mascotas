@@ -5,11 +5,11 @@
  */
 package pantallas;
 
-import entidades.Dueño;
-import java.util.ArrayList;
-import java.util.List;
+import betatester.BetaTester;
 import entidades.Multa;
+import entidades.Usuario;
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,9 +19,8 @@ import javax.swing.table.DefaultTableModel;
 public class JFrameMultas extends javax.swing.JFrame {
 
     private JFrameGestorUsuario padre;
+    private Usuario usuario;
     
-    //private Dueño dueño;
-    List<Multa> multas = new ArrayList<>();
     DefaultTableModel modeloTabla = new DefaultTableModel();
     String[] i = new String[7];
     
@@ -29,11 +28,11 @@ public class JFrameMultas extends javax.swing.JFrame {
         initComponents();
     }
     
-    public JFrameMultas(JFrameGestorUsuario padre) {
+    public JFrameMultas(JFrameGestorUsuario padre, Usuario usuario) {
         initComponents();
         this.padre = padre;
+        this.usuario = usuario;
         tbMultas.setModel(modeloTabla);
-        modeloTabla = new DefaultTableModel();
         modeloTabla.addColumn("Código de Multa");
         modeloTabla.addColumn("Tipo de Documento");
         modeloTabla.addColumn("Nro de Documento");
@@ -44,19 +43,20 @@ public class JFrameMultas extends javax.swing.JFrame {
         this.tbMultas.setModel(modeloTabla);
         llenarNombreMeses(LocalDate.now().getMonthValue());
         eliminaMultasPagadas();
+        actualizarTabla();
     }
 
     void setMulta(Multa multa) {
-        multas.add(multa);
+        BetaTester.multas.add(multa);
         actualizarTabla();
     }
     
     private void actualizarTabla() {
         modeloTabla.setRowCount(0);
-        for (Multa multa: multas){
+        for (Multa multa: BetaTester.multas){
             i[0] = multa.getCodigoMulta();
-            i[1] = "DNI"; //multa.getDueño().getTipoDoc().toString();
-            i[2] = "000"; //multa.getDueño().getNumDoc().toString();
+            i[1] = multa.getDueño().getTipoDoc().toString();
+            i[2] = multa.getDueño().getNumDoc().toString();
             i[3] = String.valueOf(multa.getMonto());
             i[4] = multa.getFechaGenerada();
             i[5] = multa.getFechaVencimiento();
@@ -67,11 +67,14 @@ public class JFrameMultas extends javax.swing.JFrame {
     
     private void eliminaMultasPagadas(){
         int e = 0;
-        for (Multa multa: multas){ 
-            if(Integer.parseInt(multa.getFechaPagado().substring(7, 5)) + 2 >= 
-                    LocalDate.now().getYear()){
-                modeloTabla.removeRow(e);
-                multas.remove(e);
+        for (Multa multa: BetaTester.multas){ 
+            if(multa.getEstado() == "Pagado")
+            {
+                if (Integer.parseInt( multa.getFechaPagado().substring(6, 10))
+                        + 2 <= LocalDate.now().getYear()) {
+                    modeloTabla.removeRow(e);
+                    BetaTester.multas.remove(e);
+                }
             }
             e++;
         }
@@ -98,6 +101,7 @@ public class JFrameMultas extends javax.swing.JFrame {
         lblTextoFondoMes3 = new javax.swing.JLabel();
         lblDescripcionFondoMes1 = new javax.swing.JLabel();
         lblTextoFondoMulta = new javax.swing.JLabel();
+        btnVer = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -117,7 +121,7 @@ public class JFrameMultas extends javax.swing.JFrame {
                 btnGenerarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 450, 130, 35));
+        jPanel1.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 420, 130, 35));
 
         btnPagar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         btnPagar.setText("Pagar Multa");
@@ -128,7 +132,7 @@ public class JFrameMultas extends javax.swing.JFrame {
                 btnPagarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 450, 130, 35));
+        jPanel1.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 470, 130, 35));
 
         btnSalir.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         btnSalir.setText("Salir");
@@ -139,7 +143,7 @@ public class JFrameMultas extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 510, 120, 35));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 570, 130, 35));
 
         tbMultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -184,7 +188,7 @@ public class JFrameMultas extends javax.swing.JFrame {
         jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 350, 33));
 
         lblDescripcionFondoMes3.setText("lblDescripcionFondoMes3");
-        jPanel1.add(lblDescripcionFondoMes3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 500, -1, 30));
+        jPanel1.add(lblDescripcionFondoMes3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 500, -1, 30));
 
         lblTextoFondoMes1.setText("lblTextoFondoMes1:");
         jPanel1.add(lblTextoFondoMes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, -1, 30));
@@ -193,25 +197,36 @@ public class JFrameMultas extends javax.swing.JFrame {
         jPanel1.add(lblTextoFondoMes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, 30));
 
         lblDescripcionFondoMes4.setText("lblDescripcionFondoMes4");
-        jPanel1.add(lblDescripcionFondoMes4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, -1, 30));
+        jPanel1.add(lblDescripcionFondoMes4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 520, -1, 30));
 
         lblTextoFondoMes4.setText("lblTextoFondoMes4:");
         jPanel1.add(lblTextoFondoMes4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 520, -1, 30));
 
         lblDescripcionFondoMes2.setText("lblDescripcionFondoMes2");
-        jPanel1.add(lblDescripcionFondoMes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, -1, 30));
+        jPanel1.add(lblDescripcionFondoMes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, -1, 30));
 
         lblTextoFondoMes3.setText("lblTextoFondoMes3:");
         jPanel1.add(lblTextoFondoMes3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, 30));
 
         lblDescripcionFondoMes1.setText("lblDescripcionFondoMes1");
-        jPanel1.add(lblDescripcionFondoMes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 460, -1, 30));
+        jPanel1.add(lblDescripcionFondoMes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, -1, 30));
 
         lblTextoFondoMulta.setText("Los fondos recaudados por la multa, se utilizaran en:");
         jPanel1.add(lblTextoFondoMulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, -1, 30));
 
+        btnVer.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        btnVer.setText("Ver Multa");
+        btnVer.setBorder(null);
+        btnVer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 520, 130, 35));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas9.JPG"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 600));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 620));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -232,7 +247,7 @@ public class JFrameMultas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        JFrameGenerarMulta multa = new JFrameGenerarMulta(this);
+        JFrameGenerarMulta multa = new JFrameGenerarMulta(this,usuario);
         multa.setLocationRelativeTo(null);
         multa.setVisible(true);
         this.setVisible(false);
@@ -244,14 +259,38 @@ public class JFrameMultas extends javax.swing.JFrame {
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
         int e = tbMultas.getSelectedRow();
-        Multa m = multas.get(e);
-        m.setEstado("Pagado");
-        m.setFechaPagado(LocalDate.now().getDayOfMonth() + "/"
-                + LocalDate.now().getMonthValue() + "/"
-                + LocalDate.now().getYear());
-        multas.set(e, m);
-        actualizarTabla();
+        if (e >= 0) {
+            Multa m = BetaTester.multas.get(e);
+            m.setEstado("Pagado");
+            m.setFechaPagado(String.format("%02d",LocalDate.now().
+                    getDayOfMonth()) + "/" + String.format("%02d",
+                    LocalDate.now().getMonthValue()) + "/" + 
+                    LocalDate.now().getYear());
+            BetaTester.multas.set(e, m);
+            actualizarTabla();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una "
+                    + "Multa para pagarla");
+        }
     }//GEN-LAST:event_btnPagarActionPerformed
+
+    private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
+        int e = tbMultas.getSelectedRow();
+        if (e >= 0) {
+            JFrameGenerarMulta multa = new JFrameGenerarMulta(this, 
+                    BetaTester.multas.get(e));
+            multa.setLocationRelativeTo(null);
+            multa.setVisible(true);
+            this.setVisible(false);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una "
+                + "Multa para mostrarla");
+        }
+    }//GEN-LAST:event_btnVerActionPerformed
 
     private void salir() {
         padre.setVisible(true);
@@ -263,10 +302,11 @@ public class JFrameMultas extends javax.swing.JFrame {
         if (modeloTabla.getRowCount() < 1) {
             return "M0001";
         } else {
-            for (Multa p : multas) {
+            for (Multa p : BetaTester.multas) {
                 codigo = p.getCodigoMulta();
             }
-            return "M" + String.format("%04d", Integer.parseInt(codigo.substring(1, 5)) + 1);
+            return "M" + String.format("%04d", 
+                    Integer.parseInt(codigo.substring(1, 5)) + 1);
         }
     }
     
@@ -415,14 +455,14 @@ public class JFrameMultas extends javax.swing.JFrame {
     public void buscar(){
         modeloTabla.setRowCount(0);
         i = new String[7];
-        for (Multa multa : multas) {
+        for (Multa multa : BetaTester.multas) {
             if (multa.getDatosCadena().toLowerCase()
                     .contains(txtBuscar.getText().toLowerCase())) {
-                Object[] rowData = {multa.getCodigoMulta()
-                        ,"DNI"//, multa.getDueño().getTipoDoc()
-                        ,"000"//, multa.getDueño().getNumDoc()
-                        , multa.getMonto(), multa.getFechaGenerada()
-                        , multa.getFechaVencimiento(), multa.getEstado()};
+                Object[] rowData = {multa.getCodigoMulta(),
+                    multa.getDueño().getTipoDoc(),
+                    multa.getDueño().getNumDoc(),
+                    multa.getMonto(), multa.getFechaGenerada(),
+                    multa.getFechaVencimiento(), multa.getEstado()};
                 modeloTabla.addRow(rowData);
             }
         }
@@ -467,6 +507,7 @@ public class JFrameMultas extends javax.swing.JFrame {
     private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnPagar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnVer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

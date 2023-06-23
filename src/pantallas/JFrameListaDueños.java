@@ -61,6 +61,7 @@ public class JFrameListaDueños extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        btnAgregarMulta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -89,7 +90,7 @@ public class JFrameListaDueños extends javax.swing.JFrame {
                 btnAgregarMascotaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregarMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 170, 35));
+        jPanel1.add(btnAgregarMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 170, 35));
 
         btnDeshabilitarYHabilitar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         btnDeshabilitarYHabilitar.setText("Deshabilitar/ Habilitar ");
@@ -164,6 +165,17 @@ public class JFrameListaDueños extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 510, 100, 35));
+
+        btnAgregarMulta.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        btnAgregarMulta.setText("AgregarMulta");
+        btnAgregarMulta.setBorder(null);
+        btnAgregarMulta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarMulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarMultaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAgregarMulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 470, 140, 35));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas7 listaDueños.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 620));
@@ -315,6 +327,32 @@ public class JFrameListaDueños extends javax.swing.JFrame {
         busquedaSensitiva();
     }//GEN-LAST:event_txtBuscarKeyReleased
 
+    private void btnAgregarMultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMultaActionPerformed
+
+        String numDoc;
+        JFrameIngresar abuelo = new JFrameIngresar();
+        JFrameGestorUsuario padre = new JFrameGestorUsuario(abuelo, this.padre.usuario);
+        JFrameMultas nuevo = new JFrameMultas(padre, this.padre.usuario);
+        int fila = tbDueños.getSelectedRow();
+        if (fila >= 0) {
+            numDoc = String.valueOf(modeloTableDueños.getValueAt(fila, 0));
+            for (Dueño dueño : BetaTester.dueños) {
+                if (numDoc == dueño.getNumDoc()) {
+                    JFrameGenerarMulta agrega
+                    = new JFrameGenerarMulta(nuevo, this.padre.usuario, dueño);
+                    agrega.setLocationRelativeTo(null);
+                    agrega.setVisible(true);
+                    this.setVisible(false);
+
+                    break;
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccionar Fila");
+        }
+    }//GEN-LAST:event_btnAgregarMultaActionPerformed
+
     private void busquedaSensitiva() {
         limpiarTabla();
         for (Dueño dueño : BetaTester.dueños) {
@@ -407,6 +445,7 @@ public class JFrameListaDueños extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarMascota;
+    private javax.swing.JButton btnAgregarMulta;
     private javax.swing.JButton btnDeshabilitarYHabilitar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnSalir;

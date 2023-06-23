@@ -5,6 +5,7 @@
  */
 package pantallas;
 
+import betatester.BetaTester;
 import entidades.Dueño;
 import entidades.Multa;
 import entidades.Usuario;
@@ -19,7 +20,6 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
 
     private Multa multa;
     private JFrameMultas padre;
-    //private boolean estoyEditando = false;
     private Dueño dueño;
     private Usuario usuario;
     
@@ -27,16 +27,71 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
         initComponents();
     }
     
-    public JFrameGenerarMulta(JFrameMultas padre) {
+    public JFrameGenerarMulta(JFrameMultas padre, Usuario usuario) {
         initComponents();
         this.padre = padre;
-        this.padre = padre;
+        this.usuario = usuario;
         txtFecha.setVisible(false);
         lblFecha.setVisible(false);
         txtFechaV.setVisible(false);
         lblFechaV.setVisible(false);
         txtFechaP.setVisible(false);
         lblFechaP.setVisible(false);
+        lblEstado.setVisible(false);
+        lblEstado1.setVisible(false);
+        lblNombreU.setVisible(false);
+        txtNombreU.setVisible(false);
+        
+        this.lblCodigoMulta.setText(padre.calcularCodigo());
+    }
+    
+    public JFrameGenerarMulta(JFrameMultas padre, Multa multa) {
+        initComponents();
+        this.padre = padre;
+        this.multa = multa;
+        this.btnGenerar.setVisible(false);
+        txtFechaV.setVisible(true);
+        lblFechaV.setVisible(true);
+        lblFechaV.setVisible(true);
+        lblEstado.setVisible(true);
+        lblNombreU.setVisible(true);
+        if (multa.getEstado() == "Por Pagar"){
+            lblFechaP.setVisible(false);
+            txtFechaP.setVisible(false);
+        }
+        else
+        {
+            txtFechaP.setText(multa.getFechaPagado());
+        }
+        lblTitulo.setText("Visualizar Multa - " + multa.getCodigoMulta());
+        this.lblCodigoMulta.setText(multa.getCodigoMulta());
+        this.cbTipoDocumento.setSelectedItem(multa.getDueño().getTipoDoc());
+        this.txtNroDocumento.setText(multa.getDueño().getNumDoc());
+        this.txtFecha.setText(multa.getFechaGenerada());
+        this.txtFechaV.setText(multa.getFechaVencimiento());
+        this.txtNombreU.setText(multa.getUsuario().getNombre());
+        this.txtMonto.setText(String.valueOf(multa.getMonto()));
+        this.lblEstado1.setText(multa.getEstado());
+        this.txtDescripcion.setText(multa.getDescripcion());
+    }
+    
+    public JFrameGenerarMulta(JFrameMultas padre, Usuario usuario, Dueño dueño){
+        initComponents();
+        this.padre = padre;
+        this.usuario = usuario;
+        txtFecha.setVisible(false);
+        lblFecha.setVisible(false);
+        txtFechaV.setVisible(false);
+        lblFechaV.setVisible(false);
+        txtFechaP.setVisible(false);
+        lblFechaP.setVisible(false);
+        lblEstado.setVisible(false);
+        lblEstado1.setVisible(false);
+        lblNombreU.setVisible(false);
+        txtNombreU.setVisible(false);
+        
+        txtNroDocumento.setText(dueño.getNumDoc());
+        txtNroDocumento.setEnabled(false);
         
         this.lblCodigoMulta.setText(padre.calcularCodigo());
     }
@@ -50,15 +105,10 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
         lblCodigoM = new javax.swing.JLabel();
         lblCodigoMulta = new javax.swing.JLabel();
         lblTipoDocumento = new javax.swing.JLabel();
-        txtTipoDocumento = new javax.swing.JTextField();
         btnGenerar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         txtNroDocumento = new javax.swing.JTextField();
         lblNroDocumento = new javax.swing.JLabel();
-        txtNombreDueño = new javax.swing.JTextField();
-        lblApellido = new javax.swing.JLabel();
-        txtApellidoDueño = new javax.swing.JTextField();
-        lblNombre = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
         lblFecha = new javax.swing.JLabel();
         txtFechaV = new javax.swing.JTextField();
@@ -69,6 +119,11 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
         lblMonto = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
         lblDescripcion = new javax.swing.JLabel();
+        cbTipoDocumento = new javax.swing.JComboBox<>();
+        lblNombreU = new javax.swing.JLabel();
+        txtNombreU = new javax.swing.JTextField();
+        lblEstado = new javax.swing.JLabel();
+        lblEstado1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -90,10 +145,6 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
         lblTipoDocumento.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         lblTipoDocumento.setText("Tipo Documento:");
         jPanel1.add(lblTipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
-
-        txtTipoDocumento.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtTipoDocumento.setBorder(null);
-        jPanel1.add(txtTipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 170, 30));
 
         btnGenerar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         btnGenerar.setText("Generar");
@@ -125,45 +176,29 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
         lblNroDocumento.setText("Nro Documento:");
         jPanel1.add(lblNroDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
-        txtNombreDueño.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtNombreDueño.setBorder(null);
-        jPanel1.add(txtNombreDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 170, 30));
-
-        lblApellido.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        lblApellido.setText("Apellido:");
-        jPanel1.add(lblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
-
-        txtApellidoDueño.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtApellidoDueño.setBorder(null);
-        jPanel1.add(txtApellidoDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 170, 30));
-
-        lblNombre.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        lblNombre.setText("Nombre:");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
-
         txtFecha.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtFecha.setBorder(null);
-        jPanel1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 170, 30));
+        jPanel1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 170, 30));
 
         lblFecha.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         lblFecha.setText("Fecha:");
-        jPanel1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
+        jPanel1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
 
         txtFechaV.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtFechaV.setBorder(null);
-        jPanel1.add(txtFechaV, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 170, 30));
+        jPanel1.add(txtFechaV, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 170, 30));
 
         lblFechaV.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         lblFechaV.setText("Vencimiento:");
-        jPanel1.add(lblFechaV, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, -1, -1));
+        jPanel1.add(lblFechaV, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, 30));
 
         txtFechaP.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtFechaP.setBorder(null);
-        jPanel1.add(txtFechaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 170, 30));
+        jPanel1.add(txtFechaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 170, 30));
 
         lblFechaP.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         lblFechaP.setText("Fecha de Pago:");
-        jPanel1.add(lblFechaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, -1, -1));
+        jPanel1.add(lblFechaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
 
         txtMonto.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtMonto.setBorder(null);
@@ -179,7 +214,26 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
 
         lblDescripcion.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         lblDescripcion.setText("Descripción:");
-        jPanel1.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
+        jPanel1.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, -1, -1));
+
+        cbTipoDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "CEDULA", "CARNET DE EXTRANJERIA" }));
+        jPanel1.add(cbTipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 170, 30));
+
+        lblNombreU.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblNombreU.setText("Nombre Usario:");
+        jPanel1.add(lblNombreU, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, -1, -1));
+
+        txtNombreU.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtNombreU.setBorder(null);
+        jPanel1.add(txtNombreU, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 170, 30));
+
+        lblEstado.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblEstado.setText("Estado:");
+        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, -1));
+
+        lblEstado1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblEstado1.setText("lblEstado1");
+        jPanel1.add(lblEstado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas9 generaMulta.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 450));
@@ -210,13 +264,18 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(this, "¿Esta seguro de que desea " + 
                 "generar la multa?", "" + "Confirm", JOptionPane.YES_NO_OPTION)
                 == JOptionPane.OK_OPTION){
-            //Encontrar o elegir un Dueño ya existente
-            //Encontrar o elegir un Usuario ya existente
-            multa = new Multa(dueño,usuario);
+            for (Dueño dueñoA : BetaTester.dueños) {
+                if (dueñoA.getNumDoc().equals(txtNroDocumento.getText())) {
+                    this.dueño = dueñoA;
+                    break;
+                }
+            }
+            multa = new Multa(this.dueño,this.usuario);
             multa.setCodigoMulta(padre.calcularCodigo());
-            multa.setFechaGenerada(LocalDate.now().getDayOfMonth() + "/" 
-                    + String.format("%02d",LocalDate.now().getMonthValue())
-                    + "/" + LocalDate.now().getYear());
+            multa.setFechaGenerada(String.format("%02d",LocalDate.now().
+                    getDayOfMonth()) + "/" + String.format("%02d",
+                    LocalDate.now().getMonthValue()) + "/" + 
+                    LocalDate.now().getYear());
             multa.setMonto(Float.parseFloat(txtMonto.getText()));
             multa.setDescripcion(txtDescripcion.getText());
             
@@ -268,28 +327,28 @@ public class JFrameGenerarMulta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> cbTipoDocumento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblCodigoM;
     private javax.swing.JLabel lblCodigoMulta;
     private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JLabel lblEstado;
+    private javax.swing.JLabel lblEstado1;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblFechaP;
     private javax.swing.JLabel lblFechaV;
     private javax.swing.JLabel lblMonto;
-    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblNombreU;
     private javax.swing.JLabel lblNroDocumento;
     private javax.swing.JLabel lblTipoDocumento;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTextField txtApellidoDueño;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtFechaP;
     private javax.swing.JTextField txtFechaV;
     private javax.swing.JTextField txtMonto;
-    private javax.swing.JTextField txtNombreDueño;
+    private javax.swing.JTextField txtNombreU;
     private javax.swing.JTextField txtNroDocumento;
-    private javax.swing.JTextField txtTipoDocumento;
     // End of variables declaration//GEN-END:variables
 }

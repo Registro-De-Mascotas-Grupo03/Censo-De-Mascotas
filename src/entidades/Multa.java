@@ -30,7 +30,7 @@ public class Multa implements Serializable{
     }
 
     public String getDatosCadena() {
-        return codigoMulta + "DNI" + "000" +//dueño.getTipoDoc + dueño.getNumDoc() +
+        return codigoMulta + dueño.getTipoDoc() + dueño.getNumDoc() +
                 monto + fechaGenerada + fechaVencimiento + estado;
     }
 

@@ -7,6 +7,7 @@ package betatester;
 
 import entidades.Dueño;
 import entidades.Mascota;
+import entidades.Multa;
 import entidades.Usuario;
 import excepcionesPersonalizadas.MiExcepcionDeArchivo;
 import excepcionesPersonalizadas.MiExcepcionDeClase;
@@ -31,6 +32,7 @@ public class BetaTester {
     public static List<Dueño> dueños= new ArrayList<>();
     public static List<Mascota> mascotas = new ArrayList<>();
     public static List<Usuario> usuarios = new ArrayList<>();
+    public static List<Multa> multas = new ArrayList<>();
     
     public static void main(String[] args) {
         try {

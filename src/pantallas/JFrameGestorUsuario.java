@@ -178,7 +178,7 @@ public class JFrameGestorUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void btnMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultasActionPerformed
-        JFrameMultas multa = new JFrameMultas(this);
+        JFrameMultas multa = new JFrameMultas(this, usuario);
         multa.setLocationRelativeTo(null);
         multa.setVisible(true);
         this.setVisible(false);
