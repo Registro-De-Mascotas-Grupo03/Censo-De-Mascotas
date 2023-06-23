@@ -59,7 +59,7 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
         actulizaTabla();
     }
 
-    void actulizaTabla() {
+    private void actulizaTabla() {
         modeloTabla.setRowCount(0);
 
         for (Mascota buscaMascTabla : BetaTester.mascotas) {
