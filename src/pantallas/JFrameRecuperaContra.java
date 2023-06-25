@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author tokiro
+ * @author Alvaro
  */
 public class JFrameRecuperaContra extends javax.swing.JFrame {
 
@@ -117,12 +117,12 @@ public class JFrameRecuperaContra extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblContraseña = new javax.swing.JLabel();
+        lblCorreo = new javax.swing.JLabel();
+        lblLinea = new javax.swing.JLabel();
+        lblTexto = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        lblTexto2 = new javax.swing.JLabel();
         btnEnviar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -141,26 +141,26 @@ public class JFrameRecuperaContra extends javax.swing.JFrame {
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 90, 33));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 25)); // NOI18N
-        jLabel2.setText("Recuperar Contraseña");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+        lblContraseña.setFont(new java.awt.Font("Dialog", 1, 25)); // NOI18N
+        lblContraseña.setText("Recuperar Contraseña");
+        jPanel1.add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel3.setText("Correo Electronico");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        lblCorreo.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblCorreo.setText("Correo Electronico");
+        jPanel1.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel4.setText("__________________________________________");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        lblLinea.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblLinea.setText("__________________________________________");
+        jPanel1.add(lblLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
-        jLabel5.setText("Para recuperar tu contraseña, ingresa el correo");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
+        lblTexto.setText("Para recuperar tu contraseña, ingresa el correo");
+        jPanel1.add(lblTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
 
         txtCorreo.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 290, 30));
 
-        jLabel6.setText("Recibirás un código de verificación al correo.");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        lblTexto2.setText("Recibirás un código de verificación al correo.");
+        jPanel1.add(lblTexto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
 
         btnEnviar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         btnEnviar.setText("Enviar");
@@ -243,12 +243,12 @@ public class JFrameRecuperaContra extends javax.swing.JFrame {
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblContraseña;
+    private javax.swing.JLabel lblCorreo;
+    private javax.swing.JLabel lblLinea;
+    private javax.swing.JLabel lblTexto;
+    private javax.swing.JLabel lblTexto2;
     private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }

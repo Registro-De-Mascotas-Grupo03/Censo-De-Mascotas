@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author tokiro
+ * @author Alvaro
  */
 public class JFrameGestorUsuario extends javax.swing.JFrame {
 

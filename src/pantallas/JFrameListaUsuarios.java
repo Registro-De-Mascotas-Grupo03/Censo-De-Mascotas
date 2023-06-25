@@ -79,7 +79,7 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -162,9 +162,9 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 510, 100, 35));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
-        jLabel2.setText("Usuarios");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+        lblUsuario.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        lblUsuario.setText("Usuarios");
+        jPanel1.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -316,9 +316,9 @@ public class JFrameListaUsuarios extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblUsuario;
     private javax.swing.JTable tbUsuarios;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables

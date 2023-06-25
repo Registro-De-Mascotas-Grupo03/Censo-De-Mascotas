@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author MIKI
+ * @author Miguel
  */
 public class Mascota implements Serializable{
 

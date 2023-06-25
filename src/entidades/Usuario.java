@@ -9,22 +9,12 @@ import java.io.Serializable;
 
 /**
  *
- * @author tokiro
+ * @author Fabricio
  */
 public class Usuario extends Persona
         implements Serializable {
 
-    public Usuario() {
-    }
-
-    public String getContraseña2() {
-        return contraseña2;
-    }
-
-    public void setContraseña2(String contraseña2) {
-        this.contraseña2 = contraseña2;
-    }
-
+    
     private Usuario supervisor;
     private String rol;
     private String usuario;
@@ -34,6 +24,19 @@ public class Usuario extends Persona
     public Usuario(String usuario, String contraseña) {
         this.usuario = usuario;
         this.contraseña = contraseña;
+    }
+    /**
+     * @return the supervisor
+     */
+    public Usuario getSupervisor() {
+        return supervisor;
+    }
+
+    /**
+     * @param supervisor the supervisor to set
+     */
+    public void setSupervisor(Usuario supervisor) {
+        this.supervisor = supervisor;
     }
 
     /**
@@ -77,4 +80,24 @@ public class Usuario extends Persona
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+
+    /**
+     * @return the contraseña2
+     */
+    public String getContraseña2() {
+        return contraseña2;
+    }
+
+    /**
+     * @param contraseña2 the contraseña2 to set
+     */
+    public void setContraseña2(String contraseña2) {
+        this.contraseña2 = contraseña2;
+    }
+
+    
+
+    
+
+    
 }

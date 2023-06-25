@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author tokiro
+ * @author Jomayra
  */
 public class JFrameMultas extends javax.swing.JFrame {
 

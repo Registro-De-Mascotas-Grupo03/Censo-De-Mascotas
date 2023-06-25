@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author tokiro
+ * @author Fabricio
  */
 public class JFrameListaDueños extends javax.swing.JFrame {
 
@@ -52,7 +52,7 @@ public class JFrameListaDueños extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblDueño = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         btnAgregarMascota = new javax.swing.JButton();
         btnDeshabilitarYHabilitar = new javax.swing.JButton();
@@ -68,9 +68,9 @@ public class JFrameListaDueños extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
-        jLabel2.setText("Dueños");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+        lblDueño.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        lblDueño.setText("Dueños");
+        jPanel1.add(lblDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
 
         txtBuscar.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtBuscar.setBorder(null);
@@ -280,9 +280,9 @@ public class JFrameListaDueños extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         String numDoc;
-        int fila = tbDueños.getSelectedRow();
 
         try {
+            int fila = tbDueños.getSelectedRow();
             if (fila >= 0) {
                 numDoc = String.valueOf(modeloTableDueños.getValueAt(fila, 0));
 
@@ -297,6 +297,9 @@ public class JFrameListaDueños extends javax.swing.JFrame {
                 }
                 Utilitario.escribirDueñosEnArchivo("Dueños.txt", BetaTester.dueños);
                 Utilitario.leerDueñosEnArchivo("Dueños.txt");
+                Utilitario.escribirMascotasEnArchivo("Mascotas.txt",
+                        BetaTester.mascotas);
+                Utilitario.leerMascotasEnArchivo("Mascotas.txt");
 
             } else {
                 JOptionPane.showMessageDialog(null, "Seleccionar Fila");
@@ -316,12 +319,20 @@ public class JFrameListaDueños extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void eliminaMascotasDeDueño(Dueño dueño) {
-        for (Mascota mascota : BetaTester.mascotas) {
-            if (dueño.getNumDoc().equals(mascota.getDueño().getNumDoc())) {
-                BetaTester.mascotas.remove(mascota);
+        int i = dueño.getMascotas().size();
+        while (i >= 1) {
+            for (Mascota mascota : BetaTester.mascotas) {
+                if (dueño.getNumDoc().equals(mascota.getDueño().getNumDoc())) {
+                    BetaTester.mascotas.remove(mascota);
+                    dueño.getMascotas().remove(mascota);
+                    i--;
+                    break;
+
+                }
 
             }
         }
+
     }
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         busquedaSensitiva();
@@ -339,7 +350,7 @@ public class JFrameListaDueños extends javax.swing.JFrame {
             for (Dueño dueño : BetaTester.dueños) {
                 if (numDoc == dueño.getNumDoc()) {
                     JFrameGenerarMulta agrega
-                    = new JFrameGenerarMulta(nuevo, this.padre.usuario, dueño);
+                            = new JFrameGenerarMulta(nuevo, this.padre.usuario, dueño);
                     agrega.setLocationRelativeTo(null);
                     agrega.setVisible(true);
                     this.setVisible(false);
@@ -450,9 +461,9 @@ public class JFrameListaDueños extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDueño;
     private javax.swing.JTable tbDueños;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables

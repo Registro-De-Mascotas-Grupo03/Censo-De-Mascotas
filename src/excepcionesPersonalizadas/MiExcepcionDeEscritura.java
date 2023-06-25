@@ -7,7 +7,7 @@ package excepcionesPersonalizadas;
 
 /**
  *
- * @author brick
+ * @author Fabricio
  */
 public class MiExcepcionDeEscritura extends Exception{
     private final static String MENSAJE=""

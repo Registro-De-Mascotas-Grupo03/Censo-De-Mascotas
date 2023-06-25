@@ -48,14 +48,32 @@ public class BetaTester {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
         //No borrar, capaz vuela todo y perdemos acceso
-        //Usuario usuario = new Usuario("Admin", "123456");
-        //usuario.setRol("Administrador");       
+        Usuario usuario = new Usuario("Admin", "123456");
+        usuario.setRol("Administrador");       
         
-        //usuario.setNombre("Emilio");
-        //usuario.setApellido("Corrales");
-        //usuario.setNumDoc("123546789");
-        //usuario.setCorreoPersonal("piconm17@gmail.com");
-        //usuarios.add(usuario);
+//        usuario.setNombre("Juan ");
+//        usuario.setApellido("Perez");
+//        usuario.setNumDoc("123546789");
+//        usuario.setCorreoPersonal("piconm17@gmail.com");
+//        usuarios.add(usuario);
+//        
+//        usuario = new Usuario("Admin2", "123456");
+//        usuario.setRol("Administrador");       
+//        
+//        usuario.setNombre("Roberto ");
+//        usuario.setApellido("Bolaños");
+//        usuario.setNumDoc("987654321");
+//        usuario.setCorreoPersonal("Rober@gmail.com");
+//        usuarios.add(usuario);
+//        
+//        usuario = new Usuario("Admin3", "123456");
+//        usuario.setRol("Administrador");       
+//        
+//        usuario.setNombre("Omar ");
+//        usuario.setApellido("Orlandini");
+//        usuario.setNumDoc("159753852");
+//        usuario.setCorreoPersonal("OmarO@gmail.com");
+//        usuarios.add(usuario);
         
         
         JFrameIngresar ingresar = new JFrameIngresar();

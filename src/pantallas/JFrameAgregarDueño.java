@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author tokiro
+ * @author Fabricio
  */
 public class JFrameAgregarDueño extends javax.swing.JFrame {
 
@@ -38,22 +38,22 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        lblApellidos = new javax.swing.JLabel();
         txtApellido = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        lblSexo = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        lblCorreo = new javax.swing.JLabel();
         cbTipoDoc = new javax.swing.JComboBox<>();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        lblTipoDoc = new javax.swing.JLabel();
+        lblNumDoc = new javax.swing.JLabel();
         txtNumDoc = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblTelefono = new javax.swing.JLabel();
+        lblFecNac = new javax.swing.JLabel();
+        lblDireccion = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         txtFecNac = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
@@ -65,49 +65,49 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
-        jLabel2.setText("Registro de Dueños");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
+        lblTitulo.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        lblTitulo.setText("Registro de Dueños");
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel4.setText("Nombres:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
+        lblNombre.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblNombre.setText("Nombres:");
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtNombre.setBorder(null);
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 160, 33));
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel5.setText("Apellidos:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, -1));
+        lblApellidos.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblApellidos.setText("Apellidos:");
+        jPanel1.add(lblApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, -1));
 
         txtApellido.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtApellido.setBorder(null);
         jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 160, 33));
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel6.setText("Sexo:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
+        lblSexo.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblSexo.setText("Sexo:");
+        jPanel1.add(lblSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
 
         txtTelefono.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtTelefono.setBorder(null);
         jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 160, 33));
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel10.setText("Correo:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
+        lblCorreo.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblCorreo.setText("Correo:");
+        jPanel1.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
 
         cbTipoDoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "CEDULA", "CARNET DE EXTRANJERIA", " " }));
         cbTipoDoc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(cbTipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 160, 30));
 
-        jLabel11.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel11.setText("Tipo Doc:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
+        lblTipoDoc.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblTipoDoc.setText("Tipo Doc:");
+        jPanel1.add(lblTipoDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
 
-        jLabel12.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel12.setText("Num.Doc: ");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
+        lblNumDoc.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblNumDoc.setText("Num.Doc: ");
+        jPanel1.add(lblNumDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
 
         txtNumDoc.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtNumDoc.setBorder(null);
@@ -117,17 +117,17 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
         txtCorreo.setBorder(null);
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 160, 33));
 
-        jLabel9.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel9.setText("Telefono:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, -1, -1));
+        lblTelefono.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblTelefono.setText("Telefono:");
+        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel8.setText("Fec. Nac:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
+        lblFecNac.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblFecNac.setText("Fec. Nac:");
+        jPanel1.add(lblFecNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel7.setText("Dirección:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, -1));
+        lblDireccion.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblDireccion.setText("Dirección:");
+        jPanel1.add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, -1));
 
         txtDireccion.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtDireccion.setBorder(null);
@@ -316,17 +316,17 @@ public class JFrameAgregarDueño extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbSexo;
     private javax.swing.JComboBox<String> cbTipoDoc;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblApellidos;
+    private javax.swing.JLabel lblCorreo;
+    private javax.swing.JLabel lblDireccion;
+    private javax.swing.JLabel lblFecNac;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblNumDoc;
+    private javax.swing.JLabel lblSexo;
+    private javax.swing.JLabel lblTelefono;
+    private javax.swing.JLabel lblTipoDoc;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;

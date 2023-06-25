@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author tokiro
+ * @author Jomayra
  */
 public class Multa implements Serializable{
     

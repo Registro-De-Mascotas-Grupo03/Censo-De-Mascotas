@@ -6,6 +6,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,14 @@ import java.util.List;
  */
 public class Dueño extends Persona
                implements Serializable {
+
+    
+
+    
       
     private String sexo;
+    private int edad;
+    private LocalDate fecNac;
     private List<Mascota> mascotas= new ArrayList<>();
     private List<Multa> multas =new ArrayList<>();
     
@@ -67,5 +74,31 @@ public class Dueño extends Persona
      */
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+    /**
+     * @return the fecNac
+     */
+    public LocalDate getFecNac() {
+        return fecNac;
+    }
+
+    /**
+     * @param fecNac the fecNac to set
+     */
+    public void setFecNac(LocalDate fecNac) {
+        this.fecNac = fecNac;
+    }
+    /**
+     * @return the edad
+     */
+    public int getEdad() {
+        return edad;
+    }
+
+    /**
+     * @param edad the edad to set
+     */
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 }

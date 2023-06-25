@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author tokiro
+ * @author Jean Pierre
  */
 public class JFrameIngresar extends javax.swing.JFrame {
 
@@ -29,7 +29,7 @@ public class JFrameIngresar extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         txtContra = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
+        txtOlvidado = new javax.swing.JLabel();
         btnIngresar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -64,15 +64,15 @@ public class JFrameIngresar extends javax.swing.JFrame {
         });
         jPanel1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 280, 50));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel1.setText("Olvide mi contraseña");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtOlvidado.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        txtOlvidado.setText("Olvide mi contraseña");
+        txtOlvidado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtOlvidado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                txtOlvidadoMouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 160, 30));
+        jPanel1.add(txtOlvidado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 160, 30));
 
         btnIngresar.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         btnIngresar.setText("Ingresar");
@@ -113,12 +113,12 @@ public class JFrameIngresar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void txtOlvidadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtOlvidadoMouseClicked
         JFrameRecuperaContra contra = new JFrameRecuperaContra(this);
         contra.setLocationRelativeTo(null);
         contra.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_txtOlvidadoMouseClicked
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
          boolean Validado= true;
@@ -205,11 +205,11 @@ public class JFrameIngresar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField txtContra;
+    private javax.swing.JLabel txtOlvidado;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

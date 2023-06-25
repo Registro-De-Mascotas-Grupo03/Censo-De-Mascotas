@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author tokiro
+ * @author Miguel 
  */
 public class JFrameAgregarMascota extends javax.swing.JFrame {
 
@@ -50,15 +50,15 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        lblCodigo = new javax.swing.JLabel();
+        lblNombres = new javax.swing.JLabel();
+        lblApellidos = new javax.swing.JLabel();
+        lblFecNac = new javax.swing.JLabel();
+        lblEspecie = new javax.swing.JLabel();
+        lblRaza = new javax.swing.JLabel();
+        lblSexo = new javax.swing.JLabel();
+        lblDni = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         rbnMacho = new javax.swing.JRadioButton();
@@ -76,41 +76,41 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
-        jLabel2.setText("Registro de Mascotas");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+        lblTitulo.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        lblTitulo.setText("Registro de Mascotas");
+        jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel3.setText("Codigo:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+        lblCodigo.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblCodigo.setText("Codigo:");
+        jPanel1.add(lblCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel4.setText("Nombres:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
+        lblNombres.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblNombres.setText("Nombres:");
+        jPanel1.add(lblNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel5.setText("Apellidos:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
+        lblApellidos.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblApellidos.setText("Apellidos:");
+        jPanel1.add(lblApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel6.setText("Fec. Nac:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
+        lblFecNac.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblFecNac.setText("Fec. Nac:");
+        jPanel1.add(lblFecNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel7.setText("Especie:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
+        lblEspecie.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblEspecie.setText("Especie:");
+        jPanel1.add(lblEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel8.setText("Raza:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
+        lblRaza.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblRaza.setText("Raza:");
+        jPanel1.add(lblRaza, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel9.setText("Sexo:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, -1, -1));
+        lblSexo.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblSexo.setText("Sexo:");
+        jPanel1.add(lblSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel10.setText("Dni Dueño:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
+        lblDni.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblDni.setText("Dni Dueño:");
+        jPanel1.add(lblDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
 
         btnRegistrar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         btnRegistrar.setText("Registrar");
@@ -320,16 +320,16 @@ public class JFrameAgregarMascota extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblApellidos;
+    private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblDni;
+    private javax.swing.JLabel lblEspecie;
+    private javax.swing.JLabel lblFecNac;
+    private javax.swing.JLabel lblNombres;
+    private javax.swing.JLabel lblRaza;
+    private javax.swing.JLabel lblSexo;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JRadioButton rbnHembra;
     private javax.swing.JRadioButton rbnMacho;
     private javax.swing.JTextField txtApellido;

@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author tokiro
+ * @author Alvaro
  */
 public class JFrameReportes extends javax.swing.JFrame {
 
@@ -53,11 +53,11 @@ public class JFrameReportes extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         btnDescargar = new javax.swing.JButton();
         btnFiltrar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        lblDe = new javax.swing.JLabel();
         cbFiltroCategoria = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblReportes = new javax.swing.JLabel();
+        lblFiltro = new javax.swing.JLabel();
+        lblFiltrarPor = new javax.swing.JLabel();
         cbFiltro = new javax.swing.JComboBox<>();
         txtFiltro = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -129,9 +129,9 @@ public class JFrameReportes extends javax.swing.JFrame {
         });
         jPanel1.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 90, 33));
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel5.setText("De:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
+        lblDe.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblDe.setText("De:");
+        jPanel1.add(lblDe, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
 
         cbFiltroCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuarios", "Dueños", "Mascotas", "Multas" }));
         cbFiltroCategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -142,17 +142,17 @@ public class JFrameReportes extends javax.swing.JFrame {
         });
         jPanel1.add(cbFiltroCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 160, 30));
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
-        jLabel4.setText("Reportes");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+        lblReportes.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        lblReportes.setText("Reportes");
+        jPanel1.add(lblReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel2.setText("Filtro:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, -1, -1));
+        lblFiltro.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblFiltro.setText("Filtro:");
+        jPanel1.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel3.setText("Filtrar por:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
+        lblFiltrarPor.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        lblFiltrarPor.setText("Filtrar por:");
+        jPanel1.add(lblFiltrarPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
 
         cbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(cbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 93, 160, 30));
@@ -517,12 +517,12 @@ public class JFrameReportes extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JComboBox<String> cbFiltroCategoria;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDe;
+    private javax.swing.JLabel lblFiltrarPor;
+    private javax.swing.JLabel lblFiltro;
+    private javax.swing.JLabel lblReportes;
     private javax.swing.JTable tbReportes;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables

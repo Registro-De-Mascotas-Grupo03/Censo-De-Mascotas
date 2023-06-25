@@ -18,8 +18,8 @@ public class Persona implements Serializable {
     private String numDoc;
     private String nombre;
     private String apellido;
-    private LocalDate fecNac;
-    private int edad;
+    
+    
     private String direccion;
     private String correoPersonal;
     private String telefono;
@@ -81,33 +81,6 @@ public class Persona implements Serializable {
         this.apellido = apellido;
     }
 
-    /**
-     * @return the fecNac
-     */
-    public LocalDate getFecNac() {
-        return fecNac;
-    }
-
-    /**
-     * @param fecNac the fecNac to set
-     */
-    public void setFecNac(LocalDate fecNac) {
-        this.fecNac = fecNac;
-    }
-
-    /**
-     * @return the edad
-     */
-    public int getEdad() {
-        return edad;
-    }
-
-    /**
-     * @param edad the edad to set
-     */
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
 
     /**
      * @return the direccion

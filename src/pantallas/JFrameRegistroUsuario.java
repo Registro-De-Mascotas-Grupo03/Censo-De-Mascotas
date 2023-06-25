@@ -39,26 +39,37 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
     public void Registrar() {
 
         try {
-            if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?")
-                    == JOptionPane.OK_OPTION) {
-                Utilitario.crearArchivo("Usuarios.txt");
+            if (txtContra.getText().equals(txtContra2.getText())) {
+                if (JOptionPane.showConfirmDialog(this, "Deseas Guardar ?")
+                        == JOptionPane.OK_OPTION) {
 
-                usuario = new Usuario(txtUsuario.getText(), txtContra.getText());
-                usuario.setNumDoc(txtDni.getText());
-                usuario.setNombre(txtNombre.getText());
-                usuario.setApellido(txtApellido.getText());
-                usuario.setDireccion(txtDireccion.getText());
-                usuario.setRol(this.cbRol.getItemAt(cbRol.getSelectedIndex()));
-                usuario.setCorreoPersonal(txtCorreo.getText());
-                usuario.setContraseña(txtContra.getText());
-                usuario.setContraseña2(txtContra2.getText());
+                    Utilitario.crearArchivo("Usuarios.txt");
 
-                this.padre.setUsuario(usuario);
-                Utilitario.escribirUsuariosEnArchivo("Usuarios.txt",
-                        BetaTester.usuarios);
-                Utilitario.leerUsuariosEnArchivo("Usuarios.txt");
-                this.padre.setVisible(true);
-                this.dispose();
+                    usuario = new Usuario(txtUsuario.getText(), txtContra.getText());
+                    usuario.setNumDoc(txtDni.getText());
+                    usuario.setNombre(txtNombre.getText());
+                    usuario.setApellido(txtApellido.getText());
+                    usuario.setDireccion(txtDireccion.getText());
+                    usuario.setRol(this.cbRol.getItemAt(cbRol.getSelectedIndex()));
+                    usuario.setEstado("Habilitado");
+                    usuario.setCorreoPersonal(txtCorreo.getText());
+                    usuario.setContraseña(txtContra.getText());
+                    usuario.setSupervisor(BetaTester.usuarios
+                            .get(cbSupervisor.getSelectedIndex()));
+
+                    usuario.setContraseña2(txtContra2.getText());
+
+                    this.padre.setUsuario(usuario);
+                    Utilitario.escribirUsuariosEnArchivo("Usuarios.txt",
+                            BetaTester.usuarios);
+                    Utilitario.leerUsuariosEnArchivo("Usuarios.txt");
+                    this.padre.setVisible(true);
+                    this.dispose();
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Las contraseñas no "
+                        + "coinciden");
             }
 
         } catch (MiExcepcionDeEscritura e) {
@@ -79,6 +90,8 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
         txtDni = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
+        lblRol = new javax.swing.JLabel();
+        lblSupervisor = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         txtContra2 = new javax.swing.JTextField();
@@ -87,8 +100,8 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
         cbRol = new javax.swing.JComboBox<>();
         btnRegistrar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        lblRegistro = new javax.swing.JLabel();
+        cbSupervisor = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -128,6 +141,14 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 290, 40));
+
+        lblRol.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblRol.setText("Rol: ");
+        jPanel1.add(lblRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 40, 20));
+
+        lblSupervisor.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblSupervisor.setText("Supervisor:");
+        jPanel1.add(lblSupervisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 90, 20));
 
         txtDireccion.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtDireccion.setForeground(new java.awt.Color(204, 204, 204));
@@ -212,14 +233,14 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 580, 100, 40));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
-        jLabel3.setText("Registro de Usuarios");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
+        lblRegistro.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        lblRegistro.setText("Registro de Usuarios");
+        jPanel1.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(204, 204, 204));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 290, 40));
+        cbSupervisor.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        cbSupervisor.setForeground(new java.awt.Color(153, 153, 153));
+        cbSupervisor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Juan Perez", "Roberto Bolaños", "Omar Orlandini" }));
+        jPanel1.add(cbSupervisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 290, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/patitas7 resgistroUsuario.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 650));
@@ -240,7 +261,7 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         Registrar();
-        salir();
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -579,10 +600,12 @@ public class JFrameRegistroUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbRol;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbSupervisor;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblRegistro;
+    private javax.swing.JLabel lblRol;
+    private javax.swing.JLabel lblSupervisor;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtContra;
     private javax.swing.JTextField txtContra2;

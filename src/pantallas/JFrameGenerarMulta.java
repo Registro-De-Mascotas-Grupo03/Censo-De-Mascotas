@@ -20,7 +20,7 @@ import java.time.LocalDate;
 
 /**
  *
- * @author tokiro
+ * @author Jomayra
  */
 public class JFrameGenerarMulta extends javax.swing.JFrame {
 

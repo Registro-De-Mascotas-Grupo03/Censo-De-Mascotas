@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author tokiro
+ * @author Miguel
  */
 public class JFrameListaMascotas extends javax.swing.JFrame {
 
@@ -88,7 +88,7 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblMascota = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -102,9 +102,9 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
-        jLabel2.setText("Mascotas");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+        lblMascota.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        lblMascota.setText("Mascotas");
+        jPanel1.add(lblMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
 
         txtBuscar.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtBuscar.setBorder(null);
@@ -334,9 +334,9 @@ public class JFrameListaMascotas extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblMascota;
     private javax.swing.JTable tbMascotas;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
